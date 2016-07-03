@@ -45,10 +45,17 @@
     <Compile Include="Intelligence.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UtilPatrikInstallGUIForm.cs" />
     <Compile Include="WorkDatabase.cs" />
     <Compile Include="WorkDirectory.cs" />
     <Compile Include="WorkFile.cs" />
     <Compile Include="WorkRegistry.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PatrikSystemPersistence\patrikSystemPersistence.csproj">
+      <Project>{89c23eb2-d7a4-4b6c-8c44-bce6bd6e6378}</Project>
+      <Name>patrikSystemPersistence</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

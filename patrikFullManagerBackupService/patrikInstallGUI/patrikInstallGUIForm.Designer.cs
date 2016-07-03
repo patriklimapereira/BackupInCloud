@@ -32,16 +32,16 @@
             this.lblPassword = new System.Windows.Forms.Label();
             this.tbPassword = new System.Windows.Forms.TextBox();
             this.lblUser = new System.Windows.Forms.Label();
-            this.tbUser = new System.Windows.Forms.TextBox();
+            this.tbUserName = new System.Windows.Forms.TextBox();
             this.lblPort = new System.Windows.Forms.Label();
             this.tbPort = new System.Windows.Forms.TextBox();
             this.lblServerName = new System.Windows.Forms.Label();
-            this.tbSever = new System.Windows.Forms.TextBox();
+            this.tbServer = new System.Windows.Forms.TextBox();
             this.rtbDisplayOperation = new System.Windows.Forms.RichTextBox();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.btnUninstall = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCopyClipboard = new System.Windows.Forms.Button();
             this.gBDadosDoBanco.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -53,7 +53,7 @@
             this.btnInstall.Name = "btnInstall";
             this.btnInstall.Size = new System.Drawing.Size(107, 31);
             this.btnInstall.TabIndex = 2;
-            this.btnInstall.Text = "install";
+            this.btnInstall.Text = "&install";
             this.btnInstall.UseVisualStyleBackColor = true;
             this.btnInstall.Click += new System.EventHandler(this.btnInstall_Click);
             // 
@@ -66,11 +66,11 @@
             this.gBDadosDoBanco.Controls.Add(this.lblPassword);
             this.gBDadosDoBanco.Controls.Add(this.tbPassword);
             this.gBDadosDoBanco.Controls.Add(this.lblUser);
-            this.gBDadosDoBanco.Controls.Add(this.tbUser);
+            this.gBDadosDoBanco.Controls.Add(this.tbUserName);
             this.gBDadosDoBanco.Controls.Add(this.lblPort);
             this.gBDadosDoBanco.Controls.Add(this.tbPort);
             this.gBDadosDoBanco.Controls.Add(this.lblServerName);
-            this.gBDadosDoBanco.Controls.Add(this.tbSever);
+            this.gBDadosDoBanco.Controls.Add(this.tbServer);
             this.gBDadosDoBanco.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.gBDadosDoBanco.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gBDadosDoBanco.ForeColor = System.Drawing.Color.Black;
@@ -93,7 +93,7 @@
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(71, 23);
             this.btnTest.TabIndex = 11;
-            this.btnTest.Text = "test";
+            this.btnTest.Text = "&test";
             this.btnTest.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTest.UseVisualStyleBackColor = true;
             this.btnTest.Click += new System.EventHandler(this.btnTest_Click);
@@ -157,18 +157,18 @@
             this.lblUser.TabIndex = 5;
             this.lblUser.Text = "usuário:";
             // 
-            // tbUser
+            // tbUserName
             // 
-            this.tbUser.BackColor = System.Drawing.Color.Black;
-            this.tbUser.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbUser.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbUser.ForeColor = System.Drawing.Color.Lime;
-            this.tbUser.Location = new System.Drawing.Point(453, 20);
-            this.tbUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbUser.Name = "tbUser";
-            this.tbUser.Size = new System.Drawing.Size(90, 13);
-            this.tbUser.TabIndex = 4;
-            this.tbUser.Text = "postgres";
+            this.tbUserName.BackColor = System.Drawing.Color.Black;
+            this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbUserName.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbUserName.ForeColor = System.Drawing.Color.Lime;
+            this.tbUserName.Location = new System.Drawing.Point(453, 20);
+            this.tbUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbUserName.Name = "tbUserName";
+            this.tbUserName.Size = new System.Drawing.Size(90, 13);
+            this.tbUserName.TabIndex = 4;
+            this.tbUserName.Text = "postgres";
             // 
             // lblPort
             // 
@@ -205,18 +205,18 @@
             this.lblServerName.TabIndex = 1;
             this.lblServerName.Text = "servidor:";
             // 
-            // tbSever
+            // tbServer
             // 
-            this.tbSever.BackColor = System.Drawing.Color.Black;
-            this.tbSever.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.tbSever.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbSever.ForeColor = System.Drawing.Color.Lime;
-            this.tbSever.Location = new System.Drawing.Point(106, 20);
-            this.tbSever.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tbSever.Name = "tbSever";
-            this.tbSever.Size = new System.Drawing.Size(128, 13);
-            this.tbSever.TabIndex = 0;
-            this.tbSever.Text = "localhost";
+            this.tbServer.BackColor = System.Drawing.Color.Black;
+            this.tbServer.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tbServer.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbServer.ForeColor = System.Drawing.Color.Lime;
+            this.tbServer.Location = new System.Drawing.Point(106, 20);
+            this.tbServer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tbServer.Name = "tbServer";
+            this.tbServer.Size = new System.Drawing.Size(128, 13);
+            this.tbServer.TabIndex = 0;
+            this.tbServer.Text = "localhost";
             // 
             // rtbDisplayOperation
             // 
@@ -251,27 +251,29 @@
             this.btnUninstall.Name = "btnUninstall";
             this.btnUninstall.Size = new System.Drawing.Size(107, 31);
             this.btnUninstall.TabIndex = 10;
-            this.btnUninstall.Text = "uninstall";
+            this.btnUninstall.Text = "&uninstall";
             this.btnUninstall.UseVisualStyleBackColor = true;
             this.btnUninstall.Click += new System.EventHandler(this.btnUninstall_Click);
             // 
-            // button1
+            // btnCopyClipboard
             // 
-            this.button1.Location = new System.Drawing.Point(79, 187);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 11;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnCopyClipboard.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
+            this.btnCopyClipboard.Location = new System.Drawing.Point(1002, 378);
+            this.btnCopyClipboard.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCopyClipboard.Name = "btnCopyClipboard";
+            this.btnCopyClipboard.Size = new System.Drawing.Size(169, 31);
+            this.btnCopyClipboard.TabIndex = 11;
+            this.btnCopyClipboard.Text = "&copy Clipboard";
+            this.btnCopyClipboard.UseVisualStyleBackColor = true;
+            this.btnCopyClipboard.Click += new System.EventHandler(this.btnCopyClipboard_Click);
             // 
             // patrikInstallGUIForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 11F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(1185, 407);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(1185, 417);
+            this.Controls.Add(this.btnCopyClipboard);
             this.Controls.Add(this.btnUninstall);
             this.Controls.Add(this.progressBar2);
             this.Controls.Add(this.progressBar1);
@@ -301,11 +303,11 @@
         private System.Windows.Forms.Button btnInstall;
         private System.Windows.Forms.GroupBox gBDadosDoBanco;
         private System.Windows.Forms.Label lblUser;
-        private System.Windows.Forms.TextBox tbUser;
+        private System.Windows.Forms.TextBox tbUserName;
         private System.Windows.Forms.Label lblPort;
         private System.Windows.Forms.TextBox tbPort;
         private System.Windows.Forms.Label lblServerName;
-        private System.Windows.Forms.TextBox tbSever;
+        private System.Windows.Forms.TextBox tbServer;
         private System.Windows.Forms.Label lblDataBase;
         private System.Windows.Forms.TextBox tbDataBase;
         private System.Windows.Forms.Label lblPassword;
@@ -315,7 +317,7 @@
         private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Button btnUninstall;
         private System.Windows.Forms.Button btnTest;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCopyClipboard;
     }
 }
 

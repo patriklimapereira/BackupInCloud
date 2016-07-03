@@ -16,18 +16,14 @@ using System.Security.Principal;
 
 
 
-namespace patrikInstallGUI
-{
-    public partial class patrikInstallGUIForm : Form
-    {
-        public patrikInstallGUIForm()
-        {
+namespace patrikInstallGUI {
+    public partial class patrikInstallGUIForm : Form {
+        public patrikInstallGUIForm() {
             InitializeComponent();
         }
 
 
-        private void patrikInstallGUIForm_Load(object sender, EventArgs e)
-        {
+        private void patrikInstallGUIForm_Load(object sender, EventArgs e) {
             /*   WindowsIdentity wi = WindowsIdentity.GetCurrent();
                WindowsPrincipal wp = new WindowsPrincipal(wi);
                bool isAdministrator = wp.IsInRole(WindowsBuiltInRole.Administrator);
@@ -37,24 +33,18 @@ namespace patrikInstallGUI
 
         }
 
-        static void RunAsAdministrator()
-        {
+        static void RunAsAdministrator() {
             ProcessStartInfo proc = new ProcessStartInfo();
             proc.UseShellExecute = true;
             proc.WorkingDirectory = Environment.CurrentDirectory;
             proc.FileName = Application.ExecutablePath;
             proc.Verb = "runas";
-            try
-            {
+            try {
                 Process.Start(proc);
 
-            }
-            catch (Win32Exception error)
-            {
+            } catch (Win32Exception error) {
                 //faz porra nenhuma  mas filtra parao excption full                        
-            }
-            catch (Exception error)
-            {
+            } catch (Exception error) {
                 MessageBox.Show("Elevação de administrador para o  usuario corrente falhou.\n O Sistema sera finalizado, Se o Erro persistir efetue um screenshot desta tela e envie ao desenvolvedor\n" +
                "Message:\n" + error.Message + "\n__________________________________________________________________\n" +
                "Source:\n" + error.Source + "\n__________________________________________________________________\n" +
@@ -63,179 +53,89 @@ namespace patrikInstallGUI
             Application.Exit();
         }
 
-        private void btnInstall_Click(object sender, EventArgs e)
-        {
-            /*Criação dos diretorios*/
-            /*flag marca se deu ruim ou não se TRUE = problemas || se FALSE = tudoOK*/
-            bool deuRuim = false;
-            String deuOk = "ok";
 
-            deuRuim = !FunctionForInstalation.createDiretorios(this.rtbDisplayOperation);
-           
-            /*deuRuim = false; utilizado para testar rotina de desistalação*/
-            if (deuRuim == true)
-            {
-                if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true)
-                {
-                    rotinaParaExclusaoDaPorraToda(sender, e);
+        private void purifyInputLabelOfConfigurationOfTheRDMS() {
+            tbServer.Text = tbServer.Text.Trim();
+            tbPort.Text = tbPort.Text.Trim();
+            tbDataBase.Text = tbDataBase.Text.Trim();
+
+        }
+        private void btnInstall_Click(object sender, EventArgs e) {
+            bool modeDevelopment = true;
+            String auxMsg;
+            this.purifyInputLabelOfConfigurationOfTheRDMS();
+            this.rtbDisplayOperation.Clear();
+
+            auxMsg = this.validatesLabelConfigurationDataBase();
+            if (auxMsg != "ok") {
+                MessageBox.Show("this problems in parameter of configuration of the dataBase were found :\n" + auxMsg, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            } else if (UtilpatrikInstallGUIForm.createDirectories(this.rtbDisplayOperation) != true) {
+                if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
+                    this.uninstallSystem("error");
                 }
-            }
-            else
-            {
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "end-install:directory ", 700, this.rtbDisplayOperation);
-                /*inicio da rotina de instalação dos arquivos*/
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "begin-install:files", 300, this.rtbDisplayOperation);
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "criação dos arquivos", 300, this.rtbDisplayOperation);
-                /*for para criar os arquivos*/
-                for (int i = 0; i < Util.FMBSFilePatrikFullManagerBackupService.Count && deuRuim == false; i++)
-                {
-                    Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "create - \"" + Util.FMBSFilePatrikFullManagerBackupService[i] + "\" : ", 600, this.rtbDisplayOperation, String.Empty);
-                    switch (Util.FMBSInstalarFile(Util.FMBSDirectoryPatrikFullManagerBackupService[i], Util.FMBSFilePatrikFullManagerBackupService[i]))
-                    {
-                        case 1:
-                            Util.psMsgAtrasoRefresh("ok", 400, this.rtbDisplayOperation);
-                            break;
-                        case 3:
-                            Util.psMsgAtrasoRefresh("fail - file already exist", 400, this.rtbDisplayOperation);
-                            break;
-                        case 0:
-                            Util.psMsgAtrasoRefresh("fail - Erro na criação do arquivo", 700, this.rtbDisplayOperation);
-                            deuRuim = true;
-                            break;
-                    }
-                }
+            } else if (UtilpatrikInstallGUIForm.createFiles(this.rtbDisplayOperation) != true) {
+                this.uninstallSystem("error");
 
-                if (deuRuim == false)
-                {
-                    /*end for para criar os arquivos*/
-                    Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "end-install:files ", 700, this.rtbDisplayOperation);
-                    String dadosDoSGBDAndBanco = tbSever.Text + Util.psSeparator[1] + tbPort.Text + Util.psSeparator[1] + tbUser.Text + Util.psSeparator[1] + tbPassword.Text + Util.psSeparator[1] + tbDataBase.Text;
-                    Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "begin-install:configuration database", 600, this.rtbDisplayOperation);
-                    Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "registrando configuração de acesso ao banco de dados", 400, this.rtbDisplayOperation);
-                    deuOk = this.bancoDeDadosConfiguradoCorretamente();
-                    if (deuOk == "ok")
-                    {
-                        deuRuim = !WorkFile.writeFile(false, Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[1], dadosDoSGBDAndBanco, false);
-                        if (deuRuim == false)
-                        {
-                            Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "configurações de acesso ao banco de dados registradas com sucesso", 400, this.rtbDisplayOperation);
-                            Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "end-install:configuration database", 700, this.rtbDisplayOperation);
-
-
-                        }
-                        else
-                        {
-                            Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "psErro no registro de configuração de acesso ao banco de dados", 400, this.rtbDisplayOperation);
-                            rotinaParaExclusaoDaPorraToda(sender, e);
-                        }
-                        /* inserir aqui rotina para  registrar o serviço*/
-
-                    }
-                    else
-                    {
-                        Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Detectado configurações inconsistente nos parametros de acesso ao banco de dados", 400, this.rtbDisplayOperation);
-                        Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + deuOk.Replace("\n", " "), 400, this.rtbDisplayOperation);
-                        rotinaParaExclusaoDaPorraToda(sender, e);
-
-                    }
-                }
-                else
-                {
-                    rotinaParaExclusaoDaPorraToda(sender, e);
-                }
+            } else if (UtilpatrikInstallGUIForm.installConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation) != "ok") {
+                this.uninstallSystem("error");
+                /*routine try drop dataBase*/
+            } else if (true == true) {
+                /*create in future registe service */
             }
         }
 
-        private void rotinaParaExclusaoDaPorraToda(object sender, EventArgs e)
-        {
-            if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true)
-            {
+        private void routineForExclusionAll(object sender, EventArgs e) {
+            if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
                 Console.Write("\a");
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Existiu um psErro durante a operação", 400, this.rtbDisplayOperation);
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "O sistema sera desistalado", 700, this.rtbDisplayOperation);
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Rotina de desistalação ativada", 1000, this.rtbDisplayOperation);
-                btnUninstall_Click(sender, e);
+                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Existiu um psErro durante a operação", 400, this.rtbDisplayOperation);
+                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "O sistema sera desistalado", 700, this.rtbDisplayOperation);
+                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Rotina de desistalação ativada", 1000, this.rtbDisplayOperation);
+                this.uninstallSystem();
             }
         }
 
-        private void btnUninstall_Click(object sender, EventArgs e)
-        {
-            bool deuRuim = false;
-            /* verifica se o diretorio existe com base no diretorio mestre do sistema*/
-            if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true)
-            {
-                /*rotina para serviçp*/
-                /*rotina excluir banco*/
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "begin delete: directory and files ", 100, this.rtbDisplayOperation);
-                System.Threading.Thread.Sleep(600);
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "delete \"" + Util.FMBSDirectoryPatrikFullManagerBackupService[0] + "\" : ", 600, this.rtbDisplayOperation, "");
-                deuRuim = WorkDirectory.deleteDirectory(Util.FMBSDirectoryPatrikFullManagerBackupService[0]);
-                if (deuRuim == true)
-                {
-                    Util.psMsgAtrasoRefresh("ok ", 600, this.rtbDisplayOperation);
-                }
-                else
-                {
-                    Util.psMsgAtrasoRefresh("fail ", 600, this.rtbDisplayOperation);
-                }
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "end delete: directory and files ", 600, this.rtbDisplayOperation);
+        private bool uninstallSystem(string error = "") {
+            String serverName, port, userName, password, databaseName;
+            bool modeDevelopment = true;
+            String auxMsg;
+            this.purifyInputLabelOfConfigurationOfTheRDMS();
+            /*create in future unregister service */
+            if (true != true) {
+                /*future implementation*/
 
+            } else if (UtilpatrikInstallGUIForm.unistallConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation, error) != "ok") {
+                /*future implementation */
+            } else if (UtilpatrikInstallGUIForm.unistalldirectoriesAndFiles(this.rtbDisplayOperation, error) != true) {
+                /*future implementation*/
             }
-            else
-            {
-                Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "O sistema não se encontra instalado, logo não se pode desistalá-lo", 600, this.rtbDisplayOperation);
-
-            }
-            Util.psMsgAtrasoRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Arquivo de log \"" + Util.psFiles[0] + "\" gravado em   " + Util.psGETCURRENTDIRECTORY, 600, this.rtbDisplayOperation);
             WorkFile.writeFile(true, Util.psGETCURRENTDIRECTORY, Util.psFiles[0], rtbDisplayOperation.Text, true);
-
-
-
-
+            return true;
 
         }
 
-        private string bancoDeDadosConfiguradoCorretamente()
-        {
-            String serverName, port, userName, password, databaseName, auxString;
-            MessageBox.Show("test");
+        private void btnUninstall_Click(object sender, EventArgs e) {
+            this.uninstallSystem();
+        }
 
-            serverName = tbSever.Text.Trim();
-            port = tbPort.Text.Trim();
-            userName = tbUser.Text;
-            password = tbPassword.Text;
-            databaseName = tbDataBase.Text.Trim();
-
-            if (serverName.Length == 0)
-            {
+        private string validatesLabelConfigurationDataBase() {
+            this.purifyInputLabelOfConfigurationOfTheRDMS();
+            String auxString = "ok";         
+            if (tbServer.Text.Length == 0) {
                 auxString = "O campo " + lblServerName.Text.Replace(":", String.Empty) + " se encontra sem preenchimento.";
-                tbSever.Focus();
-            }
-            else
-            {
-                if (port.Length == 0)
-                {
+                tbServer.Focus();
+            } else {
+                if (tbPort.Text.Length == 0) {
                     auxString = "O campo " + lblPort.Text.Replace(":", String.Empty) + " se encontra sem preenchimento.";
                     tbPort.Focus();
-
-                }
-                else
-                {
-                    if (userName.Length == 0)
-                    {
+                } else {
+                    if (tbPassword.Text.Length == 0) {
                         auxString = "O campo " + lblUser.Text.Replace(":", String.Empty) + " se encontra sem preenchimento.";
-                        tbUser.Focus();
-                    }
-                    else
-                    {
-                        if (databaseName.Length == 0)
-                        {
+                        tbUserName.Focus();
+                    } else {
+                        if (tbDataBase.Text.Length == 0) {
                             auxString = "O campo " + lblDataBase.Text.Replace(":", String.Empty) + " se encontra sem preenchimento.";
                             tbDataBase.Focus();
-                        }
-                        else
-                        {
-                            return WorkPostgreSQL.configurationIsOk(serverName, port, userName, password, databaseName);
                         }
                     }
                 }
@@ -243,33 +143,38 @@ namespace patrikInstallGUI
             return auxString;
         }
 
-        private void btnTest_Click(object sender, EventArgs e)
-        {
-            String resultado = bancoDeDadosConfiguradoCorretamente();
-            switch (resultado)
-            {
-                case "ok":
-                    MessageBox.Show("A configuração do banco de dados esta correta!!!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    break;
-                default:
-                    Form f = new dialogoDeTestSGBDPatrikInstallGUIForm();
-                    f.Text = "Erro ao acessar o  banco de dados";
-                    f.Controls["rtbDialogoDeErro"].Text = resultado;
-                    f.ShowDialog(this);
-                    break;
+
+        private void btnTest_Click(object sender, EventArgs e) {
+            string result;
+            this.purifyInputLabelOfConfigurationOfTheRDMS();
+            result = this.validatesLabelConfigurationDataBase();
+            if (result != "ok") {
+                MessageBox.Show("Error in value informed for to acess database", "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            } else {
+                result = UtilpatrikInstallGUIForm.testConnectionsRDMS(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text);
+                switch (result) {
+                    case "ok":
+                        MessageBox.Show("The configuration of the database is ok!!!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        break;
+                    default:
+                        Form f = new patrikDialogForModeTestSGBDPatrikInstallGUI();
+                        f.Text = "Erro to acess database";
+                        f.Controls["rtbMsgErrorShowHere"].Text = result;
+                        f.ShowDialog(this);
+                        break;
+                }
             }
+
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Form f = new dialogoDeTestSGBDPatrikInstallGUIForm();
-            f.Text = "Erro acesso banco de Dados";
-            f.Controls["rtbDialogoDeErro"].Text = "ola";
-            f.ShowDialog(this);
-        }
+     
 
         private void patrikInstallGUIForm_FormClosed(object sender, FormClosedEventArgs e) {
             Environment.Exit(0);
+        }
+
+        private void btnCopyClipboard_Click(object sender, EventArgs e) {
+            Clipboard.SetText(this.rtbDisplayOperation.Text);
         }
     }
 

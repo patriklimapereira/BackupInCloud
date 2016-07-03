@@ -35,7 +35,7 @@ namespace patrikDll {
 
         public static readonly List<string> psFiles = new List<string> { "psFailInstall.cma" };
 
-        public static readonly int pstimeDelay = 100; /*delay time in milliseconds*/ 
+        public static readonly int pstimeDelay = 1; /*delay time in milliseconds*/ 
 
         
         /*end das cacteristicas comuns a todos os sistemas*/
@@ -88,7 +88,7 @@ namespace patrikDll {
             return DateTime.Now.ToString(psFORMATODEDATAEHORA).ToString();
         }
 
-        public static void psMsgAtrasoRefresh(string msg, int delay, RichTextBox rtb, String quebra = "\n") {
+        public static void psMsgDelayRefresh(string msg, int delay, RichTextBox rtb, String quebra = "\n") {
             rtb.Text += msg + quebra;
             rtb.SelectionStart = rtb.Text.Length;
             rtb.ScrollToCaret();/*move for down scroll bar*/

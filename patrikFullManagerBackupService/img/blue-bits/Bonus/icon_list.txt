@@ -1,0 +1,84 @@
+Approximate (facultative) name of icon:
+
+1.	check user
+2.	add user
+3.	remove user
+4.	delete user
+5.	move user left
+6.	move user right
+7.	move user up 
+8.	move user down
+9.	search user
+10.	user options
+11.	globe search
+12.	application options
+13.	application search
+14.	move application down
+15.	move application up
+16.	move application right
+17.	move application left
+18.	delete application
+19.	remove application
+20.	add application
+21.	check application
+22.	profile options
+23.	search profile
+24.	move profile down
+25.	move profile up 
+26.	move profile right
+27.	move profile left
+28.	delete profile
+29.	remove profile
+30.	add profile
+31.	check profile 
+32.	database options
+33.	database search
+34.	move database down
+35.	move database up
+36.	move database right
+37.	move database left
+38.	delete database
+39.	remove database
+40.	add database
+41.	check database
+42.	image options
+43.	search image
+44.	move image down
+45.	move image up
+46.	move image right
+47. 	move image left
+48.	delete image
+49.	remove image
+50.	add image
+51.	check image
+52.	file options
+53.	search file	
+54.	move file down
+55.	move file up
+56.	move file right
+57.	move file left
+58.	delete file
+59.	remove file
+60.	add file
+61.	check file
+62.	folder options
+63.	search folder
+64.	move folder down
+65.	move folder up
+66.	move folder right
+67.	move folder left
+68.	delete folder
+69.	remove folder
+70.	add folder
+71.	check folder
+72.	write mail
+73.	mail options
+74.	search mail
+75.	move mail down
+76.	move mail up
+77.	move mail right
+78.	move mail left
+79.	delete mail
+80.	remove mail
+81.	add mail
+82.	check mail

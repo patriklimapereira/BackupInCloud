@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikSystemPersistence", "PatrikSystemPersistence\patrikSystemPersistence.csproj", "{89C23EB2-D7A4-4B6C-8C44-BCE6BD6E6378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikConsoleAplication", "patrikConsoleAplication\patrikConsoleAplication.csproj", "{34899BB6-74F4-4AFB-9729-BDAC552B2D4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikInstallGUI", "patrikInstallGUI\patrikInstallGUI.csproj", "{053F52D2-5A7F-4DCC-A2E1-FB94564706BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikInstallFileSilentFull", "patrikInstallFileSilentFull\patrikInstallFileSilentFull.csproj", "{59E86C0C-603F-4E77-A4E7-475751BB8CD3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikDll", "patrikDll\patrikDll.csproj", "{66ADB168-3DA2-4228-AE70-8E5F9141B6A0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89C23EB2-D7A4-4B6C-8C44-BCE6BD6E6378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89C23EB2-D7A4-4B6C-8C44-BCE6BD6E6378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89C23EB2-D7A4-4B6C-8C44-BCE6BD6E6378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89C23EB2-D7A4-4B6C-8C44-BCE6BD6E6378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34899BB6-74F4-4AFB-9729-BDAC552B2D4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34899BB6-74F4-4AFB-9729-BDAC552B2D4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34899BB6-74F4-4AFB-9729-BDAC552B2D4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34899BB6-74F4-4AFB-9729-BDAC552B2D4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{053F52D2-5A7F-4DCC-A2E1-FB94564706BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{053F52D2-5A7F-4DCC-A2E1-FB94564706BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{053F52D2-5A7F-4DCC-A2E1-FB94564706BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{053F52D2-5A7F-4DCC-A2E1-FB94564706BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59E86C0C-603F-4E77-A4E7-475751BB8CD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59E86C0C-603F-4E77-A4E7-475751BB8CD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59E86C0C-603F-4E77-A4E7-475751BB8CD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59E86C0C-603F-4E77-A4E7-475751BB8CD3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66ADB168-3DA2-4228-AE70-8E5F9141B6A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66ADB168-3DA2-4228-AE70-8E5F9141B6A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66ADB168-3DA2-4228-AE70-8E5F9141B6A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66ADB168-3DA2-4228-AE70-8E5F9141B6A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

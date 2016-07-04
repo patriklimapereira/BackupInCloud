@@ -124,7 +124,7 @@ namespace patrikInstallGUI {
 
         }
 
-        /*metodos usados somente no instalador*/
+       
         public static int toInstallDirectory(String stringDiretorio) {
             try {
                 if (WorkDirectory.directoryExist(stringDiretorio) == true) {
@@ -139,7 +139,7 @@ namespace patrikInstallGUI {
             }
         }
 
-        /*metodos usados somente no instalador*/
+      
         public static int toInstallFiles(String stringDiretorio, String stringArquivo) {
             try {
                 if (WorkFile.fileExist(stringDiretorio, stringArquivo) == true) {

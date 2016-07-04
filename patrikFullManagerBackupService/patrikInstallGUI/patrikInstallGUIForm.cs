@@ -81,16 +81,13 @@ namespace patrikInstallGUI {
                 this.uninstallSystem("error");
                 /*routine try drop dataBase*/
             } else if (true == true) {
-                /*create in future registe service */
+                /*create in future register service */
             }
         }
 
         private void routineForExclusionAll(object sender, EventArgs e) {
             if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
-                Console.Write("\a");
-                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Existiu um psErro durante a operação", 400, this.rtbDisplayOperation);
-                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "O sistema sera desistalado", 700, this.rtbDisplayOperation);
-                Util.psMsgDelayRefresh("[" + Util.psRetornaTimeString() + "]" + " - " + "Rotina de desistalação ativada", 1000, this.rtbDisplayOperation);
+                /*routine verify after*/
                 this.uninstallSystem();
             }
         }

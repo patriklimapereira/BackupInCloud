@@ -57,82 +57,28 @@ namespace patrikDll {
 
         };
 
-        /*   public static readonly  List<string> psFMBSImgPatrikFullManagerBackupService = new List<string>{"Cup (tea hot).png",
-                                                                                           "Cup (tea).png",
-                                                                                           "Cup.png",
-                                                                                           "Cup 2 (tea hot).png",
-                                                                                           "Cup 2 (tea).png",
-                                                                                           "Cup 2.png",
-                                                                                           "Cup 3 (coffee hot).png",
-                                                                                           "Cup 3 (coffee).png",
-                                                                                           "Cup 3.png",
-                                                                                           "Coffee 2 (hot).png",
-                                                                                           "Coffee 2.png",
-                                                                                           "Coffee.png"                                                                                         
-           };*/
-
-
-
-
-        /*end caracteristicas comuns a patrikFullManagerBackupService*/
-
-        /*begin caracteristicas comuns a patrikInstallFileSilentFull*/
-        public static readonly List<string> IFSFFilePatrikFullManagerBackupService = new List<string> { "patrikInstallFileSilentFull.cma" };
-
-
-
-
-        /*end caracteristicas comuns a patrikInstallFileSilentFull*/
-
-        public static string psRetornaTimeString() {
+      
+        public static string psReturnTimeString() {
             return DateTime.Now.ToString(psFORMATODEDATAEHORA).ToString();
         }
 
-        public static void psMsgDelayRefresh(string msg, int delay, RichTextBox rtb, String quebra = "\n") {
-            rtb.Text += msg + quebra;
-            rtb.SelectionStart = rtb.Text.Length;
-            rtb.ScrollToCaret();/*move for down scroll bar*/
-            System.Threading.Thread.Sleep(delay);
-            rtb.Refresh();
-
-        }
+        /*end caracteristicas comuns a patrikFullManagerBackupService*/
 
 
-        /*metodos usados somente no instalador*/
-        public static int FMBSInstalarDiretorios(String stringDiretorio) {
-            try {
-                if (WorkDirectory.directoryExist(stringDiretorio) == true) {
-                    return 3;
-                }
-                return Convert.ToInt32(WorkDirectory.createDirectory(stringDiretorio)); /* 1 criou e 0 não criou*/
 
-            } catch (Exception error) {
-                /*acerta os parametros dos metodos*/
-                Util.psErro(psErroWhatsToDo[0], false, psGETCURRENTDIRECTORY, psFiles[0], "public static int FMBSInstalarDiretorios(String stringDiretorio){", error.Message + Util.psSeparator[2] + error.Source + Util.psSeparator[2] + error.StackTrace);
-                return 0;
-            }
-        }
 
-        /*metodos usados somente no instalador*/
-        public static int FMBSInstalarFile(String stringDiretorio, String stringArquivo) {
-            try {
-                if (WorkFile.fileExist(stringDiretorio, stringArquivo) == true) {
-                    return 3;
-                }
-                return Convert.ToInt32(WorkFile.createEmptyFile(stringDiretorio, stringArquivo)); /* 1 criou e 0 não criou*/
-            } catch (Exception error) {
-                /*acerta os parametros dos metodos*/
-                Util.psErro(psErroWhatsToDo[0], false, psGETCURRENTDIRECTORY, psFiles[0], "public static int FMBSInstalarFile(String stringDiretorio, String stringArquivo) {", error.Message + Util.psSeparator[2] + error.Source + Util.psSeparator[2] + error.StackTrace);
-                return 0;
-            }
-        }
+
+      
+
+
+        
 
 
 
         /*metodo de gravação de log de psErro com possibilidade de envio de e-mail*/
         public static void psErro(int codeError, bool useSeparator, String fileLocal, String fileName, String method, String error = "") {
             if (codeError == psErroWhatsToDo[0]) {
-                WorkFile.writeFile(false, fileLocal, fileName, "[" + Util.psRetornaTimeString() + "]" + Util.psSeparator[2] + ((useSeparator == true) ? error.Replace("\n", Util.psSeparator[0]) : error), true);
+                WorkFile.writeFile(false, fileLocal, fileName, "[" + Util.psReturnTimeString() + "]" + Util.psSeparator[2] + ((useSeparator == true) ? error.Replace("\n", Util.psSeparator[0]) : error), true);
             } else {
                 if (codeError == psErroWhatsToDo[1]) {
                     //  send mail construir metodo ainda

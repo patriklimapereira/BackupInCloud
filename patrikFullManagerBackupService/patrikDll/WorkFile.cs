@@ -8,11 +8,11 @@ using System.IO;
 
 namespace patrikDll {
     public class WorkFile {
-        public static bool writeFile(bool quebraDeLinhaPadrao, String local,String fileName, String valueString,  bool acrescentarENaoSubstituirOArquivo = true) {
+        public static bool writeFile(bool breakOfLinePattern, String local,String fileName, String valueString,  bool addAndNoReplaceTheFile = true) {
             try {
                 StreamWriter file;
-                file = new StreamWriter(Path.Combine(local, fileName), acrescentarENaoSubstituirOArquivo);
-                if(quebraDeLinhaPadrao == true) {
+                file = new StreamWriter(Path.Combine(local, fileName), addAndNoReplaceTheFile);
+                if(breakOfLinePattern == true) {
                     file.WriteLine(valueString );
                 } else {
                     file.Write(valueString + Util.psSeparator[3]);
@@ -27,7 +27,7 @@ namespace patrikDll {
                 Util.psSeparator[3] + "fileName =" + fileName +
                 Util.psSeparator[3] + "local =" + local +
                 Util.psSeparator[3] + "valueString =" + valueString +
-                Util.psSeparator[3] + "acrescentarENaoSubstituirOArquivo =" + acrescentarENaoSubstituirOArquivo;
+                Util.psSeparator[3] + "addAndNoReplaceTheFile =" + addAndNoReplaceTheFile;
                 Util.psErro(Util.psErroWhatsToDo[0],true ,Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[0], method, error.ToString());
        
                 return false;

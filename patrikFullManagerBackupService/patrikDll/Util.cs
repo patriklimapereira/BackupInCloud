@@ -22,8 +22,11 @@ namespace patrikDll {
 
         public static readonly string psFORMATODEDATAEHORA = "dd-MM-yyyy HH-mm-ss"; /*brazilian format date and hour  in future create list or vector whith several country*/
         public static readonly int[] psErroWhatsToDo = new int[] { 0, 1, 3 };
-        public static readonly List<string> psSeparator = new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
 
+              public static readonly List<string> psSeparator = new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
+     //   public static readonly List<string[,]> psSeparator;//= new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
+     //   https://msdn.microsoft.com/en-us/library/2yd9wwz4.aspx
+     //continue revision of code and continue tradution for english
         /* 0 = U+1F337 =🌷   = quebra de linha = \n
          * 1 = U+27B3 = ➳   =  separator (suposto ;)
          * 2 = U+1F381 = 🎁   = strings dentro do metodo psErro

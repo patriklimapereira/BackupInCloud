@@ -23,24 +23,15 @@ namespace patrikDll {
         public static readonly string psFORMATODEDATAEHORA = "dd-MM-yyyy HH-mm-ss"; /*brazilian format date and hour  in future create list or vector whith several country*/
         public static readonly int[] psErroWhatsToDo = new int[] { 0, 1, 3 };
 
-              public static readonly List<string> psSeparator = new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
-     //   public static readonly List<string[,]> psSeparator;//= new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
-     //   https://msdn.microsoft.com/en-us/library/2yd9wwz4.aspx
-     //continue revision of code and continue tradution for english
-        /* 0 = U+1F337 =🌷   = quebra de linha = \n
-         * 1 = U+27B3 = ➳   =  separator (suposto ;)
-         * 2 = U+1F381 = 🎁   = strings dentro do metodo psErro
-         * 3 = U+1F3E9 = 🏩  = quebra de linha arquivos fisicos (\n dentro do arquivo fisico)
-         * 4 = U+273F = ✿
-         * 5 = U+1F48C = 💌 
-         * 
-         **/
+        public static readonly List<string> psSeparator = new List<string> { "\u1F337", "\u27B3", "\u1F381", "\u1F3E9", "\u273F" };
+        public static readonly List<string[,]> psSeparator2 = new List<string[,]> { new string[1, 4] { {    "\u1F337"   ,   " 🌷"   ,   " \n"   ,   "!\u2764Sissa127\u00F8\u07C9Almond Joy" } }, new string[1, 4] { {    "\u27B3"    ,   "➳" ,   ";" ,   "!\u2764Sissa127\u00F8\u07C9Aplets & Cotlets"   } } };/*in return method or error*/
+
 
         public static readonly List<string> psFiles = new List<string> { "psFailInstall.cma" };
 
-        public static readonly int pstimeDelay = 1; /*delay time in milliseconds*/ 
+        public static readonly int pstimeDelay = 1; /*delay time in milliseconds*/
 
-        
+
         /*end das cacteristicas comuns a todos os sistemas*/
 
 
@@ -60,7 +51,7 @@ namespace patrikDll {
 
         };
 
-      
+
         public static string psReturnTimeString() {
             return DateTime.Now.ToString(psFORMATODEDATAEHORA).ToString();
         }
@@ -71,10 +62,10 @@ namespace patrikDll {
 
 
 
-      
 
 
-        
+
+
 
 
 
@@ -120,7 +111,7 @@ namespace patrikDll {
 
         public static readonly string FILE_DATABASE = Environment.GetEnvironmentVariable("PROGRAMFILES") + BAR_URL_SO + "patrikSystemBackup.cma";
 
-        
+
 
         public static string replaceCaracter(string value, string exit, string enter) {
             return value.Replace(exit, enter);

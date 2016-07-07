@@ -45,7 +45,7 @@
     <Compile Include="Intelligence.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UtilPatrikInstallGUIForm.cs" />
+    <Compile Include="UtilPatrikFullManagerBackupService.cs" />
     <Compile Include="WorkDirectory.cs" />
     <Compile Include="WorkFile.cs" />
     <Compile Include="WorkRegistry.cs" />

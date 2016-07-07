@@ -38,8 +38,6 @@
             this.lblServerName = new System.Windows.Forms.Label();
             this.tbServer = new System.Windows.Forms.TextBox();
             this.rtbDisplayOperation = new System.Windows.Forms.RichTextBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.progressBar2 = new System.Windows.Forms.ProgressBar();
             this.btnUninstall = new System.Windows.Forms.Button();
             this.btnCopyClipboard = new System.Windows.Forms.Button();
             this.gBDadosDoBanco.SuspendLayout();
@@ -48,10 +46,10 @@
             // btnInstall
             // 
             this.btnInstall.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnInstall.Location = new System.Drawing.Point(149, 98);
+            this.btnInstall.Location = new System.Drawing.Point(6, 80);
             this.btnInstall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(107, 31);
+            this.btnInstall.Size = new System.Drawing.Size(91, 31);
             this.btnInstall.TabIndex = 2;
             this.btnInstall.Text = "&install";
             this.btnInstall.UseVisualStyleBackColor = true;
@@ -81,14 +79,14 @@
             this.gBDadosDoBanco.Size = new System.Drawing.Size(1159, 45);
             this.gBDadosDoBanco.TabIndex = 4;
             this.gBDadosDoBanco.TabStop = false;
-            this.gBDadosDoBanco.Text = "Parametros de conexão do SGBD";
+            this.gBDadosDoBanco.Text = "Parameter of conection of the RDMS";
             // 
             // btnTest
             // 
             this.btnTest.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
             this.btnTest.Image = ((System.Drawing.Image)(resources.GetObject("btnTest.Image")));
             this.btnTest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTest.Location = new System.Drawing.Point(1071, 14);
+            this.btnTest.Location = new System.Drawing.Point(1077, 14);
             this.btnTest.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(71, 23);
@@ -103,11 +101,11 @@
             this.lblDataBase.AutoSize = true;
             this.lblDataBase.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDataBase.ForeColor = System.Drawing.Color.Black;
-            this.lblDataBase.Location = new System.Drawing.Point(709, 20);
+            this.lblDataBase.Location = new System.Drawing.Point(690, 20);
             this.lblDataBase.Name = "lblDataBase";
-            this.lblDataBase.Size = new System.Drawing.Size(67, 15);
+            this.lblDataBase.Size = new System.Drawing.Size(97, 15);
             this.lblDataBase.TabIndex = 9;
-            this.lblDataBase.Text = "banco:";
+            this.lblDataBase.Text = "database:";
             // 
             // tbDataBase
             // 
@@ -115,7 +113,7 @@
             this.tbDataBase.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbDataBase.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbDataBase.ForeColor = System.Drawing.Color.Lime;
-            this.tbDataBase.Location = new System.Drawing.Point(776, 20);
+            this.tbDataBase.Location = new System.Drawing.Point(790, 20);
             this.tbDataBase.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbDataBase.Name = "tbDataBase";
             this.tbDataBase.Size = new System.Drawing.Size(280, 13);
@@ -127,11 +125,11 @@
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.ForeColor = System.Drawing.Color.Black;
-            this.lblPassword.Location = new System.Drawing.Point(554, 20);
+            this.lblPassword.Location = new System.Drawing.Point(501, 20);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(67, 15);
+            this.lblPassword.Size = new System.Drawing.Size(97, 15);
             this.lblPassword.TabIndex = 7;
-            this.lblPassword.Text = "senha:";
+            this.lblPassword.Text = "password:";
             // 
             // tbPassword
             // 
@@ -139,7 +137,7 @@
             this.tbPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPassword.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPassword.ForeColor = System.Drawing.Color.Lime;
-            this.tbPassword.Location = new System.Drawing.Point(621, 20);
+            this.tbPassword.Location = new System.Drawing.Point(605, 20);
             this.tbPassword.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.Size = new System.Drawing.Size(76, 13);
@@ -151,11 +149,11 @@
             this.lblUser.AutoSize = true;
             this.lblUser.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUser.ForeColor = System.Drawing.Color.Black;
-            this.lblUser.Location = new System.Drawing.Point(365, 19);
+            this.lblUser.Location = new System.Drawing.Point(338, 19);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(87, 15);
+            this.lblUser.Size = new System.Drawing.Size(57, 15);
             this.lblUser.TabIndex = 5;
-            this.lblUser.Text = "usuário:";
+            this.lblUser.Text = "user:";
             // 
             // tbUserName
             // 
@@ -163,7 +161,7 @@
             this.tbUserName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbUserName.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbUserName.ForeColor = System.Drawing.Color.Lime;
-            this.tbUserName.Location = new System.Drawing.Point(453, 20);
+            this.tbUserName.Location = new System.Drawing.Point(397, 20);
             this.tbUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbUserName.Name = "tbUserName";
             this.tbUserName.Size = new System.Drawing.Size(90, 13);
@@ -175,11 +173,11 @@
             this.lblPort.AutoSize = true;
             this.lblPort.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPort.ForeColor = System.Drawing.Color.Black;
-            this.lblPort.Location = new System.Drawing.Point(244, 19);
+            this.lblPort.Location = new System.Drawing.Point(215, 19);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(67, 15);
+            this.lblPort.Size = new System.Drawing.Size(57, 15);
             this.lblPort.TabIndex = 3;
-            this.lblPort.Text = "porta:";
+            this.lblPort.Text = "port:";
             // 
             // tbPort
             // 
@@ -187,7 +185,7 @@
             this.tbPort.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbPort.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbPort.ForeColor = System.Drawing.Color.Lime;
-            this.tbPort.Location = new System.Drawing.Point(311, 20);
+            this.tbPort.Location = new System.Drawing.Point(279, 20);
             this.tbPort.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbPort.Name = "tbPort";
             this.tbPort.Size = new System.Drawing.Size(45, 13);
@@ -199,11 +197,11 @@
             this.lblServerName.AutoSize = true;
             this.lblServerName.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblServerName.ForeColor = System.Drawing.Color.Black;
-            this.lblServerName.Location = new System.Drawing.Point(9, 19);
+            this.lblServerName.Location = new System.Drawing.Point(7, 19);
             this.lblServerName.Name = "lblServerName";
-            this.lblServerName.Size = new System.Drawing.Size(97, 15);
+            this.lblServerName.Size = new System.Drawing.Size(77, 15);
             this.lblServerName.TabIndex = 1;
-            this.lblServerName.Text = "servidor:";
+            this.lblServerName.Text = "server:";
             // 
             // tbServer
             // 
@@ -211,7 +209,7 @@
             this.tbServer.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.tbServer.Font = new System.Drawing.Font("Lucida Console", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbServer.ForeColor = System.Drawing.Color.Lime;
-            this.tbServer.Location = new System.Drawing.Point(106, 20);
+            this.tbServer.Location = new System.Drawing.Point(81, 20);
             this.tbServer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tbServer.Name = "tbServer";
             this.tbServer.Size = new System.Drawing.Size(128, 13);
@@ -222,34 +220,20 @@
             // 
             this.rtbDisplayOperation.BackColor = System.Drawing.Color.Black;
             this.rtbDisplayOperation.ForeColor = System.Drawing.Color.Lime;
-            this.rtbDisplayOperation.Location = new System.Drawing.Point(262, 80);
+            this.rtbDisplayOperation.Location = new System.Drawing.Point(217, 80);
             this.rtbDisplayOperation.Name = "rtbDisplayOperation";
             this.rtbDisplayOperation.ReadOnly = true;
-            this.rtbDisplayOperation.Size = new System.Drawing.Size(909, 293);
+            this.rtbDisplayOperation.Size = new System.Drawing.Size(954, 293);
             this.rtbDisplayOperation.TabIndex = 7;
             this.rtbDisplayOperation.Text = "";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 104);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(121, 23);
-            this.progressBar1.TabIndex = 8;
-            // 
-            // progressBar2
-            // 
-            this.progressBar2.Location = new System.Drawing.Point(12, 314);
-            this.progressBar2.Name = "progressBar2";
-            this.progressBar2.Size = new System.Drawing.Size(121, 23);
-            this.progressBar2.TabIndex = 9;
             // 
             // btnUninstall
             // 
             this.btnUninstall.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnUninstall.Location = new System.Drawing.Point(149, 309);
+            this.btnUninstall.Location = new System.Drawing.Point(105, 80);
             this.btnUninstall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUninstall.Name = "btnUninstall";
-            this.btnUninstall.Size = new System.Drawing.Size(107, 31);
+            this.btnUninstall.Size = new System.Drawing.Size(108, 31);
             this.btnUninstall.TabIndex = 10;
             this.btnUninstall.Text = "&uninstall";
             this.btnUninstall.UseVisualStyleBackColor = true;
@@ -275,8 +259,6 @@
             this.ClientSize = new System.Drawing.Size(1185, 417);
             this.Controls.Add(this.btnCopyClipboard);
             this.Controls.Add(this.btnUninstall);
-            this.Controls.Add(this.progressBar2);
-            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.rtbDisplayOperation);
             this.Controls.Add(this.gBDadosDoBanco);
             this.Controls.Add(this.btnInstall);
@@ -313,8 +295,6 @@
         private System.Windows.Forms.Label lblPassword;
         private System.Windows.Forms.TextBox tbPassword;
         private System.Windows.Forms.RichTextBox rtbDisplayOperation;
-        private System.Windows.Forms.ProgressBar progressBar1;
-        private System.Windows.Forms.ProgressBar progressBar2;
         private System.Windows.Forms.Button btnUninstall;
         private System.Windows.Forms.Button btnTest;
         private System.Windows.Forms.Button btnCopyClipboard;

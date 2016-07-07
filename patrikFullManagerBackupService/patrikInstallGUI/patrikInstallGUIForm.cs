@@ -70,14 +70,14 @@ namespace patrikInstallGUI {
             if (auxMsg != "ok") {
                 MessageBox.Show("this problems in parameter of configuration of the dataBase were found :\n" + auxMsg, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            } else if (UtilpatrikInstallGUIForm.createDirectories(this.rtbDisplayOperation) != true) {
-                if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
+            } else if (UtilPatrikFullManagerBackupService.createDirectories(this.rtbDisplayOperation) != true) {
+                if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
                     this.uninstallSystem("error");
                 }
-            } else if (UtilpatrikInstallGUIForm.createFiles(this.rtbDisplayOperation) != true) {
+            } else if (UtilPatrikFullManagerBackupService.createFiles(this.rtbDisplayOperation) != true) {
                 this.uninstallSystem("error");
 
-            } else if (UtilpatrikInstallGUIForm.installConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation) != "ok") {
+            } else if (UtilPatrikFullManagerBackupService.installConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation) != "ok") {
                 this.uninstallSystem("error");
                 /*routine try drop dataBase*/
             } else if (true == true) {
@@ -86,7 +86,7 @@ namespace patrikInstallGUI {
         }
 
         private void routineForExclusionAll(object sender, EventArgs e) {
-            if (WorkDirectory.directoryExist(Util.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
+            if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
                 /*routine verify after*/
                 this.uninstallSystem();
             }
@@ -101,12 +101,12 @@ namespace patrikInstallGUI {
             if (true != true) {
                 /*future implementation*/
 
-            } else if (UtilpatrikInstallGUIForm.unistallConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation, error) != "ok") {
+            } else if (UtilPatrikFullManagerBackupService.unistallConfigurationDataBase(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text, this.rtbDisplayOperation, error) != "ok") {
                 /*future implementation */
-            } else if (UtilpatrikInstallGUIForm.unistalldirectoriesAndFiles(this.rtbDisplayOperation, error) != true) {
+            } else if (UtilPatrikFullManagerBackupService.unistalldirectoriesAndFiles(this.rtbDisplayOperation, error) != true) {
                 /*future implementation*/
             }
-            WorkFile.writeFile(true, Util.psGETCURRENTDIRECTORY, Util.psFiles[0], rtbDisplayOperation.Text, true);
+            WorkFile.writeFile(Util.psGETCURRENTDIRECTORY, UtilPatrikFullManagerBackupService.psFilesLocalInstall[0], rtbDisplayOperation.Text, true);
             return true;
 
         }
@@ -148,7 +148,7 @@ namespace patrikInstallGUI {
             if (result != "ok") {
                 MessageBox.Show("Error in value informed for to acess database", "Error...", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {
-                result = UtilpatrikInstallGUIForm.testConnectionsRDMS(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text);
+                result = UtilPatrikFullManagerBackupService.testConnectionsRDMS(tbServer.Text, tbPort.Text, tbUserName.Text, tbPassword.Text, tbDataBase.Text);
                 switch (result) {
                     case "ok":
                         MessageBox.Show("The configuration of the database is ok!!!", "Information Message", MessageBoxButtons.OK, MessageBoxIcon.Information);

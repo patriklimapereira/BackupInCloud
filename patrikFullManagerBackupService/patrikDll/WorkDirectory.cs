@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace patrikDll {
@@ -13,9 +14,12 @@ namespace patrikDll {
                 return true;
             }
             catch (Exception error) {
-                String method = "private static bool createDirectory(String local){" +
-                Util.psSeparator[3] + "local=" + local;
-                Util.psErro(Util.psErroWhatsToDo[0],true, Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[0], method, error.Message + Util.psSeparator[2] + error.Source + Util.psSeparator[2] + error.StackTrace);
+                List<string[,]> listError = new List<string[,]> { };
+                listError.Add(new string[1, 2] { { "method", "public static bool directoryExist(String local)" } });
+                listError.Add(new string[1, 2] { { "local", local} });
+              
+                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+               
                 return false;
             }
         }
@@ -25,11 +29,16 @@ namespace patrikDll {
                 return true;
             }
             catch (Exception error) {
-                String method = "private static bool createDirectory(String local){" +
-                Util.psSeparator[3] + "local=" + local +
-                Util.psSeparator[3] + "toActiveRecursion =" + toActiveRecursion;
-                Util.psErro(Util.psErroWhatsToDo[0], true, Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[0], method, error.Message + Util.psSeparator[2] + error.Source + Util.psSeparator[2] + error.StackTrace);
+                List<string[,]> listError = new List<string[,]> { };
+                listError.Add(new string[1, 2] { { "method", "public static bool directoryExist(String local)" } });
+                listError.Add(new string[1, 2] { { "local", local } });
+                listError.Add(new string[1, 2] { {"toActiveRecursion", toActiveRecursion.ToString()} });
+
+                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+
                 return false;
+
+
             }
         }
     }

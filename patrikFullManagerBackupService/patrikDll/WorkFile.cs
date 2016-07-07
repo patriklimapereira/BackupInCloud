@@ -24,7 +24,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "name", name } });
                 listError.Add(new string[1, 2] { { "valueString", valueString } });
                 listError.Add(new string[1, 2] { { "addAndNoReplaceTheFile",  addAndNoReplaceTheFile.ToString() } });
-                Util.psError(local, name, listError, error);
+                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
 
          
 
@@ -34,33 +34,36 @@ namespace patrikDll {
         }
 
 
-      public static string[] readFileLines(String local,String fileName ) {
+      public static string[] readFileLines(String local,String name ) {
                try {
-                    return File.ReadAllLines(Path.Combine(local, fileName));
+                    return File.ReadAllLines(Path.Combine(local, name));
                 }
                 catch (Exception error) {
-                   String method = "public static string[] readFileLines(String local,String name ) {" +
-                   Util.psSeparator[3] + "local=" + local +
-                   Util.psSeparator[3] + "name =" + fileName;
-                   Util.psErro(Util.psErroWhatsToDo[0], true,Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[0], method, error.ToString());
-                   return null;
+                List<string[,]> listError = new List<string[,]> { };
+                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String name )" } });
+                listError.Add(new string[1, 2] { { "local", local } });
+                listError.Add(new string[1, 2] { { "name", name } });                
+                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                return null;
                 }
          }                
 
-       public static bool fileExist( String local,String fileName) {
-            return File.Exists(Path.Combine(local, fileName));
+       public static bool fileExist( String local,String name) {
+            return File.Exists(Path.Combine(local, name));
         }
 
-       public static bool createEmptyFile (String local,String fileName){
+       public static bool createEmptyFile (String local,String name){
            try {
-               File.Create(Path.Combine(local, fileName)).Close();                        
+               File.Create(Path.Combine(local, name)).Close();                        
                return true;
            }catch (Exception error){
-               String method = "public static bool createEmptyFile (String local,String name){" +
-               Util.psSeparator[3] + "local=" + local +
-               Util.psSeparator[3] + "name =" + fileName;
-               Util.psErro(Util.psErroWhatsToDo[0],true ,Util.FMBSDirectoryPatrikFullManagerBackupService[0], Util.FMBSFilePatrikFullManagerBackupService[0], method, error.Message + Util.psSeparator[2] + error.Source + Util.psSeparator[2] + error.StackTrace);
-               return false;
+
+                List<string[,]> listError = new List<string[,]> { };
+                listError.Add(new string[1, 2] { { "method", "public static bool createEmptyFile (String local,String name)" } });
+                listError.Add(new string[1, 2] { { "local", local } });
+                listError.Add(new string[1, 2] { { "name", name } });
+                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                return false;
            }
               
        }

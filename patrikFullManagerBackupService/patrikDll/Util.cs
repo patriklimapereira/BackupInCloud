@@ -16,8 +16,8 @@ namespace patrikDll {
         public static readonly string psBAR_URL_SO = "\\";
         /*end commons features SOs*/
 
-        /*begin features commons a systens*/
-        public static readonly string psPROGRAMFILES = "C:" + psBAR_URL_SO + "Users" + psBAR_URL_SO + "patrik" + psBAR_URL_SO + "Desktop" + psBAR_URL_SO + "allProjectsVisualStudio" + psBAR_URL_SO + "BackupInCloud" + psBAR_URL_SO + "patrikFullManagerBackupService" + psBAR_URL_SO + "pseudoProgramFiles"; /* Environment.GetEnvironmentVariable("PROGRAMFILES");*/
+        /*begin features commons a patriksystens*/
+        public static readonly string psPROGRAMFILES = "C:" + Util.psBAR_URL_SO + "Users" + Util.psBAR_URL_SO + "patrik" + Util.psBAR_URL_SO + "Desktop" + Util.psBAR_URL_SO + "allProjectsVisualStudio" + Util.psBAR_URL_SO + "BackupInCloud" + Util.psBAR_URL_SO + "patrikFullManagerBackupService" + Util.psBAR_URL_SO + "pseudoProgramFiles"; /* Environment.GetEnvironmentVariable("PROGRAMFILES");*/
         public static readonly string psGETCURRENTDIRECTORY = Directory.GetCurrentDirectory();
         public static readonly string psFORMATDATATIME = "dd-MM-yyyy HH-mm-ss"; /*brazilian format date and hour  in future create list or vector whith several country*/
 
@@ -28,46 +28,36 @@ namespace patrikDll {
             new string[1, 4] { {    "\u27B3"    ,   "➳" ,   ";" ,   "!\u2764Sissa127\u00F8\u07C9Aplets & Cotlets"   } } };
 
         /*delay time in milliseconds*/
-        public static readonly int pstimeDelay = 1; 
+        public static readonly int pstimeDelay = 1;
 
 
-        /**********end das cacteristicas comuns a todos os sistemas*/
+    
+       
 
-                    /*begin caracteristicas comuns a patrikFullManagerBackupService*//*verificar possibilidade de delete*/
-        public static readonly string FMBSSystemName = "patrikFullManagerBackupService";
-        public static readonly string FMBSSystemNamePrefixo = "psPatrikFullManagerBackupService";
-        public static readonly string FMBSImg = "picture";
-        public static readonly string FMBSTemp = "temp";
-        public static readonly List<string> FMBSDirectoryPatrikFullManagerBackupService = new List<string>{psPROGRAMFILES + psBAR_URL_SO + FMBSSystemNamePrefixo,
-                                                                                              psPROGRAMFILES + psBAR_URL_SO + FMBSSystemNamePrefixo + psBAR_URL_SO + FMBSImg,
-                                                                                              psPROGRAMFILES + psBAR_URL_SO + FMBSSystemNamePrefixo + psBAR_URL_SO + FMBSTemp,
-        };
 
-        public static readonly List<string> FMBSFilePatrikFullManagerBackupService = new List<string>{"psFILE_LOGpatrikFullManagerBackupService.cma",
-                                                                                         "psCONFIGURATIONSGBDpatrikFullManagerBackupService.cma",
-                                                                                         "psCargaInicialSGBDpatrikFullManagerBackupService.cma"
-
-        };
-     
 
         public static string psReturnTimeString() {
             return DateTime.Now.ToString(psFORMATDATATIME).ToString();
         }
 
-        /*end caracteristicas comuns a patrikFullManagerBackupService*/
-
-
-        public static  string purifyErrorMethod(string valueStringForPurification) {
-            /*aftler implements nissa123*/
+        public static string purifyErrorMethod(string valueStringForPurification) {
+            /*after implements nissa123*/
             return valueStringForPurification.Replace(psSeparator2[0][2, 0], psSeparator2[0][0, 0]).Replace(psSeparator2[1][2, 0], psSeparator2[1][0, 0]);
         }
- 
-        public static void psError( List<string[,]> listError,  Exception error = null, String local = "", String name = "") {
+
+     
+
+
+
+
+        public static void psError(String local , String name ,  List<string[,]> listError ,  Exception error = null ) {
+
+            MessageBox.Show("Erro");
             int j = 0;
             String errorString = "";
             /*other form very elegant https://msdn.microsoft.com/en-us/library/system.exception.data(v=vs.110).aspx */
             foreach (string[,] i in listError) {
-                errorString += String.Concat(i[j, 0], i[j, 0], "\n");
+                errorString += String.Concat(i[j, 0],"\t = \t" ,i[j, 0], "\n");
                 j++;
             }
             if (error != null) {
@@ -87,8 +77,13 @@ namespace patrikDll {
                         
 
             }
-        
-         /*after to remove is need for to compiler a class inteligence*/
+
+
+
+        /*end features commons a patriksystens*/
+
+
+        /*after to remove is need for to compiler a class inteligence*/
         public static readonly int ERRO_REGISTRY_LOG = 0;
         public static readonly int ERROR_SEND_EMAIL = 1;
 

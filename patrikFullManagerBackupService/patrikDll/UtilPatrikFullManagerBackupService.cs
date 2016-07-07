@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using patrikDll;
 using System.Windows.Forms;
 using PatrikSystemPersistence;
+using System.IO;
 
 namespace patrikDll {
     public class UtilPatrikFullManagerBackupService {
@@ -23,9 +24,7 @@ namespace patrikDll {
         };
 
         public static readonly List<string> FMBSFilePatrikFullManagerBackupService = new List<string>{"psFILE_LOGpatrikFullManagerBackupService.cma",
-                                                                                         "psCONFIGURATIONSGBDpatrikFullManagerBackupService.cma",
-                                                                                         "psCargaInicialSGBDpatrikFullManagerBackupService.cma"
-
+                                                                                         "psCONFIGURATIONSGBDpatrikFullManagerBackupService.cma"
         };
 
         public static readonly List<string> psFilesLocalInstall = new List<String> { "log" };
@@ -58,52 +57,52 @@ namespace patrikDll {
 
 
 
-        public static bool createFiles(RichTextBox rtb) {
-            /*begin routine of instalation of the files*/
-            msgDelayRefresh(formatStringLog("begin-install", "files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
-
-            /*for for to create the files*/
-            for (int i = 0; i < UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService.Count; i++) {
-                switch (toInstallFiles(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i])) {
-                    case 1:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
-                        break;
-                    case 3:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - file already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
-                        break;
-                    case 0:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - erro in creation the file"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
-                        return false;
-                }
-            }
-            msgDelayRefresh(formatStringLog("end-install", "files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
-            return true;
-        }
+      
 
         public static bool unistalldirectoriesAndFiles(RichTextBox rtb, string erro = "") {
-            if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
-                msgDelayRefresh(formatStringLog("begin-unistall" + (erro == "" ? String.Empty : "-" + erro), "directoriesAndfiles"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+            msgDelayRefresh(formatStringLog("begin-unistall" + (erro == "" ? String.Empty : "-" + erro), "directories And files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+
+            if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {                
 
                 /*check method deleteDirectory in future - possible problems lock file or directories because open in windowns or other OS*/
                 if (false == (WorkDirectory.deleteDirectory(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]))) {
+
                     msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "fail - erro to delete root  directory" + UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                 }
                 msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "ok - " + UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+
+                msgDelayRefresh(formatStringLog("end-unistall" + (erro == "" ? String.Empty : "-" + erro), "directoriesAndfiles"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+
+            }else {
+                erro = "error";
+                msgDelayRefresh(formatStringLog("end-unistall" + (erro == "" ? String.Empty : "-" + erro), "no unistall the directories and files no exists"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+               
+
             }
-            msgDelayRefresh(formatStringLog("end-unistall" + (erro == "" ? String.Empty : "-" + erro), "directoriesAndfiles"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+   
             return true;
         }
 
-        public static string installConfigurationDataBase(String sever, String port, String userName, String password, String dataBase, RichTextBox rtb) {
+        public static string installConfigurationDataBase(String server, String port, String userName, String password, String dataBase, RichTextBox rtb) {
             String dataBaseCreateIsOk = "ok";
+            String line = "";
+          
             msgDelayRefresh(formatStringLog("begin-install", "configuration dataBase"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
-            dataBaseCreateIsOk = testConnectionsRDMS(sever, port, userName, password, dataBase);
+            dataBaseCreateIsOk = testConnectionsRDMS(server, port, userName, password, dataBase);
             if (dataBaseCreateIsOk != "ok") {
                 msgDelayRefresh(formatStringLog("test-connetion-dataBase", "fail - " + dataBaseCreateIsOk), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                 return dataBaseCreateIsOk;
             }
+
+            line = server + ";" + port + ";" + userName + ";" + password + ";" + dataBase;
+       
             msgDelayRefresh(formatStringLog("test-connetion-dataBase", dataBaseCreateIsOk), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
-            /*write file routine acess database*/
+            if(   WorkFile.writeFile(FMBSDirectoryPatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1], line , false) == false) {      
+                msgDelayRefresh(formatStringLog("registration-database", "fail - error recording of file width the configutarion"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                return null;
+            }
+            msgDelayRefresh(formatStringLog("registration-database", "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+
             msgDelayRefresh(formatStringLog("end-install", "configuration dataBase"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
             return dataBaseCreateIsOk;
         }
@@ -114,9 +113,24 @@ namespace patrikDll {
 
         public static string unistallConfigurationDataBase(String sever, String port, String userName, String password, String dataBase, RichTextBox rtb, string erro = "") {
             String dataBaseCreateIsOk = "ok";
+
             msgDelayRefresh(formatStringLog(String.Concat("begin-unistall", (erro == "" ? String.Empty : "-" + erro)), "remove configuration dataBase "), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
-            /*remove file routine acess database*/
+
+            if (WorkFile.fileExist( FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false ){
+
+                msgDelayRefresh(formatStringLog("delete-file", "file not exist, not is necessary to remove file"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+
+             }else if (WorkFile.deleteFile(FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false) {
+
+                msgDelayRefresh(formatStringLog("begin-delete-file", "error to remover file of configuration"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+                
+
+
+                return null;
+            }
+
             msgDelayRefresh(formatStringLog(String.Concat("end-unistall", (erro == "" ? String.Empty : "-" + erro)), "remove configuration dataBase "), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+
             return dataBaseCreateIsOk;
 
         }
@@ -176,6 +190,28 @@ namespace patrikDll {
                 Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return -1;
             }
+        }
+
+        public static bool createFiles(RichTextBox rtb) {
+            /*begin routine of instalation of the files*/
+            msgDelayRefresh(formatStringLog("begin-install", "files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+
+            /*for for to create the files*/
+            for (int i = 0; i < UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService.Count; i++) {
+                switch (toInstallFiles(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i])) {
+                    case 1:
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        break;
+                    case 3:
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - file already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        break;
+                    case 0:
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - erro in creation the file"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        return false;
+                }
+            }
+            msgDelayRefresh(formatStringLog("end-install", "files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
+            return true;
         }
 
     }

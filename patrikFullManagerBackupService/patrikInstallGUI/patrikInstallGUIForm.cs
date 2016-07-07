@@ -61,7 +61,7 @@ namespace patrikInstallGUI {
 
         }
         private void btnInstall_Click(object sender, EventArgs e) {
-            bool modeDevelopment = true;
+           
             String auxMsg;
             this.purifyInputLabelOfConfigurationOfTheRDMS();
             this.rtbDisplayOperation.Clear();
@@ -112,7 +112,8 @@ namespace patrikInstallGUI {
         }
 
         private void btnUninstall_Click(object sender, EventArgs e) {
-            this.uninstallSystem();
+            this.rtbDisplayOperation.Clear();
+            this.uninstallSystem(); 
         }
 
         private string validatesLabelConfigurationDataBase() {

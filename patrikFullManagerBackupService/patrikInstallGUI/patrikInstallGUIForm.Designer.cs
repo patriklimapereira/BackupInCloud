@@ -46,10 +46,10 @@
             // btnInstall
             // 
             this.btnInstall.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnInstall.Location = new System.Drawing.Point(6, 80);
+            this.btnInstall.Location = new System.Drawing.Point(12, 80);
             this.btnInstall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnInstall.Name = "btnInstall";
-            this.btnInstall.Size = new System.Drawing.Size(91, 31);
+            this.btnInstall.Size = new System.Drawing.Size(108, 31);
             this.btnInstall.TabIndex = 2;
             this.btnInstall.Text = "&install";
             this.btnInstall.UseVisualStyleBackColor = true;
@@ -220,17 +220,17 @@
             // 
             this.rtbDisplayOperation.BackColor = System.Drawing.Color.Black;
             this.rtbDisplayOperation.ForeColor = System.Drawing.Color.Lime;
-            this.rtbDisplayOperation.Location = new System.Drawing.Point(217, 80);
+            this.rtbDisplayOperation.Location = new System.Drawing.Point(136, 80);
             this.rtbDisplayOperation.Name = "rtbDisplayOperation";
             this.rtbDisplayOperation.ReadOnly = true;
-            this.rtbDisplayOperation.Size = new System.Drawing.Size(954, 293);
+            this.rtbDisplayOperation.Size = new System.Drawing.Size(1035, 293);
             this.rtbDisplayOperation.TabIndex = 7;
             this.rtbDisplayOperation.Text = "";
             // 
             // btnUninstall
             // 
             this.btnUninstall.Font = new System.Drawing.Font("Lucida Console", 11.25F, System.Drawing.FontStyle.Bold);
-            this.btnUninstall.Location = new System.Drawing.Point(105, 80);
+            this.btnUninstall.Location = new System.Drawing.Point(12, 132);
             this.btnUninstall.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnUninstall.Name = "btnUninstall";
             this.btnUninstall.Size = new System.Drawing.Size(108, 31);

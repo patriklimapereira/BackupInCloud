@@ -7,7 +7,7 @@ using System.IO;
 
 
 namespace patrikDll {
-    public class WorkFile {
+    public class WorkerFile {
         public static bool writeFile( String local,String name, String valueString,  bool addAndNoReplaceTheFile = true) {
             try {
                 StreamWriter file;

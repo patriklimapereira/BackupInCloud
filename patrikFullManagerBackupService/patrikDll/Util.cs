@@ -70,7 +70,7 @@ namespace patrikDll {
                 errorString = purifyErrorMethod(errorString);
 
             }
-            WorkFile.writeFile(local, name, errorString);
+            WorkerFile.writeFile(local, name, errorString);
             /*after implements routine send mail*/
             MessageBox.Show("send e-mail to create this routine");     
                 

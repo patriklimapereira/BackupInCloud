@@ -62,10 +62,10 @@ namespace patrikDll {
         public static bool unistalldirectoriesAndFiles(RichTextBox rtb, string erro = "") {
             msgDelayRefresh(formatStringLog("begin-unistall" + (erro == "" ? String.Empty : "-" + erro), "directories And files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
-            if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {                
+            if (WorkerDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {                
 
                 /*check method deleteDirectory in future - possible problems lock file or directories because open in windowns or other OS*/
-                if (false == (WorkDirectory.deleteDirectory(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]))) {
+                if (false == (WorkerDirectory.deleteDirectory(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]))) {
 
                     msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "fail - erro to delete root  directory" + UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                 }
@@ -97,7 +97,7 @@ namespace patrikDll {
             line = server + ";" + port + ";" + userName + ";" + password + ";" + dataBase;
        
             msgDelayRefresh(formatStringLog("test-connetion-dataBase", dataBaseCreateIsOk), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
-            if(   WorkFile.writeFile(FMBSDirectoryPatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1], line , false) == false) {      
+            if(   WorkerFile.writeFile(FMBSDirectoryPatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1], line , false) == false) {      
                 msgDelayRefresh(formatStringLog("registration-database", "fail - error recording of file width the configutarion"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                 return null;
             }
@@ -116,11 +116,11 @@ namespace patrikDll {
 
             msgDelayRefresh(formatStringLog(String.Concat("begin-unistall", (erro == "" ? String.Empty : "-" + erro)), "remove configuration dataBase "), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
-            if (WorkFile.fileExist( FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false ){
+            if (WorkerFile.fileExist( FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false ){
 
                 msgDelayRefresh(formatStringLog("delete-file", "file not exist, not is necessary to remove file"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
-             }else if (WorkFile.deleteFile(FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false) {
+             }else if (WorkerFile.deleteFile(FMBSFilePatrikFullManagerBackupService[0], FMBSFilePatrikFullManagerBackupService[1]) == false) {
 
                 msgDelayRefresh(formatStringLog("begin-delete-file", "error to remover file of configuration"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
                 
@@ -138,7 +138,7 @@ namespace patrikDll {
         public static bool recordLog(RichTextBox rtb, string erro = "") {
             msgDelayRefresh(formatStringLog(String.Concat("begin-register-unistall", (erro == "" ? String.Empty : "-" + erro)), "file log"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
-            WorkFile.writeFile(Util.psGETCURRENTDIRECTORY, files[0], rtb.Text, true);
+            WorkerFile.writeFile(Util.psGETCURRENTDIRECTORY, files[0], rtb.Text, true);
 
             /*future routine case to ococcur erro in method   WorkFile.writeFile*/
 
@@ -161,10 +161,10 @@ namespace patrikDll {
 
         public static int toInstallDirectory(String directory) {
             try {
-                if (WorkDirectory.directoryExist(directory) == true) {
+                if (WorkerDirectory.directoryExist(directory) == true) {
                     return 3;
                 }
-                return Convert.ToInt32(WorkDirectory.createDirectory(directory)); /* 1 create and 0 not create*/
+                return Convert.ToInt32(WorkerDirectory.createDirectory(directory)); /* 1 create and 0 not create*/
 
             } catch (Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
@@ -178,10 +178,10 @@ namespace patrikDll {
 
         public static int toInstallFiles(String directory, String file) {
             try {
-                if (WorkFile.fileExist(directory, file) == true) {
+                if (WorkerFile.fileExist(directory, file) == true) {
                     return 3;
                 }
-                return Convert.ToInt32(WorkFile.createEmptyFile(directory, file)); /* 1 criou e 0 não criou*/
+                return Convert.ToInt32(WorkerFile.createEmptyFile(directory, file)); /* 1 criou e 0 não criou*/
             } catch (Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
                 listError.Add(new string[1, 2] { { "method", " public static int toInstallFiles(String directory, String file) " } });

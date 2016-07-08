@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace patrikDll {
-    public class WorkDirectory {
+    public class WorkerDirectory {
         public static bool directoryExist(String local) {
             return Directory.Exists(local);
         }

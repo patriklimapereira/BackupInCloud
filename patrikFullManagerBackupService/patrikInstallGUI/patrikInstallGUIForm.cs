@@ -71,7 +71,7 @@ namespace patrikInstallGUI {
                 MessageBox.Show("this problems in parameter of configuration of the dataBase were found :\n" + auxMsg, "Error Message", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
             } else if (UtilPatrikFullManagerBackupService.createDirectories(this.rtbDisplayOperation) != true) {
-                if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
+                if (WorkerDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
                     this.uninstallSystem("error");
                 }
             } else if (UtilPatrikFullManagerBackupService.createFiles(this.rtbDisplayOperation) != true) {
@@ -86,7 +86,7 @@ namespace patrikInstallGUI {
         }
 
         private void routineForExclusionAll(object sender, EventArgs e) {
-            if (WorkDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
+            if (WorkerDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {
                 /*routine verify after*/
                 this.uninstallSystem();
             }
@@ -106,7 +106,7 @@ namespace patrikInstallGUI {
             } else if (UtilPatrikFullManagerBackupService.unistalldirectoriesAndFiles(this.rtbDisplayOperation, error) != true) {
                 /*future implementation*/
             }
-            WorkFile.writeFile(Util.psGETCURRENTDIRECTORY, UtilPatrikFullManagerBackupService.psFilesLocalInstall[0], rtbDisplayOperation.Text, true);
+            WorkerFile.writeFile(Util.psGETCURRENTDIRECTORY, UtilPatrikFullManagerBackupService.psFilesLocalInstall[0], rtbDisplayOperation.Text, true);
             return true;
 
         }

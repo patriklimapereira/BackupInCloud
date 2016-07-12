@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("patrikConsoleAplication")]
+[assembly: AssemblyTitle("patrikService")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("patrikConsoleAplication")]
+[assembly: AssemblyProduct("patrikService")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7fbb4b14-3b05-4846-93bc-451557ddb3da")]
+[assembly: Guid("a2119c82-1c27-4ee0-b390-579eb63b7167")]
 
 // Version information for an assembly consists of the following four values:
 //

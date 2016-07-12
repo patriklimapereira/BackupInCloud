@@ -7,10 +7,7 @@ using System.IO;
 
 
 namespace patrikDll {
-    public struct StringDatetime {
-        public string first;
-        public DateTime second;
-    };
+
     public class Util {
         public static readonly bool psMODEDEVELOPMENT = true;
 

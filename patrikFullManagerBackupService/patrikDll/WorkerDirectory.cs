@@ -18,7 +18,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "method", "public static bool directoryExist(String local)" } });
                 listError.Add(new string[1, 2] { { "local", local} });
               
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                
                 return false;
             }
@@ -34,7 +34,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { {"toActiveRecursion", toActiveRecursion.ToString()} });
 
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
 
                 return false;
 

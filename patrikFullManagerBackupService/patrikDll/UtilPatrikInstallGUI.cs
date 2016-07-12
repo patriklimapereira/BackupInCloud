@@ -9,7 +9,7 @@ using PatrikSystemPersistence;
 using System.IO;
 
 namespace patrikDll {
-    public class UtilPatrikFullManagerBackupService {
+    public class UtilPatrikInstallGUI {
         private static readonly int showTextHeaderInDisplay = 2;
         private static readonly int showInstructionsExecutedInDisplay = 2;
        private static readonly List<string> files = new List<string> { "psFailInstall.cma" };
@@ -36,18 +36,18 @@ namespace patrikDll {
         public static bool createDirectories(RichTextBox rtb) {
             msgDelayRefresh(formatStringLog("begin-install", "directory"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
             /*for for to create directories*/
-            for (int i = 0; i < UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService.Count; i++) {
+            for (int i = 0; i < UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService.Count; i++) {
                 
 
-                switch (toInstallDirectory(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i])) {
+                switch (toInstallDirectory(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i])) {
                     case 1:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         break;
                     case 3:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - directory already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - directory already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         break;
                     case 0:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i] + "Fail - Error  in creation the directory"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i] + "Fail - Error  in creation the directory"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         return false;
                 }
             }
@@ -62,14 +62,14 @@ namespace patrikDll {
         public static bool unistalldirectoriesAndFiles(RichTextBox rtb, string erro = "") {
             msgDelayRefresh(formatStringLog("begin-unistall" + (erro == "" ? String.Empty : "-" + erro), "directories And files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
-            if (WorkerDirectory.directoryExist(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {                
+            if (WorkerDirectory.directoryExist(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0]) == true) {                
 
                 /*check method deleteDirectory in future - possible problems lock file or directories because open in windowns or other OS*/
-                if (false == (WorkerDirectory.deleteDirectory(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]))) {
+                if (false == (WorkerDirectory.deleteDirectory(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0]))) {
 
-                    msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "fail - erro to delete root  directory" + UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                    msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "fail - erro to delete root  directory" + UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                 }
-                msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "ok - " + UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                msgDelayRefresh(formatStringLog("delete", "deleteRootDirectory", "ok - " + UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0]), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
 
                 msgDelayRefresh(formatStringLog("end-unistall" + (erro == "" ? String.Empty : "-" + erro), "directoriesAndfiles"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
@@ -170,7 +170,7 @@ namespace patrikDll {
                 List<string[,]> listError = new List<string[,]> { };
                 listError.Add(new string[1, 2] { { "method",  "public static int toInstallDirectory(String directory)" } });
                 listError.Add(new string[1, 2] { { "directory", directory } });         
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return -1;
             }
         }
@@ -187,7 +187,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "method", " public static int toInstallFiles(String directory, String file) " } });
                 listError.Add(new string[1, 2] { { "directory", directory } });
                 listError.Add(new string[1, 2] { { "file", file } });
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return -1;
             }
         }
@@ -197,16 +197,16 @@ namespace patrikDll {
             msgDelayRefresh(formatStringLog("begin-install", "files"), Util.pstimeDelay * showTextHeaderInDisplay, rtb);
 
             /*for for to create the files*/
-            for (int i = 0; i < UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService.Count; i++) {
-                switch (toInstallFiles(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i])) {
+            for (int i = 0; i < UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService.Count; i++) {
+                switch (toInstallFiles(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[i])) {
                     case 1:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[i], "ok"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         break;
                     case 3:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - file already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - file already exist"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         break;
                     case 0:
-                        msgDelayRefresh(formatStringLog("create", UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - erro in creation the file"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
+                        msgDelayRefresh(formatStringLog("create", UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[i], "fail - erro in creation the file"), Util.pstimeDelay * showInstructionsExecutedInDisplay, rtb);
                         return false;
                 }
             }

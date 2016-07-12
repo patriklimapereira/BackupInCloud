@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace patrikDll {
     class WorkerMail {
 
-        public static sendEmail() {
+        public static void  sendEmail() {
 
 
 

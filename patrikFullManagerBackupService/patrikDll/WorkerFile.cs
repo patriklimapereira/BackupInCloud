@@ -24,7 +24,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "name", name } });
                 listError.Add(new string[1, 2] { { "valueString", valueString } });
                 listError.Add(new string[1, 2] { { "addAndNoReplaceTheFile",  addAndNoReplaceTheFile.ToString() } });
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
             return false;
             }
             return true;
@@ -40,7 +40,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String name )" } });
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { { "name", name } });                
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return null;
                 }
          }                
@@ -59,7 +59,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "method", "public static bool createEmptyFile (String local,String name)" } });
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { { "name", name } });
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return false;
            }
               
@@ -76,7 +76,7 @@ namespace patrikDll {
                 listError.Add(new string[1, 2] { { "method", "public static bool deleteFile(String local, String name)" } });
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { { "name", name } });
-                Util.psError(UtilPatrikFullManagerBackupService.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikFullManagerBackupService.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return false;
             }
 

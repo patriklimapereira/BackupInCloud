@@ -5,35 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 
+
 namespace patrikDll {
     public class Intelligence {
-        public enum searchDateFile {
-            GetCreationTime,
-            GetCreationTimeUtc,
-            GetLastWriteTime,
-            GetLastWriteTimeUtc
-        };
-        public static List<StringDatetime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion, int typeSearchDateFile = 0, string extension = "*") {
-            List<StringDatetime> nameDateList = new List<StringDatetime>();
+       
+        public static List<StringDateTime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion, int typeSearchDateFile = 0, string extension = "*") {
+            List<StringDateTime> nameDateList = new List<StringDateTime>();            
             if (Directory.Exists(sourceDirectory)) {
+                /*why?*/
                 if (numberGetNameAndDatatime > 0) {
+
                     string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);
                     foreach (string s in nameFiles) {
-                        StringDatetime nameDate;
-                        nameDate.first = Path.GetFileName(s);
-                        // nameDate.second = File.GetCreationTime(s) ; 
-
+                        StringDateTime nameDate;
+                        nameDate.name = Path.GetFileName(s);
                         switch (typeSearchDateFile) {
-                            case (int)searchDateFile.GetCreationTime: nameDate.second = File.GetCreationTime(s);
+                            case (int)searchDateFile.GetCreationTime: nameDate.dateTime = File.GetCreationTime(s);
                                 break;
-                            case (int)searchDateFile.GetCreationTimeUtc: nameDate.second = File.GetCreationTimeUtc(s);
+                            case (int)searchDateFile.GetCreationTimeUtc: nameDate.dateTime = File.GetCreationTimeUtc(s);
                                 break;
-                            case (int)searchDateFile.GetLastWriteTime: nameDate.second = File.GetLastWriteTime(s);
+                            case (int)searchDateFile.GetLastWriteTime: nameDate.dateTime = File.GetLastWriteTime(s);
                                 break;
-                            case (int)searchDateFile.GetLastWriteTimeUtc: nameDate.second = File.GetLastWriteTimeUtc(s);
+                            case (int)searchDateFile.GetLastWriteTimeUtc: nameDate.dateTime = File.GetLastWriteTimeUtc(s);
                                 break;
                             default:
-                                nameDate.second = File.GetCreationTime(s);
+                                nameDate.dateTime = File.GetCreationTime(s);
                                 break;
                         }
 
@@ -45,17 +41,17 @@ namespace patrikDll {
                     }
 
                     if (ascendingIsTheQuestion == true) {
-                        nameDateList = nameDateList.OrderBy(s => s.second).ToList();
+                        nameDateList = nameDateList.OrderBy(s => s.dateTime).ToList();
                     }
                     else {
-                        nameDateList = nameDateList.OrderByDescending(s => s.second).ToList();
+                        nameDateList = nameDateList.OrderByDescending(s => s.dateTime).ToList();
                     }
 
                     return nameDateList.GetRange(0, numberGetNameAndDatatime);
                 }
 
             }
-            String method = "public static  List<StringDatetime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion) {" +
+            String method = "public static  List<StringDateTime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion) {" +
                       "sourceDirectory = " + sourceDirectory +
                      " numberGetNameAndDatatime =" + ascendingIsTheQuestion;
             Util.error(Util.ERRO_REGISTRY_LOG, method);

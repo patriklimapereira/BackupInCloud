@@ -64,6 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Intelligence.cs" />
     <Compile Include="runTestSubRoutineService.cs" />
     <Compile Include="Service1.cs">
       <SubType>Component</SubType>
@@ -99,6 +100,20 @@
     <EmbeddedResource Include="TestSubRoutineService.resx">
       <DependentUpon>TestSubRoutineService.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\patrikDll\patrikDll.csproj">
+      <Project>{66adb168-3da2-4228-ae70-8e5f9141b6a0}</Project>
+      <Name>patrikDll</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\patrikModel\patrikModel.csproj">
+      <Project>{bb672dfd-8de5-44d1-8395-fb64be1ec954}</Project>
+      <Name>patrikModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PatrikSystemPersistence\patrikSystemPersistence.csproj">
+      <Project>{89c23eb2-d7a4-4b6c-8c44-bce6bd6e6378}</Project>
+      <Name>patrikSystemPersistence</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

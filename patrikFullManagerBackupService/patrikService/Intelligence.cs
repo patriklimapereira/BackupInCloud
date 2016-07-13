@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using patrikDll;
 
 
-namespace patrikDll {
+namespace patrikService {
     public class Intelligence {
        
         public static List<StringDateTime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion, int typeSearchDateFile = 0, string extension = "*") {
@@ -20,16 +21,16 @@ namespace patrikDll {
                         StringDateTime nameDate;
                         nameDate.name = Path.GetFileName(s);
                         switch (typeSearchDateFile) {
-                            case (int)searchDateFile.GetCreationTime: nameDate.dateTime = File.GetCreationTime(s);
+                            case (int)searchDateFile.GetCreationTime: nameDate.dateAndHour = File.GetCreationTime(s);
                                 break;
-                            case (int)searchDateFile.GetCreationTimeUtc: nameDate.dateTime = File.GetCreationTimeUtc(s);
+                            case (int)searchDateFile.GetCreationTimeUtc: nameDate.dateAndHour = File.GetCreationTimeUtc(s);
                                 break;
-                            case (int)searchDateFile.GetLastWriteTime: nameDate.dateTime = File.GetLastWriteTime(s);
+                            case (int)searchDateFile.GetLastWriteTime: nameDate.dateAndHour = File.GetLastWriteTime(s);
                                 break;
-                            case (int)searchDateFile.GetLastWriteTimeUtc: nameDate.dateTime = File.GetLastWriteTimeUtc(s);
+                            case (int)searchDateFile.GetLastWriteTimeUtc: nameDate.dateAndHour = File.GetLastWriteTimeUtc(s);
                                 break;
                             default:
-                                nameDate.dateTime = File.GetCreationTime(s);
+                                nameDate.dateAndHour = File.GetCreationTime(s);
                                 break;
                         }
 
@@ -41,10 +42,10 @@ namespace patrikDll {
                     }
 
                     if (ascendingIsTheQuestion == true) {
-                        nameDateList = nameDateList.OrderBy(s => s.dateTime).ToList();
+                        nameDateList = nameDateList.OrderBy(s => s.dateAndHour).ToList();
                     }
                     else {
-                        nameDateList = nameDateList.OrderByDescending(s => s.dateTime).ToList();
+                        nameDateList = nameDateList.OrderByDescending(s => s.dateAndHour).ToList();
                     }
 
                     return nameDateList.GetRange(0, numberGetNameAndDatatime);

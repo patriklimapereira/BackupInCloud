@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikSystemBackupService", "patrikSystemBackup\patrikSystemBackupService.csproj", "{A7892172-B792-4D12-8A95-0626A0BAFD44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikSystemBackupGUI", "patrikSystemBackupGUI\patrikSystemBackupGUI.csproj", "{99A5510C-057C-49BD-8AF0-A67DA6A36922}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikSystemBackupDll", "patrikSystemBackupDll\patrikSystemBackupDll.csproj", "{89D77AAE-F6C8-413A-A498-C09A70DEF09C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "patrikSystemBackupExist", "BackupELFoiFeito\patrikSystemBackupExist.csproj", "{0969C219-A354-4797-B605-AE19AF1CCB0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PatrikSystemPersistense", "PatrikSystemData\PatrikSystemPersistense.csproj", "{0DF5630E-1501-4006-95B9-A3C7B36EF80C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A7892172-B792-4D12-8A95-0626A0BAFD44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7892172-B792-4D12-8A95-0626A0BAFD44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7892172-B792-4D12-8A95-0626A0BAFD44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7892172-B792-4D12-8A95-0626A0BAFD44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99A5510C-057C-49BD-8AF0-A67DA6A36922}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99A5510C-057C-49BD-8AF0-A67DA6A36922}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99A5510C-057C-49BD-8AF0-A67DA6A36922}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99A5510C-057C-49BD-8AF0-A67DA6A36922}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89D77AAE-F6C8-413A-A498-C09A70DEF09C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89D77AAE-F6C8-413A-A498-C09A70DEF09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89D77AAE-F6C8-413A-A498-C09A70DEF09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89D77AAE-F6C8-413A-A498-C09A70DEF09C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0969C219-A354-4797-B605-AE19AF1CCB0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0969C219-A354-4797-B605-AE19AF1CCB0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0969C219-A354-4797-B605-AE19AF1CCB0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0969C219-A354-4797-B605-AE19AF1CCB0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF5630E-1501-4006-95B9-A3C7B36EF80C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF5630E-1501-4006-95B9-A3C7B36EF80C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF5630E-1501-4006-95B9-A3C7B36EF80C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF5630E-1501-4006-95B9-A3C7B36EF80C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

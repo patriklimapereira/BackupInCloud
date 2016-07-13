@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace patrikDll {
     public struct StringDateTime {
         public string name;
-        public DateTime dateTime;
+        public DateTime dateAndHour;
     };
 
     public enum searchDateFile {

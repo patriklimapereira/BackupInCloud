@@ -16,14 +16,19 @@ namespace patrikService {
         }
 
         private void button1_Click(object sender, EventArgs e) {
-            string origin = "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\origin";
-            string destiny = "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\destiny";
-
+          
             DateTime timeAtual = DateTime.Now;
-            String[] vectorData =  { "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\origin", "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\destiny" };
+            String[] vectorData =  {"\\\\srv-app-01\\EL\\BACKUP\\PROTOCOLO"/* "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\origin"*/,
+                "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\destiny",
+            "",
+            "",
+            "rar"};
 
+            String x = "";
             if(WorkerDirectory.directoryExist(vectorData[0])) {
-                List<StringDateTime> StringDatetimeList = Intelligence.getFileNameDateCreate(vectorData[0], 1, false, 0, vectorData[4]);
+                List<StringDateTime> StringDatetimeList = Intelligence.getFileNameDateCreate(vectorData[0], 30, false, 0, vectorData[4]);
+            
+           
                 TimeSpan ts = timeAtual - StringDatetimeList[0].dateAndHour;
                 if(ts.Days < 1) { /**futuramente usarui escolhara object time de verificacao*/
 

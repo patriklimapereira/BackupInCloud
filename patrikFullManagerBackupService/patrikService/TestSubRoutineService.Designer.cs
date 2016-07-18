@@ -8,7 +8,7 @@
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param text="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing) {
             if (disposing && (components != null)) {
                 components.Dispose();
@@ -30,8 +30,10 @@
             this.tpOneDriver = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnCompress = new System.Windows.Forms.Button();
             this.tabControlTest.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -85,6 +87,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.btnCompress);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -103,6 +106,16 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
+            // btnCompress
+            // 
+            this.btnCompress.Location = new System.Drawing.Point(6, 18);
+            this.btnCompress.Name = "btnCompress";
+            this.btnCompress.Size = new System.Drawing.Size(75, 23);
+            this.btnCompress.TabIndex = 0;
+            this.btnCompress.Text = "compress";
+            this.btnCompress.UseVisualStyleBackColor = true;
+            this.btnCompress.Click += new System.EventHandler(this.btnCompress_Click);
+            // 
             // TestSubRoutineService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +129,7 @@
             this.Text = "TestSubRoutineService";
             this.tabControlTest.ResumeLayout(false);
             this.tpOneDriver.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -128,5 +142,6 @@
         private System.Windows.Forms.TabPage tpOneDriver;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCompress;
     }
 }

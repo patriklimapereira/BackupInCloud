@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using patrikDll;
 using System.Diagnostics;
-
+using static patrikDll.Util;
 
 namespace patrikService {
     public class Intelligence {
@@ -26,7 +26,7 @@ namespace patrikService {
                         string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);
                         foreach (string s in nameFiles) {
                             StringDateTime nameDate;
-                            nameDate.name = Path.GetFileName(s);
+                            nameDate.text = Path.GetFileName(s);
                             switch (typeSearchDateFile) {
                                 case (int)searchDateFile.GetCreationTime:
                                     nameDate.dateAndHour = File.GetCreationTime(s);

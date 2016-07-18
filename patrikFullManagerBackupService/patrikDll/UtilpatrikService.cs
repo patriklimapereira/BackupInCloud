@@ -5,16 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace patrikDll {
-    public struct StringDateTime {
-        public string name;
-        public DateTime dateAndHour;
-    };
+
 
     public enum searchDateFile {
         GetCreationTime,
         GetCreationTimeUtc,
         GetLastWriteTime,
-        GetLastWriteTimeUtc
+        GetLastWriteTimeUtc  
     };
     class UtilPatrikService {
 

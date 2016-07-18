@@ -11,6 +11,8 @@ using patrikDll;
 using System.Diagnostics;
 using Microsoft.OneDrive.Sdk;
 using System.IO;
+using static patrikDll.Worker7zip;
+using static patrikDll.Util;
 
 
 using System.IO.Compression;
@@ -51,7 +53,7 @@ namespace patrikService {
 
             String x = "";
             if(WorkerDirectory.directoryExist(vectorData[0])) {
-                List<StringDateTime> StringDatetimeList = Intelligence.getFileNameDateCreate(vectorData[0], 30, false, 0, vectorData[4]);
+               List<StringDateTime> StringDatetimeList = Intelligence.getFileNameDateCreate(vectorData[0], 30, false, 0, vectorData[4]);
 
 
                 TimeSpan ts = timeAtual - StringDatetimeList[0].dateAndHour;
@@ -116,6 +118,19 @@ namespace patrikService {
             // System.IO.File.Copy(a, b);
             ZipFile.CreateFromDirectory(a, b);
 
+        }
+
+        private void btnCompress_Click(object sender, EventArgs e) {
+           String origin = "C:\\Users\\patrik\\Desktop";
+           String destiny = "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\destiny";
+            String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
+             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
+            //  bool testIntegrityOfArchive
+            //  ue, String formatCompress = "7zip", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, int maxLeghtSinglesFiles = 1) {
+            add(origin, destiny, nameOriginal, nameCompress);
+
+
+             
         }
     }
 }

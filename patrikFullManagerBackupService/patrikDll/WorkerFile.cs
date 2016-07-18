@@ -18,9 +18,9 @@ namespace patrikDll {
                 file.Dispose();
             } catch(Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static bool writeFile(bool flag, String name, String local, String valueString)" } });
+                listError.Add(new string[1, 2] { { "method", "public static bool writeFile(bool flag, String text, String local, String valueString)" } });
                 listError.Add(new string[1, 2] { { "local", local } });
-                listError.Add(new string[1, 2] { { "name", name } });
+                listError.Add(new string[1, 2] { { "text", name } });
                 listError.Add(new string[1, 2] { { "valueString", valueString } });
                 listError.Add(new string[1, 2] { { "addAndNoReplaceTheFile", addAndNoReplaceTheFile.ToString() } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
@@ -35,9 +35,9 @@ namespace patrikDll {
                 return File.ReadAllLines(Path.Combine(local, name));
             } catch(Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String name )" } });
+                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String text )" } });
                 listError.Add(new string[1, 2] { { "local", local } });
-                listError.Add(new string[1, 2] { { "name", name } });
+                listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return null;
             }
@@ -49,9 +49,9 @@ namespace patrikDll {
                 return File.ReadAllBytes(Path.Combine(local, name));
             } catch(Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String name )" } });
+                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String text )" } });
                 listError.Add(new string[1, 2] { { "local", local } });
-                listError.Add(new string[1, 2] { { "name", name } });
+                listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return null;
             }
@@ -77,9 +77,9 @@ namespace patrikDll {
             } catch(Exception error) {
 
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static bool createEmptyFile (String local,String name)" } });
+                listError.Add(new string[1, 2] { { "method", "public static bool createEmptyFile (String local,String text)" } });
                 listError.Add(new string[1, 2] { { "local", local } });
-                listError.Add(new string[1, 2] { { "name", name } });
+                listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return false;
             }
@@ -94,9 +94,9 @@ namespace patrikDll {
             } catch(Exception error) {
 
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static bool deleteFile(String local, String name)" } });
+                listError.Add(new string[1, 2] { { "method", "public static bool deleteFile(String local, String text)" } });
                 listError.Add(new string[1, 2] { { "local", local } });
-                listError.Add(new string[1, 2] { { "name", name } });
+                listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
                 return false;
             }

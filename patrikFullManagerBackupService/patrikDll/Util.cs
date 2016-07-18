@@ -8,7 +8,20 @@ using System.IO;
 
 namespace patrikDll {
 
-    public class Util {
+    public static class Util {
+        public  struct StringDateTime {
+            public string text;
+            public DateTime dateAndHour;
+        };
+
+        public struct IntString {
+            public int number;
+            public string text;
+           
+        };
+
+
+
         public static readonly bool psMODEDEVELOPMENT = true;
 
         /*begin commons features SOs*/
@@ -21,9 +34,11 @@ namespace patrikDll {
         public static readonly string psFORMATDATATIME = "dd-MM-yyyy HH-mm-ss"; /*brazilian format date and hour  in future create list or vector whith several country*/
 
         /*in return method or error*/
-        public static readonly List<string[,]> psSeparatorForPurification = new List<string[,]> { new string[1, 4] { {    "\u1F337"   ,   "🌷"   ,   "\n"   ,   "!\u2764Sissa127\u00F8\u07C9Almond Joy" } },
-            new string[1, 4] { {    "\u1F381"   ,   "🎁"    ,   "\r"    ,   "!\u2764Sissa127\u00F8\u07C9Ayds" } },
-            new string[1, 4] { {    "\u27B3"    ,   "➳" ,   ";" ,   "!\u2764Sissa127\u00F8\u07C9Aplets & Cotlets"   } } };
+        const int AMOUNT_OF_LINES = 1;
+        const int AMOUNT_OF_COLUNMS = 4;
+        public static readonly List<string[,]> psSeparatorForPurification = new List<string[,]> { new string[AMOUNT_OF_LINES, AMOUNT_OF_COLUNMS] { {    "\u1F337"   ,   "🌷"   ,   "\n"   ,   "!\u2764Sissa127\u00F8\u07C9Almond Joy" } },
+                                                                                                  new string[AMOUNT_OF_LINES, AMOUNT_OF_COLUNMS] { {    "\u1F381"   ,   "🎁"    ,   "\r"    ,   "!\u2764Sissa127\u00F8\u07C9Ayds" } },
+                                                                                                  new string[AMOUNT_OF_LINES, AMOUNT_OF_COLUNMS] { {    "\u27B3"    ,   "➳" ,   ";" ,   "!\u2764Sissa127\u00F8\u07C9Aplets & Cotlets"   } } };
 
         /*delay time in milliseconds*/
         public static readonly int pstimeDelay = 1;

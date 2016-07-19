@@ -113,18 +113,15 @@ namespace patrikService {
         }
 
         private void button1_Click_1(object sender, EventArgs e) {
-            String a = "C:\\a\\BlueStacks2_native.exe";
-            String b = "C:\\b\\sss.zip";
-            // System.IO.File.Copy(a, b);
-            ZipFile.CreateFromDirectory(a, b);
+        
 
         }
 
         private void btnCompress_Click(object sender, EventArgs e) {
-           String origin = "C:\\Users\\patrik\\Desktop";
-           String destiny = "C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\destiny";
-            String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
-             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
+            String origin = "C:\\patrikFullManagerBackupService\\o";
+            String destiny = "C:\\patrikFullManagerBackupService\\d";
+            String nameOriginal = "PhoneGapSetup-win32.exe";
+             String nameCompress = "PhoneGapSetup-win32.7z";
             //  bool testIntegrityOfArchive
             //  ue, String formatCompress = "7zip", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, int maxLeghtSinglesFiles = 1) {
             add(origin, destiny, nameOriginal, nameCompress);

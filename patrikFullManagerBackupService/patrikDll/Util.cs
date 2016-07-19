@@ -92,6 +92,8 @@ namespace patrikDll {
         /*end features commons a patriksystens*/
 
 
+            
+
         /*after to remove is necessary for to compiler a class inteligence*/
         public static readonly int ERRO_REGISTRY_LOG = 0;
         public static readonly int ERROR_SEND_EMAIL = 1;

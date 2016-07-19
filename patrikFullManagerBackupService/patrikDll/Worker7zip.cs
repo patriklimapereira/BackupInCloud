@@ -8,6 +8,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
+using System.Text;
+
 namespace patrikDll {
 
     
@@ -32,14 +34,30 @@ namespace patrikDll {
             new IntString(){number = 255, text = "User stopped the process" }
         };
 
-        public  static  readonly string zip = "zip";
-        public static readonly string sevenZip = "7z";
+        public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" }, };
+       
                 
-        public static int add(String origin, String destiny, String nameOriginal, String nameCompress, bool testIntegrityOfArchive = true, String formatCompress = "7zip", int  levelCompress = 9 /*ultra*/, bool multipleFiles = false, int maxLeghtSinglesFiles = 1) {
-           String operation = "a";
-           String o =    Path.Combine(origin, nameOriginal);
-           String d =  Path.Combine(destiny, nameCompress); 7z t archive.zip *.doc
-           String execute = operation + " " + d + " " + o
+        public static string generateValuePartsForMultiplesVolumes  ( string txt){
+            var abc = "मेरा";
+
+            foreach(var c in abc) {
+                Console.WriteLine((int)c);
+            }
+            return null;
+         }
+        public static int add(String origin, String destiny, String nameOriginal, String nameCompress, bool testIntegrityOfArchive = true, String formatCompress = "7z", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, string leghtVolumesAtK = "1440k") {
+            Encoding unicode = Encoding.Unicode;
+            String space = " ";
+            String operation = "a";       
+            String o =    Path.Combine(origin, nameOriginal);
+           String d =  Path.Combine(destiny, nameCompress);
+            String execute = operation + space + String.Concat("-t", formatCompress) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" ;//+ space + "-v11k" + space + "-v24k" + space + "-v69k" + space + "-v171k" + space + "-v0209k"+ space + "-v0608k" + space + "-v0908k" + space + "-v1024k" + space + "-v1109k" + space + "-v1440k";
+
+
+            Debug.WriteLine(execute);
+ 
+
+
 
 
           //testIntegrityOfArchive == true ? operation = "t" : ;
@@ -47,7 +65,7 @@ namespace patrikDll {
 
 
             //  MessageBox.Show(execute);
-            Debug.WriteLine(execute);
+            Debug.WriteLine("7za.exe " +execute);
             //String.Concat(sevenZip, operation,  )
 
             return executeStringIn7zip(execute); 
@@ -55,7 +73,7 @@ namespace patrikDll {
 
         private static int executeStringIn7zip(String execute) {
             ProcessStartInfo psi = new ProcessStartInfo();
-            psi.FileName = "libs\\7za.exe";
+            psi.FileName = "7zip\\7za.exe";
                           psi.Arguments = execute;
             psi.WindowStyle = ProcessWindowStyle.Normal;
 

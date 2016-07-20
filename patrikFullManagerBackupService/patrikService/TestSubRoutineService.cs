@@ -94,7 +94,7 @@ namespace patrikService {
             "",
             "rar"};
 
-            String x = "";
+   
             if(WorkerDirectory.directoryExist(vectorData[0])) {
                 List<StringDateTime> StringDatetimeList = Intelligence.getFileNameDateCreate(vectorData[0], 30, false, 0, vectorData[4]);
 
@@ -120,14 +120,20 @@ namespace patrikService {
         private void btnCompress_Click(object sender, EventArgs e) {
             String origin = "C:\\patrikFullManagerBackupService\\o";
             String destiny = "C:\\patrikFullManagerBackupService\\d";
-            String nameOriginal = "PhoneGapSetup-win32.exe";
-             String nameCompress = "PhoneGapSetup-win32.7z";
+            String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
+             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
             //  bool testIntegrityOfArchive
             //  ue, String formatCompress = "7zip", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, int maxLeghtSinglesFiles = 1) {
             add(origin, destiny, nameOriginal, nameCompress);
+            test(destiny, nameOriginal, nameCompress);
 
 
              
+        }
+
+        private void button1_Click_2(object sender, EventArgs e) {
+            MessageBox.Show(Worker7zip.generateValuePartsForMultiplesVolumes("flavia eu gostava de voce!!! Infelismente v c me ingorou"));
+          
         }
     }
 }

@@ -116,7 +116,7 @@ namespace patrikDll {
 
              //   http://stackoverflow.com/questions/13569406/how-should-i-compute-files-hashmd5-sha1-in-c-sharp
 
-                x = Convert.ToBase64String(result); 
+                x = Convert.ToBase64String(result);  
             } catch (Exception error) {
 
             }

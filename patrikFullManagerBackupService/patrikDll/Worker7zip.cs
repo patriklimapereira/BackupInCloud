@@ -39,7 +39,7 @@ namespace patrikDll {
         public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" }, };
        
                 
-        public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){
+        public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){    
             try {
                 if (String.Empty == StrTxt) {
                     return null;
@@ -53,11 +53,12 @@ namespace patrikDll {
                 foreach (var decimalValue in txt) {
 
                     legthFilesCompact += parameter + ((int)decimalValue) * multipleLengthTamanho + space;
-                }
-                                return legthFilesCompact;
-                Debug.WriteLine( legthFilesCompact);
+                }              
+                return legthFilesCompact;
+                
 
             }catch ( Exception error) {
+                /*after implementation*/
                 return null;
             }
          }
@@ -76,8 +77,11 @@ namespace patrikDll {
         public static int test (String destiny,  String nameCompress, String mask = "*", String recursive = "r" ) {
             String operation = "t";
             String space = " ";
-            String d = Path.Combine(destiny, nameCompress);
+       
+            String d = Path.Combine(destiny, String.Concat(nameCompress, ".", "001"));  //001
             String execute = operation + space + d + space + mask + space + recursive;
+
+            Debug.WriteLine("7za.exe " + execute);
             return executeStringIn7zip(execute);
 
         }
@@ -86,7 +90,7 @@ namespace patrikDll {
             int  code =  -1;
             ProcessStartInfo psi = new ProcessStartInfo();
             psi.FileName = "7zip\\7za.exe";
-           psi.Arguments = execute;
+            psi.Arguments = execute;
             psi.WindowStyle = ProcessWindowStyle.Normal;
 
             //C: \Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikService\bin\Debug\7zip

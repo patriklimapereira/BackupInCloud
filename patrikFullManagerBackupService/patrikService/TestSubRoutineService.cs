@@ -13,6 +13,7 @@ using Microsoft.OneDrive.Sdk;
 using System.IO;
 using static patrikDll.Worker7zip;
 using static patrikDll.Util;
+using static patrikDll.WorkerFile;
 
 
 using System.IO.Compression;
@@ -74,7 +75,7 @@ namespace patrikService {
 
         }
         private async void btnConnectOnedriver_Click(object sender, EventArgs e) {
-            await connectOnedriver();
+           Debug.WriteLine (await connectOnedriver());
         }
         private async Task<bool> connectOnedriver() {
             try {
@@ -112,28 +113,37 @@ namespace patrikService {
             }
         }
 
-        private void button1_Click_1(object sender, EventArgs e) {
-        
-
-        }
+  
 
         private void btnCompress_Click(object sender, EventArgs e) {
             String origin = "C:\\patrikFullManagerBackupService\\o";
             String destiny = "C:\\patrikFullManagerBackupService\\d";
             String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
-             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
-            //  bool testIntegrityOfArchive
-            //  ue, String formatCompress = "7zip", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, int maxLeghtSinglesFiles = 1) {
+            String nameCompress = "192.168.11.4_04_20160613_120000.7z";
             add(origin, destiny, nameOriginal, nameCompress);
-            test(destiny, nameOriginal, nameCompress);
+           
 
 
              
         }
 
-        private void button1_Click_2(object sender, EventArgs e) {
-            MessageBox.Show(Worker7zip.generateValuePartsForMultiplesVolumes("flavia eu gostava de voce!!! Infelismente v c me ingorou"));
-          
+      
+
+        private void btnTestCompressFile_Click(object sender, EventArgs e) {
+            String origin = "C:\\patrikFullManagerBackupService\\o";
+            String destiny = "C:\\patrikFullManagerBackupService\\d";
+            String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
+            String nameCompress = "192.168.11.4_04_20160613_120000.7z";
+            test(destiny, nameCompress);
+        }
+
+        private void testGenerateForFileHash_Click(object sender, EventArgs e) {
+            String local  = "C:\\patrikFullManagerBackupService\\o";
+         
+            String name = "Telefones.xlsx";
+
+          Debug.WriteLine (getSha1ToFile(local, name));     
+       
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Security.Cryptography;
 
 
 namespace patrikDll {
@@ -103,16 +104,24 @@ namespace patrikDll {
 
         }
 
-        public static bool copySplitFile(String localOrigin, String nameOrigin, String localDestiny, String nameDestiny) {
+
+
+        public static String getSha1ToFile(String local, String name) {
+            String x  ="";
             try {
+                byte[] arrayByteForVerifyHash  =  readFileBytes(local,name);
+                byte[] result;
+                SHA1 sha = new SHA1CryptoServiceProvider();
+                result = sha.ComputeHash(arrayByteForVerifyHash);
 
-                return true;
+             //   http://stackoverflow.com/questions/13569406/how-should-i-compute-files-hashmd5-sha1-in-c-sharp
 
-            } catch(Exception error) {
-                return false;
+                x = Convert.ToBase64String(result);
+            } catch (Exception error) {
+
             }
 
-
+            return x;
         }
     }
 }

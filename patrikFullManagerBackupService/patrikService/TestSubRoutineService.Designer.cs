@@ -28,12 +28,15 @@
             this.btnConnectOnedriver = new System.Windows.Forms.Button();
             this.tabControlTest = new System.Windows.Forms.TabControl();
             this.tpOneDriver = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.SevenZip = new System.Windows.Forms.TabPage();
             this.btnCompress = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnTestCompressFile = new System.Windows.Forms.Button();
+            this.RoutineMoveFilesAndHash = new System.Windows.Forms.TabPage();
+            this.testGenerateForFileHash = new System.Windows.Forms.Button();
             this.tabControlTest.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.SevenZip.SuspendLayout();
+            this.RoutineMoveFilesAndHash.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -67,7 +70,8 @@
             // tabControlTest
             // 
             this.tabControlTest.Controls.Add(this.tpOneDriver);
-            this.tabControlTest.Controls.Add(this.tabPage2);
+            this.tabControlTest.Controls.Add(this.SevenZip);
+            this.tabControlTest.Controls.Add(this.RoutineMoveFilesAndHash);
             this.tabControlTest.Location = new System.Drawing.Point(600, 18);
             this.tabControlTest.Name = "tabControlTest";
             this.tabControlTest.SelectedIndex = 0;
@@ -85,20 +89,21 @@
             this.tpOneDriver.Text = "OneDriver";
             this.tpOneDriver.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // SevenZip
             // 
-            this.tabPage2.Controls.Add(this.btnCompress);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(578, 149);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.SevenZip.Controls.Add(this.btnTestCompressFile);
+            this.SevenZip.Controls.Add(this.btnCompress);
+            this.SevenZip.Location = new System.Drawing.Point(4, 22);
+            this.SevenZip.Name = "SevenZip";
+            this.SevenZip.Padding = new System.Windows.Forms.Padding(3);
+            this.SevenZip.Size = new System.Drawing.Size(578, 149);
+            this.SevenZip.TabIndex = 1;
+            this.SevenZip.Text = "7zip";
+            this.SevenZip.UseVisualStyleBackColor = true;
             // 
             // btnCompress
             // 
-            this.btnCompress.Location = new System.Drawing.Point(6, 18);
+            this.btnCompress.Location = new System.Drawing.Point(16, 17);
             this.btnCompress.Name = "btnCompress";
             this.btnCompress.Size = new System.Drawing.Size(75, 23);
             this.btnCompress.TabIndex = 0;
@@ -106,22 +111,41 @@
             this.btnCompress.UseVisualStyleBackColor = true;
             this.btnCompress.Click += new System.EventHandler(this.btnCompress_Click);
             // 
-            // button1
+            // btnTestCompressFile
             // 
-            this.button1.Location = new System.Drawing.Point(189, 89);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_2);
+            this.btnTestCompressFile.Location = new System.Drawing.Point(120, 17);
+            this.btnTestCompressFile.Name = "btnTestCompressFile";
+            this.btnTestCompressFile.Size = new System.Drawing.Size(75, 23);
+            this.btnTestCompressFile.TabIndex = 1;
+            this.btnTestCompressFile.Text = "testCompress";
+            this.btnTestCompressFile.UseVisualStyleBackColor = true;
+            this.btnTestCompressFile.Click += new System.EventHandler(this.btnTestCompressFile_Click);
+            // 
+            // RoutineMoveFilesAndHash
+            // 
+            this.RoutineMoveFilesAndHash.Controls.Add(this.testGenerateForFileHash);
+            this.RoutineMoveFilesAndHash.Location = new System.Drawing.Point(4, 22);
+            this.RoutineMoveFilesAndHash.Name = "RoutineMoveFilesAndHash";
+            this.RoutineMoveFilesAndHash.Size = new System.Drawing.Size(578, 149);
+            this.RoutineMoveFilesAndHash.TabIndex = 2;
+            this.RoutineMoveFilesAndHash.Text = "RoutineMoveFilesAndHash";
+            this.RoutineMoveFilesAndHash.UseVisualStyleBackColor = true;
+            // 
+            // testGenerateForFileHash
+            // 
+            this.testGenerateForFileHash.Location = new System.Drawing.Point(26, 19);
+            this.testGenerateForFileHash.Name = "testGenerateForFileHash";
+            this.testGenerateForFileHash.Size = new System.Drawing.Size(75, 23);
+            this.testGenerateForFileHash.TabIndex = 0;
+            this.testGenerateForFileHash.Text = "testHash";
+            this.testGenerateForFileHash.UseVisualStyleBackColor = true;
+            this.testGenerateForFileHash.Click += new System.EventHandler(this.testGenerateForFileHash_Click);
             // 
             // TestSubRoutineService
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1198, 362);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.tabControlTest);
             this.Controls.Add(this.btnSimulationRoutine);
             this.Controls.Add(this.richTextBox1);
@@ -129,7 +153,8 @@
             this.Text = "TestSubRoutineService";
             this.tabControlTest.ResumeLayout(false);
             this.tpOneDriver.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
+            this.SevenZip.ResumeLayout(false);
+            this.RoutineMoveFilesAndHash.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -140,8 +165,10 @@
         private System.Windows.Forms.Button btnConnectOnedriver;
         private System.Windows.Forms.TabControl tabControlTest;
         private System.Windows.Forms.TabPage tpOneDriver;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage SevenZip;
         private System.Windows.Forms.Button btnCompress;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTestCompressFile;
+        private System.Windows.Forms.TabPage RoutineMoveFilesAndHash;
+        private System.Windows.Forms.Button testGenerateForFileHash;
     }
 }

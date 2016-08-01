@@ -31,12 +31,26 @@ namespace patrikDll {
         }
 
 
-        public static string[] readFileLines(String local, String name) {
+        public static string[] readAllLinesInFile(String localName) {
             try {
-                return File.ReadAllLines(Path.Combine(local, name));
+                return File.ReadAllLines(localName);
             } catch(Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String text )" } });
+                listError.Add(new string[1, 2] { { "method", "public static string[] readAllLinesInFile(String local,String text )" } });
+                listError.Add(new string[1, 2] { { " localName",  localName} });           
+                Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
+                return null;
+            }
+
+        }
+
+        public static string[] readAllLinesInFile(String local, String name) {
+            try {
+               return readAllLinesInFile (Path.Combine(local, name));
+               
+            } catch(Exception error) {
+                List<string[,]> listError = new List<string[,]> { };
+                listError.Add(new string[1, 2] { { "method", "public static string[] readAllLinesInFile(String local,String text )" } });
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);
@@ -50,7 +64,7 @@ namespace patrikDll {
                 return File.ReadAllBytes(Path.Combine(local, name));
             } catch(Exception error) {
                 List<string[,]> listError = new List<string[,]> { };
-                listError.Add(new string[1, 2] { { "method", "public static string[] readFileLines(String local,String text )" } });
+                listError.Add(new string[1, 2] { { "method", "public static string[] readAllLinesInFile(String local,String text )" } });
                 listError.Add(new string[1, 2] { { "local", local } });
                 listError.Add(new string[1, 2] { { "text", name } });
                 Util.psError(UtilPatrikInstallGUI.FMBSDirectoryPatrikFullManagerBackupService[0], UtilPatrikInstallGUI.FMBSFilePatrikFullManagerBackupService[0], listError, error);

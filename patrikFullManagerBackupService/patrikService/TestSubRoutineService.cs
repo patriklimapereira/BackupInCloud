@@ -142,7 +142,8 @@ namespace patrikService {
          
             String name = "Telefones.xlsx";
 
-          Debug.WriteLine (getSha1ToFile(local, name));     
+             Debug.WriteLine (getSha1ToFile(local, name));
+            MessageBox.Show(getSha1ToFile(local, name)); 
        
         }
     }

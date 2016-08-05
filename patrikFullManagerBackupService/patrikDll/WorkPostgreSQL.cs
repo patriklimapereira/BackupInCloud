@@ -26,25 +26,27 @@ namespace PatrikSystemPersistence {
 
         public NpgsqlDataReader dr { get; set; }
 
-        public WorkPostgreSQL() {
-            this.serverName = "";
-            this.port = "";
-            this.userName = "";
-            this.password = "";
-            this.databaseName = "";
-            this.conn = null;
-            this.command = null;
+        private static  NpgsqlConnection getConnection () {
 
+            return null;
         }
-        public WorkPostgreSQL(String serverName, String port, String userName, String password, String databaseName) {
-            this.serverName = serverName;
-            this.port = port;
-            this.userName = userName;
-            this.password = password;
-            this.databaseName = databaseName;
-            this.conn = new NpgsqlConnection(this.getStringConection());
-            this.command = null;
 
+       
+     
+        
+
+
+        private static  NpgsqlConnection getConnection (String server, String port, String user, String password, String dataBase) {
+            return new NpgsqlConnection(getStringConection(server, port, user, password, dataBase));
+        }
+
+
+        private static String getStringConection(String server, String port, String user, String password, String dataBase) {
+            return "Server=" + server + ";" +
+              "Port=" + port + ";" +
+              "User Id=" + user + ";" +
+              "Password=" + password + ";" +
+              "Database=" + dataBase + ";";
         }
 
         private NpgsqlDbType identificaNpgsqlDbType(String dataType) {
@@ -55,6 +57,8 @@ namespace PatrikSystemPersistence {
         public void s6elect(String consulta, List<ColumnValueType> columnValueType = null) {
             try {
                 this.command = new NpgsqlCommand(consulta, this.conn);
+
+
                 for (int i = 0; columnValueType != null && i < columnValueType.Count; i++) {
                     this.command.Parameters.Add(new NpgsqlParameter(columnValueType[i].Column, columnValueType[i].dataType));
                     this.command.Parameters[0].Value = columnValueType[i].valor;
@@ -70,11 +74,11 @@ namespace PatrikSystemPersistence {
         public static string configurationIsOk(String serverName, String port, String userName, String password, String databaseName) {
             try {                
                 WorkPostgreSQL dbPatrikFullManagerBackupDllDataBase;
-                /*serverName = "10.69.24.24";
+                /*server = "10.69.24.24";
                 port = "5432";
-                userName = "postgres";
+                user = "postgres";
                 password = "root";
-                databaseName = "patrikFullManagerBackupDllDataBase";*/
+                database = "patrikFullManagerBackupDllDataBase";*/
 
                 dbPatrikFullManagerBackupDllDataBase = new WorkPostgreSQL(serverName, port, userName, password, databaseName);
                 dbPatrikFullManagerBackupDllDataBase.conn.Open();
@@ -90,13 +94,13 @@ namespace PatrikSystemPersistence {
         }
 
 
-        private String getStringConection() {
+     /*   private String getStringConection() {
             return "Server=" + this.serverName + ";" +
               "Port=" + this.port + ";" +
               "User Id=" + this.userName + ";" +
               "Password=" + this.password + ";" +
               "Database=" + this.databaseName + ";";
-        }
+        }*/
 
     }
 }

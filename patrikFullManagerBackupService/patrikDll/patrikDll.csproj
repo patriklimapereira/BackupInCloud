@@ -113,7 +113,7 @@
     <Compile Include="WorkerFile.cs" />
     <Compile Include="WorkerRegistry.cs" />
     <Compile Include="WorkerOnedrive.cs" />
-    <Compile Include="WorkPostgreSQL.cs" />
+    <Compile Include="WorkerPostgreSQL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PatrikSystemPersistence\patrikSystemPersistence.csproj">

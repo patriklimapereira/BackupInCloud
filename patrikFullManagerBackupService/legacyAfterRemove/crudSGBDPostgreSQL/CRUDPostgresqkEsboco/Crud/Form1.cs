@@ -27,7 +27,7 @@ namespace Crud {
             WorkPostgreSQL dbPatrikFullManagerBackupDllDataBase;
             List<ColumnValueType> listColumnValueType = new List<ColumnValueType>();
             ColumnValueType auxValoresDaColumnValueType;
-            serverName = "10.69.24.24";
+            serverName = "172.16.250.130";
             port = "5432";
             userName = "postgres";
             password = "root";

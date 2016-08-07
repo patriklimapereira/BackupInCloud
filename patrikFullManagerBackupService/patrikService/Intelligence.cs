@@ -7,48 +7,53 @@ using System.IO;
 using patrikDll;
 using System.Diagnostics;
 using static patrikDll.Util;
+using static patrikDll.WorkerFile;
 
 namespace patrikService {
     public class Intelligence {
-       
-        public static List<StringDateTime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion, int typeSearchDateFile = 0, string extension = "*") {
-            List<StringDateTime> nameDateList = new List<StringDateTime>();
+        public enum searchDateFile {
+            GetCreationTime,
+            GetCreationTimeUtc,
+            GetLastWriteTime,
+            GetLastWriteTimeUtc
+        };
+        public static List<TextDateTimeHash> getFileNameDateCreateHash(String sourceDirectory, int typeSearchInSearchDateTimeFile = 0 /*default datetime creation*/, string extension = "*") {
+            List<TextDateTimeHash> nameDateList = new List<TextDateTimeHash>();
 
             if( extension != "*") {
                extension = "*." + extension;
             }
             try {
-
                 if (Directory.Exists(sourceDirectory)) {
                     /*why?*/
-                    if (numberGetNameAndDatatime > 0) {
-
-                        string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);
-                        foreach (string s in nameFiles) {
-                            StringDateTime nameDate;
-                            nameDate.text = Path.GetFileName(s);
-                            switch (typeSearchDateFile) {
+                  //  if (numberGetNameAndDatatime > 0) {                    
+                        string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);            /*searh option possible solution for problens backup contabilidade*/                   
+                    foreach (string s in nameFiles) {
+                            TextDateTimeHash nameDateTimeHash;
+                            nameDateTimeHash.text = Path.GetFileName(s);
+                            nameDateTimeHash.hash  =  getSha1ToFile(Path.GetDirectoryName(s), nameDateTimeHash.text) ;
+                            switch (typeSearchInSearchDateTimeFile) {
                                 case (int)searchDateFile.GetCreationTime:
-                                    nameDate.dateAndHour = File.GetCreationTime(s);
+                                    nameDateTimeHash.dateAndHour = File.GetCreationTime(s);
                                     break;
                                 case (int)searchDateFile.GetCreationTimeUtc:
-                                    nameDate.dateAndHour = File.GetCreationTimeUtc(s);
+                                    nameDateTimeHash.dateAndHour = File.GetCreationTimeUtc(s);
                                     break;
                                 case (int)searchDateFile.GetLastWriteTime:
-                                    nameDate.dateAndHour = File.GetLastWriteTime(s);
+                                    nameDateTimeHash.dateAndHour = File.GetLastWriteTime(s);
                                     break;
                                 case (int)searchDateFile.GetLastWriteTimeUtc:
-                                    nameDate.dateAndHour = File.GetLastWriteTimeUtc(s);
+                                    nameDateTimeHash.dateAndHour = File.GetLastWriteTimeUtc(s);
                                     break;
                                 default:
-                                    nameDate.dateAndHour = File.GetCreationTime(s);
+                                    nameDateTimeHash.dateAndHour = File.GetCreationTime(s);
                                     break;
                             }
 
-                            nameDateList.Add(nameDate);
-                        }
+                            nameDateList.Add(nameDateTimeHash);
+                       // }
 
-                        if (numberGetNameAndDatatime > nameDateList.Count) {
+                      /*  if (numberGetNameAndDatatime > nameDateList.Count) {
                             numberGetNameAndDatatime = nameDateList.Count;
                         }
 
@@ -56,15 +61,18 @@ namespace patrikService {
                             nameDateList = nameDateList.OrderBy(s => s.dateAndHour).ToList();
                         } else {
                             nameDateList = nameDateList.OrderByDescending(s => s.dateAndHour).ToList();
-                        }
+                        }*/
 
-                        return nameDateList.GetRange(0, numberGetNameAndDatatime);
-                    }
+                     //   return nameDateList.GetRange(0, numberGetNameAndDatatime);
+                    
+                    }/*not backup after create treatment error*/
 
-                }
-                String method = "public static  List<StringDateTime> getFileNameDateCreate(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion) {" +
+                     return nameDateList;
+
+                }/*after create treatment error*/
+                String method = "public static  List<TextDateTimeHash> getFileNameDateCreateHash(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion) {" +
                           "sourceDirectory = " + sourceDirectory +
-                         " numberGetNameAndDatatime =" + ascendingIsTheQuestion;
+                         " numberGetNameAndDatatime =" + "ascendingIsTheQuestion";
                 Util.error(Util.ERRO_REGISTRY_LOG, method);
 
             }catch (Exception erro) {

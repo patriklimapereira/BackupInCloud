@@ -9,9 +9,10 @@ using System.IO;
 namespace patrikDll {
 
     public static class Util {
-        public  struct StringDateTime {
+        public  struct TextDateTimeHash {
             public string text;
             public DateTime dateAndHour;
+            public string hash;
         };
 
         public struct IntString {

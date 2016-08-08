@@ -79,7 +79,7 @@ namespace patrikDll {
                 errorString += String.Concat("error.Message", "=", error.Message, "\n");
                 errorString += String.Concat("error.Source", "=", error.StackTrace, "\n");
                 errorString += String.Concat("error.TargetSite", "=", error.TargetSite, "\n");
-                errorString += String.Concat("error.ToString()", "=", error.ToString(), "\n");
+                errorString += String.Concat("error.ToString()", "=", error.ToString(), "\n"); 
             }
 
             if (psMODEDEVELOPMENT != true) {

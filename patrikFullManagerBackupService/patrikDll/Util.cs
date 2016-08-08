@@ -9,10 +9,13 @@ using System.IO;
 namespace patrikDll {
 
     public static class Util {
-        public  struct TextDateTimeHash {
+        public  struct localTextDateTimeHashExtension {
+            public string local;
             public string text;
             public DateTime dateAndHour;
             public string hash;
+            public string extension;
+
         };
 
         public struct IntString {

@@ -22,7 +22,7 @@ namespace patrikSystemBackupDll {
                         StringDatetime nameDate;
                         nameDate.first = Path.GetFileName(s);
                         // nameDate.second = File.GetCreationTime(s); 
-
+                     
                         switch (typeSearchDateFile) {
                             case (int)searchDateFile.GetCreationTime: nameDate.second = File.GetCreationTime(s);
                                 break;

@@ -34,11 +34,12 @@
             this.RoutineMoveFilesAndHash = new System.Windows.Forms.TabPage();
             this.testGenerateForFileHash = new System.Windows.Forms.Button();
             this.RDMS = new System.Windows.Forms.TabPage();
-            this.testRDMS = new System.Windows.Forms.Button();
-            this.testQuery = new System.Windows.Forms.Button();
             this.testeQueryParameter = new System.Windows.Forms.Button();
+            this.testQuery = new System.Windows.Forms.Button();
+            this.testRDMS = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.validateGetNameDateTimeHash = new System.Windows.Forms.Button();
+            this.listFolder = new System.Windows.Forms.Button();
             this.intelligenceRoutines.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
             this.SevenZip.SuspendLayout();
@@ -90,6 +91,7 @@
             // 
             // tpOneDriver
             // 
+            this.tpOneDriver.Controls.Add(this.listFolder);
             this.tpOneDriver.Controls.Add(this.btnConnectOnedriver);
             this.tpOneDriver.Location = new System.Drawing.Point(4, 22);
             this.tpOneDriver.Name = "tpOneDriver";
@@ -164,15 +166,15 @@
             this.RDMS.Text = "RDMS";
             this.RDMS.UseVisualStyleBackColor = true;
             // 
-            // testRDMS
+            // testeQueryParameter
             // 
-            this.testRDMS.Location = new System.Drawing.Point(15, 18);
-            this.testRDMS.Name = "testRDMS";
-            this.testRDMS.Size = new System.Drawing.Size(75, 23);
-            this.testRDMS.TabIndex = 0;
-            this.testRDMS.Text = "testRDMS";
-            this.testRDMS.UseVisualStyleBackColor = true;
-            this.testRDMS.Click += new System.EventHandler(this.testRDMS_Click);
+            this.testeQueryParameter.Location = new System.Drawing.Point(223, 18);
+            this.testeQueryParameter.Name = "testeQueryParameter";
+            this.testeQueryParameter.Size = new System.Drawing.Size(75, 23);
+            this.testeQueryParameter.TabIndex = 2;
+            this.testeQueryParameter.Text = "testeQueryParameter";
+            this.testeQueryParameter.UseVisualStyleBackColor = true;
+            this.testeQueryParameter.Click += new System.EventHandler(this.testeQueryParameter_Click);
             // 
             // testQuery
             // 
@@ -184,15 +186,15 @@
             this.testQuery.UseVisualStyleBackColor = true;
             this.testQuery.Click += new System.EventHandler(this.testQuery_Click);
             // 
-            // testeQueryParameter
+            // testRDMS
             // 
-            this.testeQueryParameter.Location = new System.Drawing.Point(223, 18);
-            this.testeQueryParameter.Name = "testeQueryParameter";
-            this.testeQueryParameter.Size = new System.Drawing.Size(75, 23);
-            this.testeQueryParameter.TabIndex = 2;
-            this.testeQueryParameter.Text = "testeQueryParameter";
-            this.testeQueryParameter.UseVisualStyleBackColor = true;
-            this.testeQueryParameter.Click += new System.EventHandler(this.testeQueryParameter_Click);
+            this.testRDMS.Location = new System.Drawing.Point(15, 18);
+            this.testRDMS.Name = "testRDMS";
+            this.testRDMS.Size = new System.Drawing.Size(75, 23);
+            this.testRDMS.TabIndex = 0;
+            this.testRDMS.Text = "testRDMS";
+            this.testRDMS.UseVisualStyleBackColor = true;
+            this.testRDMS.Click += new System.EventHandler(this.testRDMS_Click);
             // 
             // tabPage1
             // 
@@ -214,6 +216,16 @@
             this.validateGetNameDateTimeHash.Text = "validateGetNameDateTimeHash";
             this.validateGetNameDateTimeHash.UseVisualStyleBackColor = true;
             this.validateGetNameDateTimeHash.Click += new System.EventHandler(this.validateGetNameDateTimeHash_Click);
+            // 
+            // listFolder
+            // 
+            this.listFolder.Location = new System.Drawing.Point(121, 17);
+            this.listFolder.Name = "listFolder";
+            this.listFolder.Size = new System.Drawing.Size(75, 23);
+            this.listFolder.TabIndex = 7;
+            this.listFolder.Text = "listFolder";
+            this.listFolder.UseVisualStyleBackColor = true;
+            this.listFolder.Click += new System.EventHandler(this.listFolder_Click);
             // 
             // TestSubRoutineService
             // 
@@ -252,5 +264,6 @@
         private System.Windows.Forms.Button testeQueryParameter;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button validateGetNameDateTimeHash;
+        private System.Windows.Forms.Button listFolder;
     }
 }

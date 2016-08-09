@@ -56,6 +56,10 @@ namespace patrikService {
             }
         }
 
+
+         private async void listFolder_Click(object sender, EventArgs e) {
+           bool x =  await WorkerOnedrive.selectFolder2(this.oneDriveClient , "patrikFullManagerBackupService");
+        }
         private void btnRoutineBackup_Click(object sender, EventArgs e) {
             DateTime timeAtual = DateTime.Now;
             /*String[] vectorData =  {"C:\\Users\\patrik\\Desktop\\allProjectsVisualStudio\\BackupInCloud\\patrikFullManagerBackupService\\origin",
@@ -297,5 +301,7 @@ namespace patrikService {
 
             // public static List<localTextDateTimeHashExtension> getFileNameDateCreateHash(String sourceDirectory, int numberGetNameAndDatatime, bool ascendingIsTheQuestion, int typeSearchDateFile = 0 /*default datetime creation*/, string extension = "*") {
         }
+
+       
     }
 }

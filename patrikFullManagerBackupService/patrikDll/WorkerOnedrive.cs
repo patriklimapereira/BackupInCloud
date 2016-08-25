@@ -83,8 +83,7 @@ namespace patrikDll{
             }
         }
 
-         public async static Task<bool> selectFolder2(IOneDriveClient oneDriveClient, String folder) {
-             
+         public async static Task<bool> selectFolder2(IOneDriveClient oneDriveClient, String folder) {             
             try {
                 var expandValue= "thumbnails,children(expand=thumbnails)";
            var  x =     await oneDriveClient.Drive.Root.ItemWithPath("/"+folder).Request().Expand(expandValue).GetAsync();

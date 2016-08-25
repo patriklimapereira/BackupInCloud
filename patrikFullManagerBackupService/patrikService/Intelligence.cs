@@ -86,6 +86,8 @@ namespace patrikService {
         }
 
 
+
+        /*function for restriction days not useful*/
         public static int calculeAmountDaysUseful(int days) {
 
             return days;

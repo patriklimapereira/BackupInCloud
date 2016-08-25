@@ -107,20 +107,32 @@ namespace patrikService {
             /*after implements hour server database*/
             DateTime timeAtual = DateTime.Now;
 
+
+
+            /*return list folder of the database*/
             String query = @"select b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id ";
             String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
             List<ColumnValueType> listParameterColumnValueType = new List<ColumnValueType>();
             listParameterColumnValueType.Add(new ColumnValueType { column = "origin", dataType = NpgsqlDbType.Varchar, value = "C:\\patrikFullManagerBackupService\\o" });
             listParameterColumnValueType.Add(new ColumnValueType { column = "name", dataType = NpgsqlDbType.Varchar, value = "rar" });
             NpgsqlDataReader dr = WorkPostgreSQL.select(stringConnection, query, listParameterColumnValueType);
-            Debug.WriteLine(             dr.Statements);
+            Debug.WriteLine( dr.Statements);
+
             while (dr.Read()) {
               //  http://www.sqlines.com/postgresql/npgsql_cs_result_sets                  
-               List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash( (String) dr["origin"]    , (int)Intelligence.searchDateFile.GetCreationTime, "exe");
-                int days = Intelligence.calculeAmountDaysUseful(5);
+               List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash( (String) dr["origin"] , (int)Intelligence.searchDateFile.GetCreationTime, "exe");
+               listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a=> a.dateAndHour >= timeAtual.AddDays(-30)).ToList();
+
+             //listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a=> a.dateAndHour.Month.Equals(timeAtual.Month )).ToList();
+
+             //listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Select(s => s.dateAndHour.Month == timeAtual.Month);
+
+
+             
+
                 if (listLocalNameDateListHashExtension.Count == 0) {
                  //   initial storage
-                    listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.OrderBy(s => s.dateAndHour).ToList().GetRange(0, days);
+               //     listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.OrderBy(s => s.dateAndHour).ToList().GetRange(0, days);
                     foreach (localTextDateTimeHashExtension ltdhe in listLocalNameDateListHashExtension) {
 
                     }

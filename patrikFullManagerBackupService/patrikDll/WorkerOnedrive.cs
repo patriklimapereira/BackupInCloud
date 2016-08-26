@@ -22,6 +22,9 @@ namespace patrikDll{
 
         public static async Task<IOneDriveClient> signIn(string msaClientId, string msaReturnUrl, string[] scopes) {
             try {
+                
+         
+
                 IOneDriveClient oneDriveClient = await OneDriveClient.GetSilentlyAuthenticatedMicrosoftAccountClient(msaClientId, msaReturnUrl, scopes, getRefreshToken());
                 Debug.WriteLine("athenticated  is ok");
                 return oneDriveClient;

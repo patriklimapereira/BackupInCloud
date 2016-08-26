@@ -58,7 +58,7 @@ namespace patrikService {
 
 
          private async void listFolder_Click(object sender, EventArgs e) {
-           bool x =  await WorkerOnedrive.selectFolder2(this.oneDriveClient , "patrikFullManagerBackupService");
+           bool x =  await WorkerOnedrive.selectFolder(this.oneDriveClient ,  Path.Combine (  folderRootIndDriverForPatrikFullManagerBackupService, "patrikFullManagerBackupService"));
         }
         private void btnRoutineBackup_Click(object sender, EventArgs e) {
             DateTime timeAtual = DateTime.Now;
@@ -110,18 +110,24 @@ namespace patrikService {
 
 
             /*return list folder of the database*/
-            String query = @"select b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id ";
+            String query = @"select b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id  ";
             String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
             List<ColumnValueType> listParameterColumnValueType = new List<ColumnValueType>();
-            listParameterColumnValueType.Add(new ColumnValueType { column = "origin", dataType = NpgsqlDbType.Varchar, value = "C:\\patrikFullManagerBackupService\\o" });
-            listParameterColumnValueType.Add(new ColumnValueType { column = "name", dataType = NpgsqlDbType.Varchar, value = "rar" });
-            NpgsqlDataReader dr = WorkPostgreSQL.select(stringConnection, query, listParameterColumnValueType);
+           // listParameterColumnValueType.Add(new ColumnValueType { column = "origin", dataType = NpgsqlDbType.Varchar, value = "C:\\patrikFullManagerBackupService\\o" });
+           // listParameterColumnValueType.Add(new ColumnValueType { column = "name", dataType = NpgsqlDbType.Varchar, value = "exe" });
+            NpgsqlDataReader dr = WorkPostgreSQL.select(stringConnection, query/*, listParameterColumnValueType*/);
             Debug.WriteLine( dr.Statements);
 
             while (dr.Read()) {
               //  http://www.sqlines.com/postgresql/npgsql_cs_result_sets                  
                List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash( (String) dr["origin"] , (int)Intelligence.searchDateFile.GetCreationTime, "exe");
                listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a=> a.dateAndHour >= timeAtual.AddDays(-30)).ToList();
+
+               MessageBox.Show(   listLocalNameDateListHashExtension.Count.ToString());
+
+
+
+           ///     ToString(psFORMATDATATIME).ToString();
 
              //listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a=> a.dateAndHour.Month.Equals(timeAtual.Month )).ToList();
 

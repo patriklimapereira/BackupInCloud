@@ -69,12 +69,12 @@
       <HintPath>..\packages\Npgsql.3.1.7\lib\net451\Npgsql.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OneDriveSdk, Version=1.1.47.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.OneDriveSDK.1.1.47\lib\net451\OneDriveSdk.dll</HintPath>
+    <Reference Include="OneDriveSdk, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OneDriveSDK.1.2.0\lib\net451\OneDriveSdk.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OneDriveSdk.WindowsForms, Version=1.1.47.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.OneDriveSDK.1.1.47\lib\net451\OneDriveSdk.WindowsForms.dll</HintPath>
+    <Reference Include="OneDriveSdk.WindowsForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.OneDriveSDK.1.2.0\lib\net451\OneDriveSdk.WindowsForms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

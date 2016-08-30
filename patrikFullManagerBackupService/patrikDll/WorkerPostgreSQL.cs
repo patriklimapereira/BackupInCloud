@@ -79,8 +79,24 @@ namespace patrikDll {
 
                //    MessageBox.Show(   command.Statements.ToString())      ;           
          
+        
+
+                MessageBox.Show(        command.CommandText);
+
+               NpgsqlParameterCollection x =  command.Parameters;
+               
+
+       
+
+
+                   
+
+           
                 dr = command.ExecuteReader();
+                    
+               
             } catch (NpgsqlException ex) {
+      
                 MessageBox.Show(ex.ToString());
 
                 return null;
@@ -98,7 +114,6 @@ namespace patrikDll {
         public static string configurationIsOk(String server, String port, String user, String password, String dataBase) {
             try {
                 NpgsqlConnection conn = getConnection(  getStringConection( server, port,  user,  password, dataBase));
-                conn.Open();
                 conn.Close();
 
             } catch (Exception erro) {

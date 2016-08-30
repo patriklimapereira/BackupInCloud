@@ -28,6 +28,7 @@
             this.btnConnectOnedriver = new System.Windows.Forms.Button();
             this.intelligenceRoutines = new System.Windows.Forms.TabControl();
             this.tpOneDriver = new System.Windows.Forms.TabPage();
+            this.listFolder = new System.Windows.Forms.Button();
             this.SevenZip = new System.Windows.Forms.TabPage();
             this.btnTestCompressFile = new System.Windows.Forms.Button();
             this.btnCompress = new System.Windows.Forms.Button();
@@ -39,13 +40,17 @@
             this.testRDMS = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.validateGetNameDateTimeHash = new System.Windows.Forms.Button();
-            this.listFolder = new System.Windows.Forms.Button();
+            this.btnSelect = new System.Windows.Forms.Button();
+            this.geral = new System.Windows.Forms.TabPage();
+            this.returnDate = new System.Windows.Forms.Button();
+            this.testQueryP2 = new System.Windows.Forms.Button();
             this.intelligenceRoutines.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
             this.SevenZip.SuspendLayout();
             this.RoutineMoveFilesAndHash.SuspendLayout();
             this.RDMS.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.geral.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -83,6 +88,7 @@
             this.intelligenceRoutines.Controls.Add(this.RoutineMoveFilesAndHash);
             this.intelligenceRoutines.Controls.Add(this.RDMS);
             this.intelligenceRoutines.Controls.Add(this.tabPage1);
+            this.intelligenceRoutines.Controls.Add(this.geral);
             this.intelligenceRoutines.Location = new System.Drawing.Point(600, 18);
             this.intelligenceRoutines.Name = "intelligenceRoutines";
             this.intelligenceRoutines.SelectedIndex = 0;
@@ -91,6 +97,7 @@
             // 
             // tpOneDriver
             // 
+            this.tpOneDriver.Controls.Add(this.btnSelect);
             this.tpOneDriver.Controls.Add(this.listFolder);
             this.tpOneDriver.Controls.Add(this.btnConnectOnedriver);
             this.tpOneDriver.Location = new System.Drawing.Point(4, 22);
@@ -100,6 +107,16 @@
             this.tpOneDriver.TabIndex = 0;
             this.tpOneDriver.Text = "OneDriver";
             this.tpOneDriver.UseVisualStyleBackColor = true;
+            // 
+            // listFolder
+            // 
+            this.listFolder.Location = new System.Drawing.Point(121, 17);
+            this.listFolder.Name = "listFolder";
+            this.listFolder.Size = new System.Drawing.Size(75, 23);
+            this.listFolder.TabIndex = 7;
+            this.listFolder.Text = "listFolder";
+            this.listFolder.UseVisualStyleBackColor = true;
+            this.listFolder.Click += new System.EventHandler(this.listFolder_Click);
             // 
             // SevenZip
             // 
@@ -155,6 +172,7 @@
             // 
             // RDMS
             // 
+            this.RDMS.Controls.Add(this.testQueryP2);
             this.RDMS.Controls.Add(this.testeQueryParameter);
             this.RDMS.Controls.Add(this.testQuery);
             this.RDMS.Controls.Add(this.testRDMS);
@@ -217,15 +235,47 @@
             this.validateGetNameDateTimeHash.UseVisualStyleBackColor = true;
             this.validateGetNameDateTimeHash.Click += new System.EventHandler(this.validateGetNameDateTimeHash_Click);
             // 
-            // listFolder
+            // btnSelect
             // 
-            this.listFolder.Location = new System.Drawing.Point(121, 17);
-            this.listFolder.Name = "listFolder";
-            this.listFolder.Size = new System.Drawing.Size(75, 23);
-            this.listFolder.TabIndex = 7;
-            this.listFolder.Text = "listFolder";
-            this.listFolder.UseVisualStyleBackColor = true;
-            this.listFolder.Click += new System.EventHandler(this.listFolder_Click);
+            this.btnSelect.Location = new System.Drawing.Point(220, 17);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.TabIndex = 8;
+            this.btnSelect.Text = "select";
+            this.btnSelect.UseMnemonic = false;
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
+            // geral
+            // 
+            this.geral.Controls.Add(this.returnDate);
+            this.geral.Location = new System.Drawing.Point(4, 22);
+            this.geral.Name = "geral";
+            this.geral.Padding = new System.Windows.Forms.Padding(3);
+            this.geral.Size = new System.Drawing.Size(578, 149);
+            this.geral.TabIndex = 5;
+            this.geral.Text = "geral";
+            this.geral.UseVisualStyleBackColor = true;
+            // 
+            // returnDate
+            // 
+            this.returnDate.Location = new System.Drawing.Point(22, 28);
+            this.returnDate.Name = "returnDate";
+            this.returnDate.Size = new System.Drawing.Size(75, 23);
+            this.returnDate.TabIndex = 0;
+            this.returnDate.Text = "button1";
+            this.returnDate.UseVisualStyleBackColor = true;
+            this.returnDate.Click += new System.EventHandler(this.returnDate_Click);
+            // 
+            // testQueryP2
+            // 
+            this.testQueryP2.Location = new System.Drawing.Point(348, 17);
+            this.testQueryP2.Name = "testQueryP2";
+            this.testQueryP2.Size = new System.Drawing.Size(75, 23);
+            this.testQueryP2.TabIndex = 3;
+            this.testQueryP2.Text = "button1";
+            this.testQueryP2.UseVisualStyleBackColor = true;
+            this.testQueryP2.Click += new System.EventHandler(this.testQueryP2_Click);
             // 
             // TestSubRoutineService
             // 
@@ -243,6 +293,7 @@
             this.RoutineMoveFilesAndHash.ResumeLayout(false);
             this.RDMS.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.geral.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -265,5 +316,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button validateGetNameDateTimeHash;
         private System.Windows.Forms.Button listFolder;
+        private System.Windows.Forms.Button btnSelect;
+        private System.Windows.Forms.TabPage geral;
+        private System.Windows.Forms.Button returnDate;
+        private System.Windows.Forms.Button testQueryP2;
     }
 }

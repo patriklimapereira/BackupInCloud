@@ -86,7 +86,27 @@ namespace patrikDll{
             }
         }
 
-         public async static Task<bool> selectFolder2(IOneDriveClient oneDriveClient, String folder) {             
+      public async static Task<String > searchFolder(IOneDriveClient oneDriveClient, String folder) {
+
+
+            try {
+                 var expandValue= "thumbnails,children(expand=thumbnails)";
+                   var  x =     await oneDriveClient.Drive.Root.ItemWithPath("/"+folder).Request().Expand(expandValue).GetAsync();
+               return  x.Id;
+
+                //return (int) x.id;
+              
+                 } catch(OneDriveException errorOneDriver) {
+            //    MessageBox.Show(errorOneDriver.ToString() );
+                Debug.WriteLine(errorOneDriver.ToString());
+                return  null;
+            }
+
+            
+
+        }
+
+         public async static Task<bool> selectFolder(IOneDriveClient oneDriveClient, String folder) {             
             try {
                 var expandValue= "thumbnails,children(expand=thumbnails)";
            var  x =     await oneDriveClient.Drive.Root.ItemWithPath("/"+folder).Request().Expand(expandValue).GetAsync();
@@ -97,6 +117,7 @@ namespace patrikDll{
               IList<Item> items =   x.Children.CurrentPage;
                 return true;
             } catch(OneDriveException errorOneDriver) {
+                MessageBox.Show(errorOneDriver.ToString() );
                 Debug.WriteLine(errorOneDriver.ToString());
                 return false;
             } catch(Exception error) {
@@ -104,24 +125,7 @@ namespace patrikDll{
                 return false;
             }
         }
-          public async static Task<bool> selectFolder(IOneDriveClient oneDriveClient, String folder) {
-             
-            try {
-           var  x =     await oneDriveClient.Drive.Root.ItemWithPath(folder).Request().GetAsync();
-                 var expandString = "thumbnails,children(expand=thumbnails)";
-               
-             var y =    await oneDriveClient.Drive.Items[x.Id].Request().Expand(expandString).GetAsync();
-              
-              IList<Item> items =   y.Children.CurrentPage;
-                return true;
-            } catch(OneDriveException errorOneDriver) {
-                Debug.WriteLine(errorOneDriver.ToString());
-                return false;
-            } catch(Exception error) {
-                Debug.WriteLine(error.ToString());
-                return false;
-            }
-        }
+        
 
       
         public async static Task<Item> uploadFile(IOneDriveClient oneDriveClient, String local, String name) {

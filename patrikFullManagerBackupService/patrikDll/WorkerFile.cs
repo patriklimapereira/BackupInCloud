@@ -134,7 +134,7 @@ namespace patrikDll {
                 }
                 
                 
-                Debug.WriteLine(hashValue);
+                //Debug.WriteLine(hashValue);
 
                 
             } catch (Exception error) {

@@ -59,53 +59,70 @@ namespace patrikDll {
 
               return NpgsqlDbType.Bigint;
           }*/
-        public static NpgsqlDataReader select(String stringConnection , String consulta, List<ColumnValueType> columnValueType = null) {
+     
+        private static void verififySqlInDataBase (String consulta, List<ColumnValueType> columnValueType = null) {
+             string prefixString = "'";  
+              string marcape = ":";            
+              if (columnValueType != null) {
+                    for (int i = 0; i < columnValueType.Count; i++) {
+                     switch (columnValueType[i].dataType) {
+                        case NpgsqlDbType.Varchar:
+                        case NpgsqlDbType.Text:
+                            prefixString = "'";  
+                               consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            break;
+                        case NpgsqlDbType.Timestamp: 
+                                          
+                            prefixString = "'";  
+                                consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString("yyyy-MM-dd HH:mm:ss").ToString()   +   prefixString );
+                            break;
+                        default:
+                           MessageBox.Show("porra loka");
+                            prefixString = "";
+                                consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            break;
+                    }
 
+
+                    prefixString = "";
+                    };
+
+                }
+              
+              Console.WriteLine("rogelia");
+              Console.WriteLine (consulta);
+
+        }
+
+        public static int  insert (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
+            NpgsqlCommand command;
+            int numberRownsAffected; 
+            command = new NpgsqlCommand(query, getConnection( stringConnection ));
+            numberRownsAffected  = command.ExecuteNonQuery();
+
+            return 0;
+        }
+
+        public static NpgsqlDataReader select(String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
             NpgsqlCommand command;
             NpgsqlDataReader dr = null;
             try {
-                command = new NpgsqlCommand(consulta, getConnection( stringConnection ));
-
-
+                command = new NpgsqlCommand(query, getConnection( stringConnection ));
                 if (columnValueType != null) {
                     for (int i = 0; i < columnValueType.Count; i++) {
                         command.Parameters.Add(new NpgsqlParameter(columnValueType[i].column, columnValueType[i].dataType));
                         command.Parameters[i].Value = columnValueType[i].value;
                     };
-
                 }
-             //   Console.WriteLine( command.CommandText);
-             //   MessageBox.Show(       command.CommandText);
-
-               //    MessageBox.Show(   command.Statements.ToString())      ;           
-         
-        
-
-                MessageBox.Show(        command.CommandText);
-
-               NpgsqlParameterCollection x =  command.Parameters;
-               
-
-       
-
-
-                   
-
-           
+                verififySqlInDataBase( query, columnValueType );     
                 dr = command.ExecuteReader();
-                    
-               
-            } catch (NpgsqlException ex) {
-      
-                MessageBox.Show(ex.ToString());
-
-                return null;
+               } catch (NpgsqlException ex) {      
+                MessageBox.Show( "erro....\n\n\n\n\n\n\n"  + ex.ToString());
+                 return null;
             } catch (Exception ex) {
-                MessageBox.Show(ex.ToString());
-
+                MessageBox.Show("erro....\n\n\n\n\n\n\n"+ex.ToString());
                 return null;
             }
-
             return dr;
         }
 

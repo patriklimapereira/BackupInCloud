@@ -28,7 +28,7 @@ namespace patrikService {
                     //  if (numberGetNameAndDatatime > 0) {                    
                     string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);            /*searh option possible solution for problens backup contabilidade*/
                     foreach (string s in nameFiles) {
-                        Debug.WriteLine(s);
+                       // Debug.WriteLine(s);
                         localTextDateTimeHashExtension helperNameDateTimeHash;
                         helperNameDateTimeHash.local = Path.GetDirectoryName(s);
                         helperNameDateTimeHash.text = Path.GetFileName(s);

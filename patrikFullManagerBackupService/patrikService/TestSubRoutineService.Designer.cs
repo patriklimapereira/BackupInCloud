@@ -28,6 +28,7 @@
             this.btnConnectOnedriver = new System.Windows.Forms.Button();
             this.intelligenceRoutines = new System.Windows.Forms.TabControl();
             this.tpOneDriver = new System.Windows.Forms.TabPage();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.listFolder = new System.Windows.Forms.Button();
             this.SevenZip = new System.Windows.Forms.TabPage();
             this.btnTestCompressFile = new System.Windows.Forms.Button();
@@ -35,15 +36,15 @@
             this.RoutineMoveFilesAndHash = new System.Windows.Forms.TabPage();
             this.testGenerateForFileHash = new System.Windows.Forms.Button();
             this.RDMS = new System.Windows.Forms.TabPage();
+            this.testQueryP2 = new System.Windows.Forms.Button();
             this.testeQueryParameter = new System.Windows.Forms.Button();
             this.testQuery = new System.Windows.Forms.Button();
             this.testRDMS = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.validateGetNameDateTimeHash = new System.Windows.Forms.Button();
-            this.btnSelect = new System.Windows.Forms.Button();
             this.geral = new System.Windows.Forms.TabPage();
             this.returnDate = new System.Windows.Forms.Button();
-            this.testQueryP2 = new System.Windows.Forms.Button();
+            this.ddlInsert = new System.Windows.Forms.Button();
             this.intelligenceRoutines.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
             this.SevenZip.SuspendLayout();
@@ -107,6 +108,17 @@
             this.tpOneDriver.TabIndex = 0;
             this.tpOneDriver.Text = "OneDriver";
             this.tpOneDriver.UseVisualStyleBackColor = true;
+            // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(220, 17);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(75, 23);
+            this.btnSelect.TabIndex = 8;
+            this.btnSelect.Text = "select";
+            this.btnSelect.UseMnemonic = false;
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
             // listFolder
             // 
@@ -172,6 +184,7 @@
             // 
             // RDMS
             // 
+            this.RDMS.Controls.Add(this.ddlInsert);
             this.RDMS.Controls.Add(this.testQueryP2);
             this.RDMS.Controls.Add(this.testeQueryParameter);
             this.RDMS.Controls.Add(this.testQuery);
@@ -183,6 +196,16 @@
             this.RDMS.TabIndex = 3;
             this.RDMS.Text = "RDMS";
             this.RDMS.UseVisualStyleBackColor = true;
+            // 
+            // testQueryP2
+            // 
+            this.testQueryP2.Location = new System.Drawing.Point(320, 18);
+            this.testQueryP2.Name = "testQueryP2";
+            this.testQueryP2.Size = new System.Drawing.Size(75, 23);
+            this.testQueryP2.TabIndex = 3;
+            this.testQueryP2.Text = "testQueryP2";
+            this.testQueryP2.UseVisualStyleBackColor = true;
+            this.testQueryP2.Click += new System.EventHandler(this.testQueryP2_Click);
             // 
             // testeQueryParameter
             // 
@@ -235,17 +258,6 @@
             this.validateGetNameDateTimeHash.UseVisualStyleBackColor = true;
             this.validateGetNameDateTimeHash.Click += new System.EventHandler(this.validateGetNameDateTimeHash_Click);
             // 
-            // btnSelect
-            // 
-            this.btnSelect.Location = new System.Drawing.Point(220, 17);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(75, 23);
-            this.btnSelect.TabIndex = 8;
-            this.btnSelect.Text = "select";
-            this.btnSelect.UseMnemonic = false;
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
-            // 
             // geral
             // 
             this.geral.Controls.Add(this.returnDate);
@@ -267,15 +279,15 @@
             this.returnDate.UseVisualStyleBackColor = true;
             this.returnDate.Click += new System.EventHandler(this.returnDate_Click);
             // 
-            // testQueryP2
+            // ddlInsert
             // 
-            this.testQueryP2.Location = new System.Drawing.Point(348, 17);
-            this.testQueryP2.Name = "testQueryP2";
-            this.testQueryP2.Size = new System.Drawing.Size(75, 23);
-            this.testQueryP2.TabIndex = 3;
-            this.testQueryP2.Text = "button1";
-            this.testQueryP2.UseVisualStyleBackColor = true;
-            this.testQueryP2.Click += new System.EventHandler(this.testQueryP2_Click);
+            this.ddlInsert.Location = new System.Drawing.Point(433, 18);
+            this.ddlInsert.Name = "ddlInsert";
+            this.ddlInsert.Size = new System.Drawing.Size(75, 23);
+            this.ddlInsert.TabIndex = 4;
+            this.ddlInsert.Text = "Insert";
+            this.ddlInsert.UseVisualStyleBackColor = true;
+            this.ddlInsert.Click += new System.EventHandler(this.ddlInsert_Click);
             // 
             // TestSubRoutineService
             // 
@@ -320,5 +332,6 @@
         private System.Windows.Forms.TabPage geral;
         private System.Windows.Forms.Button returnDate;
         private System.Windows.Forms.Button testQueryP2;
+        private System.Windows.Forms.Button ddlInsert;
     }
 }

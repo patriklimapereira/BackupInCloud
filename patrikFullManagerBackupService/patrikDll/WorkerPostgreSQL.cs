@@ -79,7 +79,7 @@ namespace patrikDll {
                         default:
                            MessageBox.Show("porra loka");
                             prefixString = "";
-                                consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
                             break;
                     }
 
@@ -94,36 +94,40 @@ namespace patrikDll {
 
         }
 
-        public static int  insert (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
-            NpgsqlCommand command;
-            int numberRownsAffected; 
-            command = new NpgsqlCommand(query, getConnection( stringConnection ));
-            numberRownsAffected  = command.ExecuteNonQuery();
-
-            return 0;
-        }
-
-        public static NpgsqlDataReader select(String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
-            NpgsqlCommand command;
-            NpgsqlDataReader dr = null;
+        private static NpgsqlCommand prepareStatement (String stringConnection, String query, List<ColumnValueType> columnValueType = null) {
+          NpgsqlCommand command;
             try {
-                command = new NpgsqlCommand(query, getConnection( stringConnection ));
+                command = new NpgsqlCommand(query, getConnection(stringConnection));
                 if (columnValueType != null) {
                     for (int i = 0; i < columnValueType.Count; i++) {
                         command.Parameters.Add(new NpgsqlParameter(columnValueType[i].column, columnValueType[i].dataType));
                         command.Parameters[i].Value = columnValueType[i].value;
-                    };
+                    }
                 }
-                verififySqlInDataBase( query, columnValueType );     
-                dr = command.ExecuteReader();
-               } catch (NpgsqlException ex) {      
-                MessageBox.Show( "erro....\n\n\n\n\n\n\n"  + ex.ToString());
-                 return null;
-            } catch (Exception ex) {
-                MessageBox.Show("erro....\n\n\n\n\n\n\n"+ex.ToString());
+            //    verififySqlInDataBase(query, columnValueType);
+                return command;
+            } catch (NpgsqlException ex) {
+                MessageBox.Show("erro....\n\n\n\n\n\n\n" + ex.ToString());
                 return null;
+            } catch (Exception ex) {
+                MessageBox.Show("erro....\n\n\n\n\n\n\n" + ex.ToString());
+                return null;
+
             }
-            return dr;
+
+        } 
+
+        public static int  ExecuteNonQuery (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
+            NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);                                
+            return  (command == null) ?  -1 :  command.ExecuteNonQuery(); 
+
+        }
+
+        public static NpgsqlDataReader ExecuteReader(String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
+            NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);
+            return (command == null) ? null : command.ExecuteReader();
+          
+          
         }
 
 

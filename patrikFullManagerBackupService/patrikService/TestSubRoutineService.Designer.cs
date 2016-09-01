@@ -115,7 +115,7 @@
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(75, 23);
             this.btnSelect.TabIndex = 8;
-            this.btnSelect.Text = "select";
+            this.btnSelect.Text = "ExecuteReader";
             this.btnSelect.UseMnemonic = false;
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);

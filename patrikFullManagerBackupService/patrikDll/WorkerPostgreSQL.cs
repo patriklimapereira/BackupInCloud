@@ -5,6 +5,7 @@ using System.Text;
 using Npgsql;
 using NpgsqlTypes;
 
+
 using System.Windows.Forms;
 
 using System.Diagnostics;
@@ -61,25 +62,24 @@ namespace patrikDll {
           }*/
      
         private static void verififySqlInDataBase (String consulta, List<ColumnValueType> columnValueType = null) {
-             string prefixString = "'";  
-              string marcape = ":";            
+             string prefixString = "'";                       
               if (columnValueType != null) {
                     for (int i = 0; i < columnValueType.Count; i++) {
                      switch (columnValueType[i].dataType) {
                         case NpgsqlDbType.Varchar:
                         case NpgsqlDbType.Text:
                             prefixString = "'";  
-                               consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                               consulta = consulta.Replace(columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
                             break;
                         case NpgsqlDbType.Timestamp: 
                                           
                             prefixString = "'";  
-                                consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString("yyyy-MM-dd HH:mm:ss").ToString()   +   prefixString );
+                                consulta = consulta.Replace(columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString("yyyy-MM-dd HH:mm:ss").ToString()   +   prefixString );
                             break;
                         default:
                            MessageBox.Show("porra loka");
                             prefixString = "";
-                            consulta = consulta.Replace(marcape+columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            consulta = consulta.Replace(columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
                             break;
                     }
 
@@ -117,14 +117,18 @@ namespace patrikDll {
 
         } 
 
+        
+
         public static int  ExecuteNonQuery (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
-            NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);                                
+            NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);     
+            verififySqlInDataBase( query,  columnValueType );                           
             return  (command == null) ?  -1 :  command.ExecuteNonQuery(); 
 
         }
 
         public static NpgsqlDataReader ExecuteReader(String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
             NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);
+             verififySqlInDataBase( query,  columnValueType );   
             return (command == null) ? null : command.ExecuteReader();
           
           

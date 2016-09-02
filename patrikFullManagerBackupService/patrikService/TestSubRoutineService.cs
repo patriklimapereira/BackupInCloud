@@ -30,7 +30,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "192.168.79.129";
+        private String server = "172.16.250.130";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -117,9 +117,9 @@ namespace patrikService {
         private void btnRoutine_Click(object sender, EventArgs e) {
             /*after implements hour server database*/
             DateTime timeAtual = DateTime.Now;
-
+              string marcape = ":_";  
             /*return list folder of the database*/
-            String query = @"ExecuteReader b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id  ";
+            String query = @"select b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id  ";
             String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
             List<ColumnValueType> listParameterColumnValueType = new List<ColumnValueType>();
             NpgsqlDataReader drBackupsExtensions = WorkPostgreSQL.ExecuteReader(stringConnection, query); 
@@ -128,27 +128,32 @@ namespace patrikService {
                 List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash((String)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
                 listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a => a.dateAndHour >= timeAtual.AddDays(-35)).OrderBy(s => s.dateAndHour).ToList();
                 /*empty directory verify */
-                if (listLocalNameDateListHashExtension.Count > 0) {                    
-                      query = @"create  table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash varchar(69) );";
-                    int j = 0 ;
-                    String prefix = ":_";
-                    List<ColumnValueType> listHashFileDateTimeCreation = new List<ColumnValueType>();
+              
+                if (listLocalNameDateListHashExtension.Count > 0) {    
+                      int j = 0 ;
+                      List<ColumnValueType> listHashFileDateTimeCreation = new List<ColumnValueType>();
+                      query = @"create  table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash varchar(100) ); insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash) values";
+                      query += "("+ marcationOfParameterDataBaseForAutomaticGenerateParamenter +   j.ToString()+")";
+                      listHashFileDateTimeCreation.Add(new ColumnValueType { column =   marcationOfParameterDataBaseForAutomaticGenerateParamenter  + j.ToString(), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[j].hash+listLocalNameDateListHashExtension[j].dateAndHour.ToString(Util.psFORMATDATATIME) });
+                      j++;                
+                  
                     while (j < listLocalNameDateListHashExtension.Count) {
-                        query += "insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash)  values("+ prefix + j+" );"; 
-                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = "_" + j.ToString(), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[j].hash+listLocalNameDateListHashExtension[j].dateAndHour });
+                         query += ",("+ marcationOfParameterDataBaseForAutomaticGenerateParamenter +   j.ToString()+")";
+                        listHashFileDateTimeCreation.Add(new ColumnValueType { column =   marcationOfParameterDataBaseForAutomaticGenerateParamenter  + j.ToString(), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[j].hash+listLocalNameDateListHashExtension[j].dateAndHour.ToString(Util.psFORMATDATATIME) });
                         j++;
                     }
 
+                    query += ";"; 
+
+                     WorkPostgreSQL.ExecuteReader(stringConnection, query,    listHashFileDateTimeCreation );
+
+                        //WorkPostgreSQL.ExecuteNonQuery(stringConnection, query,listHashFileDateTimeCreation);
+                    Debug.WriteLine(query);
+                    MessageBox.Show("kkkkkk"+query);
 
 
 
-
-                        WorkPostgreSQL.ExecuteNonQuery(stringConnection, query);
-
-
-
-
-                      query = "";
+                  /*    query = "";
                       String hash = "", fileDateTimeCreation = "";
                       
                       int i = 0, j = 0;
@@ -168,17 +173,17 @@ namespace patrikService {
                        //   MessageBox.Show("value de i "+i.ToString());
                           listHashFileDateTimeCreation .Add(new ColumnValueType { column = "_"+  i.ToString(), dataType = NpgsqlDbType.Timestamp, value = listLocalNameDateListHashExtension[j].dateAndHour });
                           j++;
-                      }
+                      }*/
 
                       /*query*/
-                    query = @"ExecuteReader * from operations  o where o.hash_local  in ("+hash+") and o.file_datetime_creation  in ("+ fileDateTimeCreation +" )";           
+                 /*   query = @"ExecuteReader * from operations  o where o.hash_local  in ("+hash+") and o.file_datetime_creation  in ("+ fileDateTimeCreation +" )";           
                      NpgsqlDataReader drOperation = WorkPostgreSQL.ExecuteReader(stringConnection, query,    listHashFileDateTimeCreation );
                       List<localTextDateTimeHashExtension> listLocalNameDateListHashExtensionFromRDMS ;
                    
                       while (drOperation.Read()) {
 
 
-                      }                
+                      }  */              
                       
              
                 } else {

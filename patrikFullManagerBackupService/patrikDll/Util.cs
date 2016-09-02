@@ -36,7 +36,7 @@ namespace patrikDll {
         /*begin features commons a patriksystens*/
         public static readonly string psPROGRAMFILES = "C:" + Util.psBAR_URL_SO + "Users" + Util.psBAR_URL_SO + "patrik" + Util.psBAR_URL_SO + "Desktop" + Util.psBAR_URL_SO + "allProjectsVisualStudio" + Util.psBAR_URL_SO + "BackupInCloud" + Util.psBAR_URL_SO + "patrikFullManagerBackupService" + Util.psBAR_URL_SO + "pseudoProgramFiles"; /* Environment.GetEnvironmentVariable("PROGRAMFILES");*/
         public static readonly string psGETCURRENTDIRECTORY = Directory.GetCurrentDirectory();
-        public static readonly string psFORMATDATATIME = "yyyy-MM-dd HH-mm-ss.ffffff"; /*format date and hour timeStamp whithout time zone of the postgresql/
+        public static readonly string psFORMATDATATIME = "yyyy-MM-dd HH:mm:ss.ffffff"; /*format date and hour timeStamp whithout time zone of the postgresql/
                 
 
         /*in return method or error*/

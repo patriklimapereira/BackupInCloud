@@ -34,7 +34,7 @@ namespace patrikDll {
                      
 
 
-       private static NpgsqlConnection getConnection(String stringConnetion) {
+       public  static NpgsqlConnection getConnection(String stringConnetion) {
             NpgsqlConnection conn =  new NpgsqlConnection( stringConnetion);
             conn.Open();
             return conn;
@@ -74,7 +74,7 @@ namespace patrikDll {
                         case NpgsqlDbType.Timestamp: 
                                           
                             prefixString = "'";  
-                                consulta = consulta.Replace(columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString("yyyy-MM-dd HH:mm:ss").ToString()   +   prefixString );
+                                consulta = consulta.Replace(columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString(Util.psFORMATDATATIME).ToString()   +   prefixString );
                             break;
                         default:
                            MessageBox.Show("porra loka");
@@ -115,9 +115,13 @@ namespace patrikDll {
 
             }
 
-        } 
+        }
 
-        
+        public static int ExecuteNonQueryPorraLoka(ref NpgsqlConnection conn, String query) {
+            return new NpgsqlCommand(query, conn).ExecuteNonQuery();        
+
+        }
+
 
         public static int  ExecuteNonQuery (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
             NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);     

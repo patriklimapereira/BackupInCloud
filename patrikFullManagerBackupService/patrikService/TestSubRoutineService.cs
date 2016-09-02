@@ -30,7 +30,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "172.16.250.130";
+        private String server = "192.168.79.129";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -126,26 +126,30 @@ namespace patrikService {
             /*line directory backup*/  
             while (drBackupsExtensions.Read()) {                           
                 List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash((String)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
-                listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a => a.dateAndHour >= timeAtual.AddDays(-35)).OrderBy(s => s.dateAndHour).ToList();
+                /*after directory null*/
+                listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a => a.dateAndHour >= timeAtual.AddDays(-5)).OrderBy(s => s.dateAndHour).ToList();
                 /*empty directory verify */
               
-                if (listLocalNameDateListHashExtension.Count > 0) {    
-                      int j = 0 ;
+                if (listLocalNameDateListHashExtension.Count > 0) {
+                    int j = 0, i = 0;
                       List<ColumnValueType> listHashFileDateTimeCreation = new List<ColumnValueType>();
-                      query = @"create  table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash varchar(100) ); insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour_hash) values";
-                      query += "("+ marcationOfParameterDataBaseForAutomaticGenerateParamenter +   j.ToString()+")";
-                      listHashFileDateTimeCreation.Add(new ColumnValueType { column =   marcationOfParameterDataBaseForAutomaticGenerateParamenter  + j.ToString(), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[j].hash+listLocalNameDateListHashExtension[j].dateAndHour.ToString(Util.psFORMATDATATIME) });
-                      j++;                
-                  
-                    while (j < listLocalNameDateListHashExtension.Count) {
-                         query += ",("+ marcationOfParameterDataBaseForAutomaticGenerateParamenter +   j.ToString()+")";
-                        listHashFileDateTimeCreation.Add(new ColumnValueType { column =   marcationOfParameterDataBaseForAutomaticGenerateParamenter  + j.ToString(), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[j].hash+listLocalNameDateListHashExtension[j].dateAndHour.ToString(Util.psFORMATDATATIME) });
-                        j++;
+                      query = @"create  table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour timestamp, hash  varchar ); insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour , hash) values";
+                      query += "("+ marcationOfParameterDataBaseForAutomaticGenerateParamenter +  ++j +"," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j +  ")";
+                      listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j-1), dataType = NpgsqlDbType.Timestamp, value =  listLocalNameDateListHashExtension[i].dateAndHour });
+                      listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + j, dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].hash });
+
+                    i++;
+                    while (i < listLocalNameDateListHashExtension.Count) {
+                        query += ",(" + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + ")";
+                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j-1), dataType = NpgsqlDbType.Timestamp, value = listLocalNameDateListHashExtension[i].dateAndHour });
+                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + j, dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].hash });
+                        i++;
                     }
 
-                    query += ";"; 
+                    query += ";";
 
-                     WorkPostgreSQL.ExecuteReader(stringConnection, query,    listHashFileDateTimeCreation );
+                    MessageBox.Show(query);
+                    WorkPostgreSQL.ExecuteReader(stringConnection, query,    listHashFileDateTimeCreation );
 
                         //WorkPostgreSQL.ExecuteNonQuery(stringConnection, query,listHashFileDateTimeCreation);
                     Debug.WriteLine(query);
@@ -375,7 +379,8 @@ namespace patrikService {
         }
 
         private void returnDate_Click(object sender, EventArgs e) {
-            MessageBox.Show(Util.psReturnTimeString());
+            int j = 0;
+            MessageBox.Show ( " "+ j++ );
 
         }
 

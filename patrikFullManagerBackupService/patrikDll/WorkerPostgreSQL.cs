@@ -64,8 +64,8 @@ namespace patrikDll {
 
                 }
               
-              Console.WriteLine("rogelia");
-              Console.WriteLine (consulta);
+           //   Console.WriteLine("rogelia");
+             // Console.WriteLine (consulta);
 
         }
 
@@ -79,7 +79,7 @@ namespace patrikDll {
                         command.Parameters[i].Value = columnValueType[i].value;
                     }
                 }
-              verififySqlInDataBase(query, columnValueType);
+             // verififySqlInDataBase(query, columnValueType);
                 return command;
             } catch (NpgsqlException ex) {
                 MessageBox.Show("erro....\n\n\n\n\n\n\n" + ex.ToString());

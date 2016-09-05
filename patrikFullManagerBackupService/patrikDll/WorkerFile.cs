@@ -139,13 +139,21 @@ namespace patrikDll {
                 
             } catch (Exception error) {
 
-            }
-            
+            }           
            
-
             return hashValue;
 
-
         }
+
+        public static bool moveFile(String local, String name) {
+            try {
+
+            } catch (Exception error) {
+
+                return false;
+            }
+
+            return true;
+}
     }
 }

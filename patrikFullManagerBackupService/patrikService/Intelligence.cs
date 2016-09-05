@@ -31,8 +31,8 @@ namespace patrikService {
                        // Debug.WriteLine(s);
                         localTextDateTimeHashExtension helperNameDateTimeHash;
                         helperNameDateTimeHash.local = Path.GetDirectoryName(s);
-                        helperNameDateTimeHash.text = Path.GetFileName(s);
-                        helperNameDateTimeHash.hash = getSha1ToFile(Path.GetDirectoryName(s), helperNameDateTimeHash.text);
+                        helperNameDateTimeHash.name = Path.GetFileName(s);
+                        helperNameDateTimeHash.hash = getSha1ToFile(Path.GetDirectoryName(s), helperNameDateTimeHash.name);
                         helperNameDateTimeHash.extension = Path.GetExtension(s);
                         switch (typeSearchInSearchDateTimeFile) {
                             case (int)searchDateFile.GetCreationTime:

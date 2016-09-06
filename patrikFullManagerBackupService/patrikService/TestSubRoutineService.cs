@@ -31,7 +31,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "172.16.250.130";
+        private String server = "192.168.79.130";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -169,8 +169,8 @@ namespace patrikService {
                             //  query = @"select  t.date_and_hour|| t.hash  || t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
                             query = @"select  t.date_and_hour, t.hash  , t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
                             NpgsqlDataReader drOperation = WorkPostgreSQL.ExecuteReader(stringConnection, query, listHashFileDateTimeCreation);
-             
 
+                            MessageBox.Show("ola");
                             // List<localTextDateTimeHashExtension> listTimeHashFromRDMS = new List<localTextDateTimeHashExtension>();
                             while (drOperation.Read()) { 
                                        String  helperCreateFolderDestiny;                        
@@ -181,8 +181,9 @@ namespace patrikService {
                                 if ( WorkerDirectory.createDirectory(  helperCreateFolderDestiny ) == false)  {
                                     MessageBox.Show(helperCreateFolderDestiny );
                                 }else {
-                                   if(  WorkerFile.copyFile(listTimeHashFromRDMS.local,listTimeHashFromRDMS.name,helperCreateFolderDestiny  ,listTimeHashFromRDMS.name) == 0 ) {
-                                      /*compactar*/
+                                   if(copyFile(listTimeHashFromRDMS.local,listTimeHashFromRDMS.name,helperCreateFolderDestiny  ,listTimeHashFromRDMS.name) == 0 ) {
+                                        Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, listTimeHashFromRDMS.name);
+                                        /*compactar*/
                                     /*upload*/
                                     }
                                 }

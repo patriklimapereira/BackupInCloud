@@ -1,0 +1,38 @@
+method	 = 	public static bool directoryExist(String local)
+local	 = 	M:\d2014-11-21 04:49:29.0374983C37C54DACFCDA2A2EBE734E38A0CE9A90BAC6D4license.exe
+
+error.GetType()=System.NotSupportedException
+error.HelpLink=
+error.HResult=-2146233067
+error.InnerException=
+error.Message=The given path's format is not supported.
+error.Source=   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+error.TargetSite=Void EmulateFileIOPermissionChecks(System.String)
+error.ToString()=System.NotSupportedException: The given path's format is not supported.
+   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+
+method	 = 	public static bool directoryExist(String local)
+local	 = 	M:\d2016-07-18 07:19:49.23695748714CE99BE96E352145C5FD82E318F94A88442BFirefox Setup Stub 47.0.1.exe
+
+error.GetType()=System.NotSupportedException
+error.HelpLink=
+error.HResult=-2146233067
+error.InnerException=
+error.Message=The given path's format is not supported.
+error.Source=   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+error.TargetSite=Void EmulateFileIOPermissionChecks(System.String)
+error.ToString()=System.NotSupportedException: The given path's format is not supported.
+   at System.Security.Permissions.FileIOPermission.EmulateFileIOPermissionChecks(String fullPath)
+   at System.Security.Permissions.FileIOPermission.QuickDemand(FileIOPermissionAccess access, String fullPath, Boolean checkForDuplicates, Boolean needFullPath)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+

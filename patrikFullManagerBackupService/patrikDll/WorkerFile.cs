@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
 using System.Diagnostics;
-
+using System.Windows.Forms;
 
 namespace patrikDll {
     public class WorkerFile {
@@ -145,15 +145,19 @@ namespace patrikDll {
 
         }
 
-        public static bool moveFile(String local, String name) {
+        public static int copyFile(String origem,  String nameO, String destiny, String  nameD) {
             try {
 
-            } catch (Exception error) {
+                 File.Copy(Path.Combine(origem, nameO), Path.Combine(destiny, nameD), true);
+                         
+                      
 
-                return false;
+            } catch (Exception error) {
+                 MessageBox.Show(error.ToString());
+                return  -1;
             }
 
-            return true;
+            return 1;
 }
     }
 }

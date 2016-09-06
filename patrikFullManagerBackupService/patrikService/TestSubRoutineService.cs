@@ -20,6 +20,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Threading;
 using System.Globalization;
+using System.Windows.Forms;
 
 
 
@@ -30,7 +31,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "192.168.79.130";
+        private String server = "172.16.250.130";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -171,18 +172,24 @@ namespace patrikService {
              
 
                             // List<localTextDateTimeHashExtension> listTimeHashFromRDMS = new List<localTextDateTimeHashExtension>();
-                            while (drOperation.Read()) {                                    
+                            while (drOperation.Read()) { 
+                                       String  helperCreateFolderDestiny;                        
                                     /*List<localTextDateTimeHashExtension> listTimeHashFromRDMS */
                                    // localTextDateTimeHashExtension listTimeHashFromRDMS ;                                        
                                      localTextDateTimeHashExtension listTimeHashFromRDMS = listLocalNameDateListHashExtension.Where(a => a.dateAndHour.ToString(Util.psFORMATDATATIME)+a.hash+a.name == (((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIME)+(string)drOperation["hash"]+(string)drOperation["name"] ) ).ToList()[0];
-
-
-                                 
-                                    MessageBox.Show("para aqui");
-                                    int x = 0;
-                                    /*copy origin for destiny*/
-                                    /*compactar*/
+                                 helperCreateFolderDestiny = (Path.Combine ((string)drBackupsExtensions["destiny"], ((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIMEFOLDERANDFILES)+(string)drOperation["hash"]+(string)drOperation["name"]) ) ;
+                                if ( WorkerDirectory.createDirectory(  helperCreateFolderDestiny ) == false)  {
+                                    MessageBox.Show(helperCreateFolderDestiny );
+                                }else {
+                                   if(  WorkerFile.copyFile(listTimeHashFromRDMS.local,listTimeHashFromRDMS.name,helperCreateFolderDestiny  ,listTimeHashFromRDMS.name) == 0 ) {
+                                      /*compactar*/
                                     /*upload*/
+                                    }
+                                }
+                                
+                                       
+                                   
+                                   
                                 }
                             }
                         }

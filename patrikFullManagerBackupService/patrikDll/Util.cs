@@ -135,6 +135,41 @@ namespace patrikDll {
 
         }
 
+          private static string reverseString(string Word) {
+            char[] arrayChar = Word.ToCharArray();
+            Array.Reverse(arrayChar);
+               return new String(arrayChar);         
+        }
+
+        private static string findExtension(string manipulationStringOrigem) {
+            String manipulationString = manipulationStringOrigem;
+            int firtOccurrence;          
+            manipulationString = reverseString(manipulationString);
+            firtOccurrence = manipulationString.IndexOf('.')+1;
+            if (firtOccurrence < 0) {
+                return string.Empty;
+            }
+            else {
+                return reverseString(manipulationString.Substring(0, firtOccurrence));
+              
+            }
+
+        }
+
+        public static string removeExtension(string manipulationStringOrigem) {
+            String manipulationString = manipulationStringOrigem;
+            int firtOccurrence;
+            manipulationString = reverseString(manipulationString);
+            firtOccurrence = manipulationString.IndexOf('.') + 1;
+            if (firtOccurrence < 0) {
+                return string.Empty;
+            }
+            else {
+                return reverseString(manipulationString.Substring(firtOccurrence, manipulationString.Length - firtOccurrence));
+
+            }
+        }
+
     }
 
 }

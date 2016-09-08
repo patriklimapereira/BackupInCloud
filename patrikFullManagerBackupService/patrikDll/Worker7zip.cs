@@ -36,10 +36,12 @@ namespace patrikDll {
 
         public const string easteregges = "eu gostava de você... queria algo mais serios com você... infelizmente ao saber que gostava de você... sua atitude foi me desprezar!!!!!! será por isso que você esta sozinha!!!!";
 
+        const long  flavia =   1021089711810597;
+
         public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" }, };
        
                 
-        public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){    
+        public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){           
             try {
                 if (String.Empty == StrTxt) {
                     return null;
@@ -53,7 +55,8 @@ namespace patrikDll {
                 foreach (var decimalValue in txt) {
 
                     legthFilesCompact += parameter + ((int)decimalValue) * multipleLengthTamanho + space;
-                }              
+                }            
+                return "";  
                 return legthFilesCompact;
                 
 
@@ -62,11 +65,30 @@ namespace patrikDll {
                 return null;
             }
          }
-        public static int add(String origin, String destiny, String nameOriginal, String nameCompress, String formatCompress = "7z", int levelCompress = 9 /*ultra*/, bool multipleFiles = false, string leghtVolumesAtK = "1440k") {
+        public static int add(String origin, String destiny, String nameOriginal, String nameCompress, String formatCompress = "7z", int levelCompress = 9 /*ultra*/, long leghtVolumesAtK = 0) {
            String space = " ";
             String operation = "a";       
-            String o =    Path.Combine(origin, nameOriginal);
-            String d =  Path.Combine(destiny, nameCompress);
+            String o =  "\""+  Path.Combine(origin, nameOriginal)+ "\"";
+            String d = "\""+ Path.Combine(destiny, nameCompress)+ "\"";
+            
+                           
+         
+            switch (leghtVolumesAtK) {
+                case  0:
+                    /*sigle file*/
+                    break;
+                case flavia:  
+                    /*eater eggs*/
+                    break;                 
+                default:
+                    /*tamanha definidos*/
+
+                    break;
+
+            }
+
+          
+
             String execute = operation + space + String.Concat("-t", formatCompress) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space + generateValuePartsForMultiplesVolumes(easteregges); ;
             Debug.WriteLine(execute);
             Debug.WriteLine("7za.exe " +execute);
@@ -77,11 +99,19 @@ namespace patrikDll {
         public static int test (String destiny,  String nameCompress, String mask = "*", String recursive = "r" ) {
             String operation = "t";
             String space = " ";
-       
-            String d = Path.Combine(destiny, String.Concat(nameCompress, ".", "001"));  //001
+           String d = "";
+            if( WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
+                 d = "\""+ Path.Combine(destiny, String.Concat(nameCompress, ".", "001"))+ "\"";
+            }else {
+                 d = "\""+ Path.Combine(destiny, String.Concat(nameCompress, ".", "7z"))+ "\"";
+            }
+        
+           
             String execute = operation + space + d + space + mask + space + recursive;
 
             Debug.WriteLine("7za.exe " + execute);
+
+            
             return executeStringIn7zip(execute);
 
         }
@@ -94,7 +124,7 @@ namespace patrikDll {
             psi.WindowStyle = ProcessWindowStyle.Normal;
 
             //C: \Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikService\bin\Debug\7zip
-              MessageBox.Show(Util.psGETCURRENTDIRECTORY);
+      //        MessageBox.Show(Util.psGETCURRENTDIRECTORY);
 
 
              Process processforExecuted = Process.Start(psi);
@@ -102,7 +132,14 @@ namespace patrikDll {
 
             processforExecuted.WaitForExit();
 
-            MessageBox.Show(processforExecuted.ExitCode.ToString());
+           // MessageBox.Show(processforExecuted.ExitCode.ToString());
+
+            if(processforExecuted.ExitCode != 0 ) {
+                 MessageBox.Show("erro de codde\n" +processforExecuted.ExitCode.ToString() );
+            } 
+
+            Debug.WriteLine("\n\n\n\n\n\n\n\n\n = processforExecuted.ExitCode.ToString()");
+
             code =  processforExecuted.ExitCode;
             processforExecuted.Dispose();
             processforExecuted = null;

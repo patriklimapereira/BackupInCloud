@@ -186,10 +186,10 @@ namespace patrikService {
                                     //  } else {
 
                                     //*         add(origin, destiny, nameOriginal, nameCompress);
-                                    String name = removeExtension(listTimeHashFromRDMS.name) + ".7z";
-                                    Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name);
-
-                                  MessageBox.Show(Worker7zip.test(helperCreateFolderDestiny, name).ToString());
+                                    String name = removeExtension(listTimeHashFromRDMS.name) ;
+                                    Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"7zip");                                   
+                                   // MessageBox.Show("ola");
+                                 Worker7zip.test(helperCreateFolderDestiny, name);
 
                                     //   MessageBox.Show("Erro de compactação");
 
@@ -237,7 +237,7 @@ namespace patrikService {
             String destiny = "C:\\patrikFullManagerBackupService\\d";
             String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
-            add(origin, destiny, nameOriginal, nameCompress);
+            add(origin, destiny, nameOriginal, nameCompress, "7zip");
 
 
 

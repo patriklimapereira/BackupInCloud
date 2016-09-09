@@ -38,7 +38,7 @@ namespace patrikDll {
 
         const long  flavia =   1021089711810597;
 
-        public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" }, };
+        public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" } };
        
                 
         public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){           
@@ -55,8 +55,8 @@ namespace patrikDll {
                 foreach (var decimalValue in txt) {
 
                     legthFilesCompact += parameter + ((int)decimalValue) * multipleLengthTamanho + space;
-                }            
-                return "";  
+                }           
+             
                 return legthFilesCompact;
                 
 
@@ -65,31 +65,33 @@ namespace patrikDll {
                 return null;
             }
          }
-        public static int add(String origin, String destiny, String nameOriginal, String nameCompress, String formatCompress = "7z", int levelCompress = 9 /*ultra*/, long leghtVolumesAtK = 0) {
+        public static long add(String origin, String destiny, String nameOriginal, String nameCompress,  string  formatCompress ,  long leghtVolumesAtK = 0, int levelCompress = 9 ) {
+
+          /*after implements validation de formatCompress*/
            String space = " ";
-            String operation = "a";       
-            String o =  "\""+  Path.Combine(origin, nameOriginal)+ "\"";
-            String d = "\""+ Path.Combine(destiny, nameCompress)+ "\"";
-            
+           String operation = "a";   
+           String spaceK = "k ";
+           String parameter = "-v";           
+           String o =  "\""+  Path.Combine(origin, nameOriginal)+ "\"";
+           String d = "\""+ Path.Combine(destiny, nameCompress)+ String.Concat(".",typeFormatCompress["7zip"] )+"\"";
+           String strMultipleFiles;
                            
-         
             switch (leghtVolumesAtK) {
                 case  0:
-                    /*sigle file*/
+                    strMultipleFiles  = "";
                     break;
                 case flavia:  
-                    /*eater eggs*/
+                      strMultipleFiles  = generateValuePartsForMultiplesVolumes(easteregges);
                     break;                 
                 default:
-                    /*tamanha definidos*/
-
+                     strMultipleFiles =  parameter+leghtVolumesAtK.ToString()+spaceK;
                     break;
 
             }
 
           
 
-            String execute = operation + space + String.Concat("-t", formatCompress) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space + generateValuePartsForMultiplesVolumes(easteregges); ;
+            String execute = operation + space + String.Concat("-t", typeFormatCompress["7zip"]) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space +strMultipleFiles;
             Debug.WriteLine(execute);
             Debug.WriteLine("7za.exe " +execute);
             /*routine of error*/
@@ -103,7 +105,7 @@ namespace patrikDll {
             if( WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
                  d = "\""+ Path.Combine(destiny, String.Concat(nameCompress, ".", "001"))+ "\"";
             }else {
-                 d = "\""+ Path.Combine(destiny, String.Concat(nameCompress, ".", "7z"))+ "\"";
+                 d = "\""+ Path.Combine(destiny, nameCompress+ ".7z")+ "\"";
             }
         
            

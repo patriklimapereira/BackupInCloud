@@ -31,7 +31,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "172.16.250.130";
+        private String server = "192.168.79.131";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -186,10 +186,14 @@ namespace patrikService {
                                     //  } else {
 
                                     //*         add(origin, destiny, nameOriginal, nameCompress);
-                                    String name = removeExtension(listTimeHashFromRDMS.name) ;
-                                    Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"7zip");                                   
+                                    String name = removeExtension(listTimeHashFromRDMS.name) ; 
+                                    if(Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"7zip") != 0 || Worker7zip.test(helperCreateFolderDestiny, name) != 0 ){
+                                        MessageBox.Show("erro erro");
+                                    }else {
+
+                                    }
                                    // MessageBox.Show("ola");
-                                 Worker7zip.test(helperCreateFolderDestiny, name);
+
 
                                     //   MessageBox.Show("Erro de compactação");
 

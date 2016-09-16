@@ -12,18 +12,15 @@ using System.Text;
 
 namespace patrikDll {
 
-    
-
 
     public static class Worker7zip {
-
         public const int IDS_METHOD_STORE = 0;
         public const int IDS_METHOD_FASTEST = 1;
         public const int IDS_METHOD_FAST = 3;
         public const int IDS_METHOD_NORMAL = 5;
         public const int IDS_METHOD_MAXIMUM = 7;
         public const int IDS_METHOD_ULTRA = 9;
-        const  int AMOUNT_OF_LINES = 1;
+        const int AMOUNT_OF_LINES = 1;
         const int AMOUNT_OF_COLUNMS = 2;
         public static readonly List<IntString> error7zip = new List<IntString>() {
             new IntString(){number = 0, text = "No error" },
@@ -36,116 +33,94 @@ namespace patrikDll {
 
         public const string easteregges = "eu gostava de você... queria algo mais serios com você... infelizmente ao saber que gostava de você... sua atitude foi me desprezar!!!!!! será por isso que você esta sozinha!!!!";
 
-        const long  flavia =   1021089711810597;
+        const long flavia = 1021089711810597;
 
-        public static Dictionary<string, string> typeFormatCompress= new Dictionary<string, string>() { { "7zip", "7z"}, { "zip", "zip" } };
-       
-                
-        public static string generateValuePartsForMultiplesVolumes  ( string StrTxt){           
+        public static Dictionary<string, string> typeFormatCompress = new Dictionary<string, string>() { { "7zip", "7z" }, { "zip", "zip" } };
+
+
+        public static string generateValuePartsForMultiplesVolumes(string value) {
             try {
-                if (String.Empty == StrTxt) {
+                if (String.Empty == value) {
                     return null;
                 }
-                var txt = StrTxt;
-                String space = "k ";
+                String spaceK = "k";
+                String space = " ";
                 String parameter = "-v";
                 String legthFilesCompact = "";
                 int multipleLengthTamanho = 10;
 
-                foreach (var decimalValue in txt) {
-
-                    legthFilesCompact += parameter + ((int)decimalValue) * multipleLengthTamanho + space;
-                }           
-             
+                foreach (var decimalValue in value) {
+                    legthFilesCompact += parameter + ((int)decimalValue) * multipleLengthTamanho + spaceK + space;
+                }
                 return legthFilesCompact;
-                
 
-            }catch ( Exception error) {
+
+            } catch (Exception error) {
                 /*after implementation*/
+                MessageBox.Show("/*after implementation*/");
                 return null;
             }
-         }
-        public static long add(String origin, String destiny, String nameOriginal, String nameCompress,  string  formatCompress ,  long leghtVolumesAtK = 0, int levelCompress = 9 ) {
+        }
+        public static long add(String origin, String destiny, String nameOriginal, String nameCompress, string formatCompress, long leghtVolumesAtK = 0, int levelCompress = 9) {
+                       
+            try {
+                String space = " ", operation = "a", spaceK = "k ",  parameter = "-v",  strMultipleFiles =  "", execute;
+                String o = "\"" + Path.Combine(origin, nameOriginal) + "\"";
+                String d = "\"" + Path.Combine(destiny, nameCompress) + String.Concat(".", typeFormatCompress[formatCompress]) + "\"";              
 
-          /*after implements validation de formatCompress*/
-           String space = " ";
-           String operation = "a";   
-           String spaceK = "k ";
-           String parameter = "-v";           
-           String o =  "\""+  Path.Combine(origin, nameOriginal)+ "\"";
-           String d = "\""+ Path.Combine(destiny, nameCompress)+ String.Concat(".",typeFormatCompress["7zip"] )+"\"";
-           String strMultipleFiles;
-                           
-            switch (leghtVolumesAtK) {
-                case  0:
-                    strMultipleFiles  = "";
-                    break;
-                case flavia:  
-                      strMultipleFiles  = generateValuePartsForMultiplesVolumes(easteregges);
-                    break;                 
-                default:
-                     strMultipleFiles =  parameter+leghtVolumesAtK.ToString()+spaceK;
-                    break;
+                switch (leghtVolumesAtK) {
+                    case 0:
+                        strMultipleFiles = "";
+                        break;
+                    case flavia:
+                        strMultipleFiles = generateValuePartsForMultiplesVolumes(easteregges);
+                        break;
+                    default:
+                        strMultipleFiles = parameter + leghtVolumesAtK.ToString() + spaceK;
+                        break;
 
+                }                
+                execute = operation + space + String.Concat("-t", typeFormatCompress[formatCompress]) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space + strMultipleFiles;
+                Debug.WriteLine("7za.exe " + execute);
+                /*routine of error*/
+                return executeStringIn7zip(execute);
+            } catch (Exception erro) {
+                MessageBox.Show("/*after implementation*/");
+                return Util.psMaxValueLong;
             }
-
-          
-
-            String execute = operation + space + String.Concat("-t", typeFormatCompress["7zip"]) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space +strMultipleFiles;
-            Debug.WriteLine(execute);
-            Debug.WriteLine("7za.exe " +execute);
-            /*routine of error*/
-            return executeStringIn7zip(execute); 
         }
 
-        public static int test (String destiny,  String nameCompress, String mask = "*", String recursive = "r" ) {
-            String operation = "t";
-            String space = " ";
-           String d = "";
-            if( WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
-                 d = "\""+ Path.Combine(destiny, String.Concat(nameCompress, ".", "001"))+ "\"";
-            }else {
-                 d = "\""+ Path.Combine(destiny, nameCompress+ ".7z")+ "\"";
+        public static long  test(String destiny, String nameCompress, String mask = "*", String recursive = "r") {
+            String operation = "t", space = " ", d ,execute;
+            if (WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
+                d = "\"" + Path.Combine(destiny, String.Concat(nameCompress, ".", "001")) + "\"";
+            } else {
+                d = "\"" + Path.Combine(destiny, nameCompress + ".7z") + "\"";
             }
-        
-           
-            String execute = operation + space + d + space + mask + space + recursive;
-
+            execute = operation + space + d + space + mask + space + recursive;
             Debug.WriteLine("7za.exe " + execute);
-
-            
             return executeStringIn7zip(execute);
 
         }
 
-        private static int executeStringIn7zip(String execute) {
-            int  code =  -1;
+        private static long executeStringIn7zip(String execute) {
+            int code = -1;
             ProcessStartInfo psi = new ProcessStartInfo();
+             Process processforExecuted;
             psi.FileName = "7zip\\7za.exe";
             psi.Arguments = execute;
             psi.WindowStyle = ProcessWindowStyle.Normal;
-
-            //C: \Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikService\bin\Debug\7zip
-      //        MessageBox.Show(Util.psGETCURRENTDIRECTORY);
-
-
-             Process processforExecuted = Process.Start(psi);
-
-
+            processforExecuted = Process.Start(psi);
             processforExecuted.WaitForExit();
 
-           // MessageBox.Show(processforExecuted.ExitCode.ToString());
-
-            if(processforExecuted.ExitCode != 0 ) {
-                 MessageBox.Show("erro de codde\n" +processforExecuted.ExitCode.ToString() );
-            } 
-
-            Debug.WriteLine("\n\n\n\n\n\n\n\n\n = processforExecuted.ExitCode.ToString()");
-
-            code =  processforExecuted.ExitCode;
-            processforExecuted.Dispose();
+            if (processforExecuted.ExitCode != 0) {
+                MessageBox.Show("erro de codde\n" + processforExecuted.ExitCode.ToString());
+            }
+       
+            code = processforExecuted.ExitCode;
+            /*processforExecuted.Dispose();
             processforExecuted = null;
-            psi = null;
+            psi = null;*/
             return code;
         }
     }

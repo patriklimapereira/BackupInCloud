@@ -31,7 +31,7 @@ using Npgsql;
 namespace patrikService {
 
     public partial class TestSubRoutineService : Form {
-        private String server = "192.168.79.131";
+        private String server = "172.16.250.130";
         private String port = "5432";
         private String user = "postgres";
         private String password = "root";
@@ -169,9 +169,7 @@ namespace patrikService {
                             //  query = @"select  t.date_and_hour|| t.hash  || t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
                             query = @"select  t.date_and_hour, t.hash  , t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
                             NpgsqlDataReader drOperation = WorkPostgreSQL.ExecuteReader(stringConnection, query, listHashFileDateTimeCreation);
-
-                            MessageBox.Show("ola");
-                            // List<localTextDateTimeHashExtension> listTimeHashFromRDMS = new List<localTextDateTimeHashExtension>();
+                                                  
                             while (drOperation.Read()) {
                                 String helperCreateFolderDestiny;
                                 /*List<localTextDateTimeHashExtension> listTimeHashFromRDMS */
@@ -187,20 +185,14 @@ namespace patrikService {
 
                                     //*         add(origin, destiny, nameOriginal, nameCompress);
                                     String name = removeExtension(listTimeHashFromRDMS.name) ; 
-                                    if(Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"7zip") != 0 || Worker7zip.test(helperCreateFolderDestiny, name) != 0 ){
-                                        MessageBox.Show("erro erro");
+                                    if(Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"zip",2) != 0 /*|| Worker7zip.test(helperCreateFolderDestiny, name) != 0 */){
+                                        MessageBox.Show("erro erro no 7zip ");
                                     }else {
-
+                                         List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension7zip = Intelligence.getFileNameDateCreateHash((string)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
+                                         /*upload*/
                                     }
-                                   // MessageBox.Show("ola");
-
-
-                                    //   MessageBox.Show("Erro de compactação");
-
-
-
-                                    /*compactar*/
-                                    /*upload*/
+                             
+                                   
 
                                     // }
                                 }
@@ -386,13 +378,10 @@ namespace patrikService {
         }
 
         private void returnDate_Click(object sender, EventArgs e) {
-          
-                var txt = "flavia";
-              
+                var txt = "flavia";           
       
                 String legthFilesCompact = "";
                 int multipleLengthTamanho = 10;
-
                 foreach (var decimalValue in txt) {
 
                     legthFilesCompact +=  ((int)decimalValue) ;
@@ -472,6 +461,13 @@ namespace patrikService {
 
             WorkPostgreSQL.ExecuteNonQuery(stringConnection, query);
             MessageBox.Show("ola");
+        }
+
+        private void button1_Click_2(object sender, EventArgs e) {
+
+            MessageBox.Show(Worker7zip.typeFormatCompress["79zip"]);
+           
+            //public static Dictionary<string, string> typeFormatCompress = new Dictionary<string, string>() { { "7zip", "7z" }, { "zip", "zip" } };
         }
     }
 }

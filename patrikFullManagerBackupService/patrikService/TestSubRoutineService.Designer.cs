@@ -36,6 +36,7 @@
             this.RoutineMoveFilesAndHash = new System.Windows.Forms.TabPage();
             this.testGenerateForFileHash = new System.Windows.Forms.Button();
             this.RDMS = new System.Windows.Forms.TabPage();
+            this.ddlInsert = new System.Windows.Forms.Button();
             this.testQueryP2 = new System.Windows.Forms.Button();
             this.testeQueryParameter = new System.Windows.Forms.Button();
             this.testQuery = new System.Windows.Forms.Button();
@@ -44,7 +45,7 @@
             this.validateGetNameDateTimeHash = new System.Windows.Forms.Button();
             this.geral = new System.Windows.Forms.TabPage();
             this.returnDate = new System.Windows.Forms.Button();
-            this.ddlInsert = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.intelligenceRoutines.SuspendLayout();
             this.tpOneDriver.SuspendLayout();
             this.SevenZip.SuspendLayout();
@@ -197,6 +198,16 @@
             this.RDMS.Text = "RDMS";
             this.RDMS.UseVisualStyleBackColor = true;
             // 
+            // ddlInsert
+            // 
+            this.ddlInsert.Location = new System.Drawing.Point(433, 18);
+            this.ddlInsert.Name = "ddlInsert";
+            this.ddlInsert.Size = new System.Drawing.Size(75, 23);
+            this.ddlInsert.TabIndex = 4;
+            this.ddlInsert.Text = "Insert";
+            this.ddlInsert.UseVisualStyleBackColor = true;
+            this.ddlInsert.Click += new System.EventHandler(this.ddlInsert_Click);
+            // 
             // testQueryP2
             // 
             this.testQueryP2.Location = new System.Drawing.Point(320, 18);
@@ -260,6 +271,7 @@
             // 
             // geral
             // 
+            this.geral.Controls.Add(this.button1);
             this.geral.Controls.Add(this.returnDate);
             this.geral.Location = new System.Drawing.Point(4, 22);
             this.geral.Name = "geral";
@@ -279,15 +291,15 @@
             this.returnDate.UseVisualStyleBackColor = true;
             this.returnDate.Click += new System.EventHandler(this.returnDate_Click);
             // 
-            // ddlInsert
+            // button1
             // 
-            this.ddlInsert.Location = new System.Drawing.Point(433, 18);
-            this.ddlInsert.Name = "ddlInsert";
-            this.ddlInsert.Size = new System.Drawing.Size(75, 23);
-            this.ddlInsert.TabIndex = 4;
-            this.ddlInsert.Text = "Insert";
-            this.ddlInsert.UseVisualStyleBackColor = true;
-            this.ddlInsert.Click += new System.EventHandler(this.ddlInsert_Click);
+            this.button1.Location = new System.Drawing.Point(142, 28);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_2);
             // 
             // TestSubRoutineService
             // 
@@ -333,5 +345,6 @@
         private System.Windows.Forms.Button returnDate;
         private System.Windows.Forms.Button testQueryP2;
         private System.Windows.Forms.Button ddlInsert;
+        private System.Windows.Forms.Button button1;
     }
 }

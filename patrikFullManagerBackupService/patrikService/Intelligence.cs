@@ -25,8 +25,9 @@ namespace patrikService {
             try {
                 if (Directory.Exists(sourceDirectory)) {
                     /*why?*/
-                    //  if (numberGetNameAndDatatime > 0) {                    
-                    string[] nameFiles = Directory.GetFiles(sourceDirectory, extension);            /*searh option possible solution for problens backup contabilidade*/
+                    //  if (numberGetNameAndDatatime > 0) {           
+                         
+                    string[] nameFiles = Directory.GetFiles(sourceDirectory, extension,SearchOption.AllDirectories);            /*searh option possible solution for problens backup contabilidade*/
                     foreach (string s in nameFiles) {
                        // Debug.WriteLine(s);
                         localTextDateTimeHashExtension helperNameDateTimeHash;
@@ -34,6 +35,9 @@ namespace patrikService {
                         helperNameDateTimeHash.name = Path.GetFileName(s);
                         helperNameDateTimeHash.hash = getSha1ToFile(Path.GetDirectoryName(s), helperNameDateTimeHash.name);
                         helperNameDateTimeHash.extension = Path.GetExtension(s);
+                           helperNameDateTimeHash.nameWithoutExtension = Path.GetFileNameWithoutExtension(s);
+                       
+
                         switch (typeSearchInSearchDateTimeFile) {
                             case (int)searchDateFile.GetCreationTime:
                                 helperNameDateTimeHash.dateAndHour = File.GetCreationTime(s);

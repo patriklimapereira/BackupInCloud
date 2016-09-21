@@ -13,23 +13,23 @@ namespace patrikDll {
         public String column;
         public NpgsqlDbType dataType;
         public Object value;
-        
+
     };
 
-    public static class WorkPostgreSQL {      
-                     
-       public  static NpgsqlConnection getConnection(String stringConnetion) {
-            NpgsqlConnection conn =  new NpgsqlConnection( stringConnetion);
+    public static class WorkPostgreSQL {
+
+        public static NpgsqlConnection getConnection(String stringConnetion) {
+            NpgsqlConnection conn = new NpgsqlConnection(stringConnetion);
             conn.Open();
             return conn;
         }
 
 
-      public static  NpgsqlConnection endConnection (ref NpgsqlConnection conn) {
-           conn.Close ();
+        public static NpgsqlConnection endConnection(ref NpgsqlConnection conn) {
+            conn.Close();
             return conn;
         }
-                 
+
         public static String getStringConection(String server, String port, String user, String password, String dataBase) {
             return "Server=" + server + ";" +
               "Port=" + port + ";" +
@@ -38,39 +38,39 @@ namespace patrikDll {
               "Database=" + dataBase + ";";
         }
 
-            
-        private static void verififySqlInDataBase (String consulta, List<ColumnValueType> columnValueType = null) {
-             string prefixString = "'";                       
-              if (columnValueType != null) {
-                    for (int i = 0; i < columnValueType.Count; i++) {
-                     switch (columnValueType[i].dataType) {
+
+        private static void verififySqlInDataBase(String consulta, List<ColumnValueType> columnValueType = null) {
+            string prefixString = "'";
+            if (columnValueType != null) {
+                for (int i = 0; i < columnValueType.Count; i++) {
+                    switch (columnValueType[i].dataType) {
                         case NpgsqlDbType.Varchar:
                         case NpgsqlDbType.Text:
-                            prefixString = "'";  
-                               consulta = consulta.Replace(columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            prefixString = "'";
+                            consulta = consulta.Replace(columnValueType[i].column, prefixString + (string)columnValueType[i].value + prefixString);
                             break;
-                        case NpgsqlDbType.Timestamp:                                          
-                            prefixString = "'";  
-                                consulta = consulta.Replace(columnValueType[i].column,     prefixString +   ((DateTime )columnValueType[i].value ).ToString(Util.psFORMATDATATIME).ToString()   +   prefixString );
+                        case NpgsqlDbType.Timestamp:
+                            prefixString = "'";
+                            consulta = consulta.Replace(columnValueType[i].column, prefixString + ((DateTime)columnValueType[i].value).ToString(Util.psFORMATDATATIME).ToString() + prefixString);
                             break;
-                        default:                         
+                        default:
                             prefixString = "";
-                            consulta = consulta.Replace(columnValueType[i].column,     prefixString +  (string) columnValueType[i].value   +   prefixString );
+                            consulta = consulta.Replace(columnValueType[i].column, prefixString + (string)columnValueType[i].value + prefixString);
                             break;
                     }
 
                     prefixString = "";
-                    };
+                };
 
-                }
-              
-           //   Console.WriteLine("rogelia");
-             // Console.WriteLine (consulta);
+            }
+
+            //   Console.WriteLine("rogelia");
+            // Console.WriteLine (consulta);
 
         }
 
-        private static NpgsqlCommand prepareStatement (String stringConnection, String query, List<ColumnValueType> columnValueType = null) {
-          NpgsqlCommand command;
+        private static NpgsqlCommand prepareStatement(String stringConnection, String query, List<ColumnValueType> columnValueType = null) {
+            NpgsqlCommand command;
             try {
                 command = new NpgsqlCommand(query, getConnection(stringConnection));
                 if (columnValueType != null) {
@@ -79,7 +79,7 @@ namespace patrikDll {
                         command.Parameters[i].Value = columnValueType[i].value;
                     }
                 }
-             // verififySqlInDataBase(query, columnValueType);
+                // verififySqlInDataBase(query, columnValueType);
                 return command;
             } catch (NpgsqlException ex) {
                 MessageBox.Show("erro....\n\n\n\n\n\n\n" + ex.ToString());
@@ -92,38 +92,45 @@ namespace patrikDll {
 
         }
 
-        public static long   ExecuteNonQueryPorraLoka(ref NpgsqlConnection conn, String query) {
-             try { 
-               return  new NpgsqlCommand(query,  conn).ExecuteNonQuery();
-                           
-             }   catch (Exception error) {
-                return  Util.psMaxValueLong;
-            }  
+        public static long ExecuteNonQueryPorraLoka(ref NpgsqlConnection conn, String query) {
+            try {
+                return new NpgsqlCommand(query, conn).ExecuteNonQuery();
+
+            } catch (Exception error) {
+                return Util.psMaxValueLong;
+            }
 
         }
 
 
-        public static long  ExecuteNonQuery (String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
-            NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);     
-            verififySqlInDataBase( query,  columnValueType );                           
-            return  (command == null) ?   Util.psMaxValueLong :  command.ExecuteNonQuery(); 
-
-        }
-
-        public static NpgsqlDataReader ExecuteReader(String stringConnection , String query, List<ColumnValueType> columnValueType = null) {
+        public static long ExecuteNonQuery(String stringConnection, String query, List<ColumnValueType> columnValueType = null) {
             NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);
-             verififySqlInDataBase( query,  columnValueType );   
-            return (command == null) ? null : command.ExecuteReader();
-          
-          
+            verififySqlInDataBase(query, columnValueType);
+            return (command == null) ? Util.psMaxValueLong : command.ExecuteNonQuery();
+
         }
 
+        public static NpgsqlDataReader ExecuteReader(String stringConnection, String query, List<ColumnValueType> columnValueType = null) {
+
+            try {
+                NpgsqlCommand command = prepareStatement(stringConnection, query, columnValueType);
+                verififySqlInDataBase(query, columnValueType);
+                return (command == null) ? null : command.ExecuteReader();
+
+
+
+            } catch (Exception error) {
+                MessageBox.Show(error.ToString());
+
+                return null;
+            }
+        }
 
         /*after otimize*/
         public static string configurationIsOk(String server, String port, String user, String password, String dataBase) {
             try {
-                NpgsqlConnection conn = getConnection(  getStringConection( server, port,  user,  password, dataBase));
-                 conn.Close();
+                NpgsqlConnection conn = getConnection(getStringConection(server, port, user, password, dataBase));
+                conn.Close();
 
             } catch (Exception erro) {
                 return erro.ToString();

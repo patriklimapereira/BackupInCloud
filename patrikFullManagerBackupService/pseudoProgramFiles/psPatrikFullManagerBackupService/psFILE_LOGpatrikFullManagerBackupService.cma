@@ -36,3 +36,40 @@ error.ToString()=System.NotSupportedException: The given path's format is not su
    at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
    at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
 
+method	 = 	public static bool directoryExist(String local)
+local	 = 	M:\d
+toActiveRecursion	 = 	True
+
+error.GetType()=System.IO.DirectoryNotFoundException
+error.HelpLink=
+error.HResult=-2147024893
+error.InnerException=
+error.Message=Could not find a part of the path 'M:\d'.
+error.Source=   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   at patrikDll.WorkerDirectory.deleteDirectory(String local, Boolean toActiveRecursion) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 28
+error.TargetSite=Void WinIOError(Int32, System.String)
+error.ToString()=System.IO.DirectoryNotFoundException: Could not find a part of the path 'M:\d'.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.Delete(String fullPath, String userPath, Boolean recursive, Boolean checkHost)
+   at patrikDll.WorkerDirectory.deleteDirectory(String local, Boolean toActiveRecursion) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 28
+
+method	 = 	public static bool directoryExist(String local)
+local	 = 	M:\d\2016_07_29_08_33_51_387236935641EB5D0D79A6AA1F0E62D0F5C4B3BAEE256Dwmsetup.log
+
+error.GetType()=System.UnauthorizedAccessException
+error.HelpLink=
+error.HResult=-2147024891
+error.InnerException=
+error.Message=Access to the path 'M:\d\2016_07_29_08_33_51_387236935641EB5D0D79A6AA1F0E62D0F5C4B3BAEE256Dwmsetup.log' is denied.
+error.Source=   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.InternalCreateDirectory(String fullPath, String path, Object dirSecurityObj, Boolean checkHost)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+error.TargetSite=Void WinIOError(Int32, System.String)
+error.ToString()=System.UnauthorizedAccessException: Access to the path 'M:\d\2016_07_29_08_33_51_387236935641EB5D0D79A6AA1F0E62D0F5C4B3BAEE256Dwmsetup.log' is denied.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.Directory.InternalCreateDirectory(String fullPath, String path, Object dirSecurityObj, Boolean checkHost)
+   at System.IO.Directory.InternalCreateDirectoryHelper(String path, Boolean checkHost)
+   at patrikDll.WorkerDirectory.createDirectory(String local) in C:\Users\patrik\Desktop\allProjectsVisualStudio\BackupInCloud\patrikFullManagerBackupService\patrikDll\WorkerDirectory.cs:line 13
+

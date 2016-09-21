@@ -62,11 +62,10 @@ namespace patrikDll {
             }
         }
         public static long add(String origin, String destiny, String nameOriginal, String nameCompress, string formatCompress, long leghtVolumesAtK = 0, int levelCompress = 9) {
-                       
-            try {
-                String space = " ", operation = "a", spaceK = "k ",  parameter = "-v",  strMultipleFiles =  "", execute;
+              try {
+                String space = " ", operation = "a", spaceK = "k ", parameter = "-v", strMultipleFiles = "", execute;
                 String o = "\"" + Path.Combine(origin, nameOriginal) + "\"";
-                String d = "\"" + Path.Combine(destiny, nameCompress) + String.Concat(".", typeFormatCompress[formatCompress]) + "\"";              
+                String d = "\"" + Path.Combine(destiny, nameCompress) + String.Concat(".", typeFormatCompress[formatCompress]) + "\"";
 
                 switch (leghtVolumesAtK) {
                     case 0:
@@ -79,7 +78,7 @@ namespace patrikDll {
                         strMultipleFiles = parameter + leghtVolumesAtK.ToString() + spaceK;
                         break;
 
-                }                
+                }
                 execute = operation + space + String.Concat("-t", typeFormatCompress[formatCompress]) + space + d + space + o + space + String.Concat("-mx", levelCompress) + space + "-y" + space + strMultipleFiles;
                 Debug.WriteLine("7za.exe " + execute);
                 /*routine of error*/
@@ -90,38 +89,41 @@ namespace patrikDll {
             }
         }
 
-        public static long  test(String destiny, String nameCompress, String mask = "*", String recursive = "r") {
-            String operation = "t", space = " ", d ,execute;
-            if (WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
-                d = "\"" + Path.Combine(destiny, String.Concat(nameCompress, ".", "001")) + "\"";
-            } else {
-                d = "\"" + Path.Combine(destiny, nameCompress + ".7z") + "\"";
-            }
-            execute = operation + space + d + space + mask + space + recursive;
-            Debug.WriteLine("7za.exe " + execute);
-            return executeStringIn7zip(execute);
+        public static long test(String destiny, String nameCompress, string extension, String mask = "*", String recursive = "r") {
+            try {
+                String operation = "t", space = " ", d, execute;
 
+                if (WorkerFile.fileExist(destiny, String.Concat(nameCompress, ".", "001"))) {
+                    d = "\"" + Path.Combine(destiny, String.Concat(nameCompress, ".", "001")) + "\"";
+                } else {
+                    d = "\"" + Path.Combine(destiny, nameCompress + "." + typeFormatCompress[extension]) + "\"";
+                }
+                execute = operation + space + d + space + mask + space + recursive;
+                Debug.WriteLine("7za.exe " + execute);
+                return executeStringIn7zip(execute);
+            } catch (Exception error) {
+                MessageBox.Show("Error");
+                return Util.psMaxValueLong;
+            }
         }
 
         private static long executeStringIn7zip(String execute) {
-            int code = -1;
-            ProcessStartInfo psi = new ProcessStartInfo();
-             Process processforExecuted;
-            psi.FileName = "7zip\\7za.exe";
-            psi.Arguments = execute;
-            psi.WindowStyle = ProcessWindowStyle.Normal;
-            processforExecuted = Process.Start(psi);
-            processforExecuted.WaitForExit();
-
-            if (processforExecuted.ExitCode != 0) {
-                MessageBox.Show("erro de codde\n" + processforExecuted.ExitCode.ToString());
+            try {
+                ProcessStartInfo psi = new ProcessStartInfo();
+                Process processforExecuted;
+                psi.FileName = "7zip\\7za.exe";
+                psi.Arguments = execute;
+                psi.WindowStyle = ProcessWindowStyle.Minimized;
+                processforExecuted = Process.Start(psi);
+                processforExecuted.WaitForExit();
+                if (processforExecuted.ExitCode != 0) {
+                    MessageBox.Show("----------------------erro de code\n" + processforExecuted.ExitCode.ToString());
+                }
+                return processforExecuted.ExitCode;                
+            } catch (Exception error) {
+                MessageBox.Show("Error");
+                return Util.psMaxValueLong;
             }
-       
-            code = processforExecuted.ExitCode;
-            /*processforExecuted.Dispose();
-            processforExecuted = null;
-            psi = null;*/
-            return code;
         }
     }
 }

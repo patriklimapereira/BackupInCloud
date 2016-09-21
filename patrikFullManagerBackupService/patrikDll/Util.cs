@@ -15,6 +15,7 @@ namespace patrikDll {
             public DateTime dateAndHour;
             public string hash;
             public string extension;
+            public string nameWithoutExtension;
 
         };
 

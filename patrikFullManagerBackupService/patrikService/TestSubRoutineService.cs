@@ -36,6 +36,10 @@ namespace patrikService {
         private String user = "postgres";
         private String password = "root";
         private String dataBase = "backupInCloudWebUI_development";
+        DateTime timeAtual = DateTime.Now;
+        private int numberDaysVerify = 1005;
+
+
 
         private const string msaClientId = "3e776a02-19a4-481c-92f0-61832a8ba791";
         private const string msaReturnUrl = "https://login.live.com/oauth20_desktop.srf";
@@ -115,100 +119,153 @@ namespace patrikService {
             }
         }
 
-        private void btnRoutine_Click(object sender, EventArgs e) {
-            /*after implements hour server database*/
-            DateTime timeAtual = DateTime.Now;
-            /*return list folder of the database*/
+        private NpgsqlDataReader queryFilesBackupLocal() {
             String query = @"select b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id;";
             String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
-            List<ColumnValueType> listParameterColumnValueType = new List<ColumnValueType>();
-            NpgsqlDataReader drBackupsExtensions = WorkPostgreSQL.ExecuteReader(stringConnection, query);
-            /*line directory backup*/
-            while (drBackupsExtensions.Read()) {
-                List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension = Intelligence.getFileNameDateCreateHash((string)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
-                if (listLocalNameDateListHashExtension == null) {/*directory  o  not exist*/
-                    MessageBox.Show("after implements directory  origem  not existe ");
-                } else if (!WorkerDirectory.directoryExist((string)drBackupsExtensions["destiny"])) {
-                    MessageBox.Show("after implements directory  destiny not existe ");
-                } else if (listLocalNameDateListHashExtension.Count <= 0) {
-                    MessageBox.Show("after implements directory   empty ");
-                } else {
-                    //   try {
-                    long errorCodeExecuteNonQueryPorraLoka;
-                    NpgsqlConnection conn = WorkPostgreSQL.getConnection(stringConnection);
-                    int j = 0, i = 0;
-                    List<ColumnValueType> listHashFileDateTimeCreation = new List<ColumnValueType>();
-                    query = @"drop table if exists temp_list_local_name_datetime_list_hash_extension_from_database;";
-                    query += @"create table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour timestamp, hash  varchar, name varchar );";
-                    errorCodeExecuteNonQueryPorraLoka = WorkPostgreSQL.ExecuteNonQueryPorraLoka(ref conn, query);
-                    WorkPostgreSQL.endConnection(ref conn);
-                    listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a => a.dateAndHour >= timeAtual.AddDays(-1005)).OrderBy(s => s.dateAndHour).ToList();
-                    /*verify table create*/
-                    if (errorCodeExecuteNonQueryPorraLoka == Util.psMaxValueLong) {
-                        /*after implements  create table temporary*/
-                        MessageBox.Show("error create table temporary");
+            return WorkPostgreSQL.ExecuteReader(stringConnection, query);
+        }
+
+
+
+
+        private long createPseudoTableTemporary() {
+            long errorCodeExecuteNonQueryPorraLoka;
+            String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
+            NpgsqlConnection conn = WorkPostgreSQL.getConnection(stringConnection);
+
+            String query = @"drop table if exists temp_list_local_name_datetime_list_hash_extension_from_database;";
+            query += @"create table temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour timestamp, hash  varchar, name varchar );";
+            errorCodeExecuteNonQueryPorraLoka = WorkPostgreSQL.ExecuteNonQueryPorraLoka(ref conn, query);
+            WorkPostgreSQL.endConnection(ref conn);
+            return errorCodeExecuteNonQueryPorraLoka;
+        }
+
+        private long insertValuesFilterInFolderInTabletemp_list_local_name_datetime_list_hash_extension_from_database(List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension) {
+            int j = 0, i = 0;
+            List<ColumnValueType> listHashFileDateTimeCreation = new List<ColumnValueType>();
+            String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
+            listLocalNameDateListHashExtension = listLocalNameDateListHashExtension.Where(a => a.dateAndHour >= timeAtual.AddDays(numberDaysVerify * -1)).OrderBy(s => s.dateAndHour).ToList();
+            String query = @"insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour , hash, name) values";
+            while (i < listLocalNameDateListHashExtension.Count) {
+                query += ((i != 0) ? "," : "") + "(" + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + ")";
+                listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 2), dataType = NpgsqlDbType.Timestamp, value = listLocalNameDateListHashExtension[i].dateAndHour });
+                listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 1), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].hash });
+                listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + j, dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].name });
+                i++;
+            }
+            query += ";";
+
+           
+            return WorkPostgreSQL.ExecuteNonQuery(stringConnection, query, listHashFileDateTimeCreation);
+        }
+
+        private long insertOperation (String name, String  hash_local, DateTime file_datetime_creation, String  folder_destiny, String  status_operation, DateTime date_time_operation, int backup_id) {
+            String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
+            String query = @"insert into operations( name, hash_local, file_datetime_creation, folder_destiny, status_operation, date_time_operation,backup_id,created_at,updated_at) values ("+
+                          "'"+ name+"',"+    
+                          "'"+  hash_local +"',"+
+                         "'"+ file_datetime_creation.ToString(Util.psFORMATDATATIME)+"',"+
+                         "'"+ folder_destiny+"',"+
+                         "'"+ status_operation+"',"+
+                         "'"+ date_time_operation.ToString(Util.psFORMATDATATIME)+"',"+
+                          backup_id+    ","+
+                           "'"+ date_time_operation.ToString(Util.psFORMATDATATIME)+"',"+
+                            "'"+ date_time_operation.ToString(Util.psFORMATDATATIME)+"'"+                 
+                         ");";
+
+            Debug.WriteLine(query);
+          //  MessageBox.Show(query);
+            return WorkPostgreSQL.ExecuteNonQuery(stringConnection, query);
+           
+        }
+
+        private NpgsqlDataReader queryFilesNotUploads() {
+            String query = @"select  t.date_and_hour , t.hash , t.name from temp_list_local_name_datetime_list_hash_extension_from_database t  where t.date_and_hour || t.hash || t.name not in ( select    o.file_datetime_creation || o.hash_local ||  o.name from operations  o);";
+            String stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
+            return WorkPostgreSQL.ExecuteReader(stringConnection, query);
+        }
+
+
+        private void btnRoutine_Click(object sender, EventArgs e) {
+            /*after implements hour server database*/
+            NpgsqlDataReader drBackupsExtensions;
+            List<localTextDateTimeHashExtension> listLocalNameDateListHashExtensionDay;
+            localTextDateTimeHashExtension listTimeHashFromRDMS;
+            String helperCreateFolderDestiny;
+            NpgsqlDataReader drOperation;
+            drBackupsExtensions = queryFilesBackupLocal();
+            if (drBackupsExtensions == null) {
+                MessageBox.Show(" tramento de erro para drBackupsExtensions ==  null ");
+            } else {
+                /*line directory backup*/
+                while (drBackupsExtensions.Read()) {
+                    listLocalNameDateListHashExtensionDay = Intelligence.getFileNameDateCreateHash((string)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (string)drBackupsExtensions["name"]);
+                     MessageBox.Show(listLocalNameDateListHashExtensionDay.Count.ToString());
+
+                    WorkerDirectory.deleteDirectory ((string)drBackupsExtensions["destiny"]);
+
+                   MessageBox.Show("ola ola");
+                    WorkerDirectory.createDirectory ((string)drBackupsExtensions["destiny"]);
+
+                    if (listLocalNameDateListHashExtensionDay == null) {/*directory  o  not exist*/
+                        MessageBox.Show("after implements directory  origem  not existe ");
+                    } else if (!WorkerDirectory.directoryExist((string)drBackupsExtensions["destiny"])) {
+                        MessageBox.Show("after implements directory  destiny not existe ");
+                    } else if (listLocalNameDateListHashExtensionDay.Count <= 0) {
+                        MessageBox.Show("after implements directory   empty ");
                     } else {
-                        query = @"insert into temp_list_local_name_datetime_list_hash_extension_from_database(date_and_hour , hash, name) values";
-                        /*query += "(" + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + ","+marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j +")";
-                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 2), dataType = NpgsqlDbType.Timestamp, value = listLocalNameDateListHashExtension[i].dateAndHour });
-                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 1), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].hash });
-                        listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + j, dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].name });
-                        i++;*/
-                        while (i < listLocalNameDateListHashExtension.Count) {
-                            query += ((i != 0) ? "," : "") + "(" + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + "," + marcationOfParameterDataBaseForAutomaticGenerateParamenter + ++j + ")";
-                            listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 2), dataType = NpgsqlDbType.Timestamp, value = listLocalNameDateListHashExtension[i].dateAndHour });
-                            listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + (j - 1), dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].hash });
-                            listHashFileDateTimeCreation.Add(new ColumnValueType { column = marcationOfParameterDataBaseForAutomaticGenerateParamenter + j, dataType = NpgsqlDbType.Varchar, value = listLocalNameDateListHashExtension[i].name });
-                            i++;
-                        }
-                        query += ";";
-                        errorCodeExecuteNonQueryPorraLoka = WorkPostgreSQL.ExecuteNonQuery(stringConnection, query, listHashFileDateTimeCreation);
-                        if (errorCodeExecuteNonQueryPorraLoka == Util.psMaxValueLong) {
-                            MessageBox.Show("error insert");
+                        /*verify table create*/
+                        if (createPseudoTableTemporary() == Util.psMaxValueLong) {
+                            /*after implements  create table temporary*/
+                            MessageBox.Show("error create table temporary");
                         } else {
-                            //  query = @"select  t.date_and_hour|| t.hash  || t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
-                            query = @"select  t.date_and_hour, t.hash  , t.name from temp_list_local_name_datetime_list_hash_extension_from_database t where t.date_and_hour || t.hash not  in ( select    o.hash_local || o.file_datetime_creation  from operations  o)";
-                            NpgsqlDataReader drOperation = WorkPostgreSQL.ExecuteReader(stringConnection, query, listHashFileDateTimeCreation);
-                                                  
-                            while (drOperation.Read()) {
-                                String helperCreateFolderDestiny;
-                                /*List<localTextDateTimeHashExtension> listTimeHashFromRDMS */
-                                // localTextDateTimeHashExtension listTimeHashFromRDMS ;                                        
-                                localTextDateTimeHashExtension listTimeHashFromRDMS = listLocalNameDateListHashExtension.Where(a => a.dateAndHour.ToString(Util.psFORMATDATATIME) + a.hash + a.name == (((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIME) + (string)drOperation["hash"] + (string)drOperation["name"])).ToList()[0];
-                                helperCreateFolderDestiny = (Path.Combine((string)drBackupsExtensions["destiny"], ((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIMEFOLDERANDFILES) + (string)drOperation["hash"] + ((string)drOperation["name"])));
-                                if (WorkerDirectory.createDirectory(helperCreateFolderDestiny) == false) {
-                                    MessageBox.Show(helperCreateFolderDestiny);
+                            /*list order by  day*/
+                            if (insertValuesFilterInFolderInTabletemp_list_local_name_datetime_list_hash_extension_from_database(listLocalNameDateListHashExtensionDay) == Util.psMaxValueLong) {
+                                MessageBox.Show("error insert");
+                            } else {
+                                drOperation = queryFilesNotUploads();
+                                if (drOperation == null) {
+                                    MessageBox.Show("erro na validação do  queryFilesNotUploads();");
                                 } else {
-                                    //  if(copyFile(listTimeHashFromRDMS.local,listTimeHashFromRDMS.name,helperCreateFolderDestiny  ,"tmp_"+listTimeHashFromRDMS.name) == 0 ) {
-                                    //  MessageBox.Show("Erro copiar");
-                                    //  } else {
+                                    if( drOperation.HasRows == false ) {
+                                        MessageBox.Show("sem arquivo de backup");
+                                    }else { 
 
-                                    //*         add(origin, destiny, nameOriginal, nameCompress);
-                                    String name = removeExtension(listTimeHashFromRDMS.name) ; 
-                                    if(Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"zip",2) != 0 /*|| Worker7zip.test(helperCreateFolderDestiny, name) != 0 */){
-                                        MessageBox.Show("erro erro no 7zip ");
-                                    }else {
-                                         List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension7zip = Intelligence.getFileNameDateCreateHash((string)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
-                                         /*upload*/
+                                    while (drOperation.Read()) {
+                                        listTimeHashFromRDMS = listLocalNameDateListHashExtensionDay.Where(a => a.dateAndHour.ToString(Util.psFORMATDATATIME) + a.hash + a.name == (((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIME) + (string)drOperation["hash"] + (string)drOperation["name"])).ToList()[0];
+                                        helperCreateFolderDestiny = (Path.Combine((string)drBackupsExtensions["destiny"], ((DateTime)drOperation["date_and_hour"]).ToString(Util.psFORMATDATATIMEFOLDERANDFILES) + (string)drOperation["hash"] + ((string)drOperation["name"])));
+                                        if (WorkerDirectory.createDirectory(helperCreateFolderDestiny) == false) {
+                                            MessageBox.Show(helperCreateFolderDestiny);
+                                        } else {
+                                                String extension = "zip";
+                                           // nameWhithExtensionRemoved = removeExtension(listTimeHashFromRDMS.name);
+                                         //    if(Worker7zip.add((string)drBackupsExtensions["origin"], helperCreateFolderDestiny, listTimeHashFromRDMS.name, name,"zip",2) != 0 /*|| Worker7zip.test(helperCreateFolderDestiny, name) != 0 */){
+                                            if (Worker7zip.add(listTimeHashFromRDMS.local, helperCreateFolderDestiny, listTimeHashFromRDMS.name, listTimeHashFromRDMS.nameWithoutExtension, extension, 5000) != 0  || Worker7zip.test(helperCreateFolderDestiny,  listTimeHashFromRDMS.nameWithoutExtension, extension) != 0) {
+                                                MessageBox.Show("erro erro no 7zip ");
+                                            } else {
+                                                List<localTextDateTimeHashExtension> listLocalNameDateListHashExtension7zip = Intelligence.getFileNameDateCreateHash((string)drBackupsExtensions["origin"], (int)Intelligence.searchDateFile.GetCreationTime, (String)drBackupsExtensions["name"]);
+                                                /*upload*/                              
+                                               insertOperation(listTimeHashFromRDMS.name,listTimeHashFromRDMS.hash,listTimeHashFromRDMS.dateAndHour,(string)drBackupsExtensions["destiny"],"upload",DateTime.Now,(int)drBackupsExtensions["id_backup"]);
+                                            }
+
+
+                                        }
+
+
+
+
                                     }
-                             
-                                   
-
-                                    // }
+                                    }
                                 }
-
-
-
-
                             }
                         }
+
+                        /*    } catch (Exception erro) {
+                               MessageBox.Show(erro.ToString());
+                            }*/
                     }
 
-                    /*    } catch (Exception erro) {
-                           MessageBox.Show(erro.ToString());
-                        }*/
                 }
-
             }
 
             /*TimeSpan ts = timeAtual - StringDatetimeList[0].dateAndHour;
@@ -250,7 +307,7 @@ namespace patrikService {
             String destiny = "C:\\patrikFullManagerBackupService\\d";
             String nameOriginal = "192.168.11.4_04_20160613_120000.avi";
             String nameCompress = "192.168.11.4_04_20160613_120000.7z";
-            test(destiny, nameCompress);
+            test(destiny, nameCompress, "7zip");
         }
 
         private void testGenerateForFileHash_Click(object sender, EventArgs e) {
@@ -304,7 +361,7 @@ namespace patrikService {
             Thread.Sleep(2000);
             //  String value2 = Util.psReturnTimeString().Replace("-","_").Replace(" ","__");
             MessageBox.Show(value1 + value2);
-            String query = @"ExecuteReader b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.name from backups b, extensions e where e.id = b.extension_id  and b.origin = :" + value1 + " and e.name = :" + value2 + "";
+            String query = @"ExecuteReader b.id as id_backup, b.origin, b.destiny, e.id as id_extension , e.nameWhithExtensionRemovida from backups b, extensions e where e.id = b.extension_id  and b.origin = :" + value1 + " and e.nameWhithExtensionRemovida = :" + value2 + "";
             string stringConnection = WorkPostgreSQL.getStringConection(server, port, user, password, dataBase);
             List<ColumnValueType> listParameterColumnValueType = new List<ColumnValueType>();
             listParameterColumnValueType.Add(new ColumnValueType { column = value1, dataType = NpgsqlDbType.Varchar, value = "M:\\o" });
@@ -354,9 +411,9 @@ namespace patrikService {
 
             } else {
                 /*   String aux = "";
-                   if (listLocalNameDateListHashExtension != null && listLocalNameDateListHashExtension.Count != 0) {
-                       foreach (localTextDateTimeHashExtension unitNameDateListHash in listLocalNameDateListHashExtension) {
-                           aux += unitNameDateListHash.name + "\t";
+                   if (listLocalNameDateListHashExtensionDay != null && listLocalNameDateListHashExtensionDay.Count != 0) {
+                       foreach (localTextDateTimeHashExtension unitNameDateListHash in listLocalNameDateListHashExtensionDay) {
+                           aux += unitNameDateListHash.nameWhithExtensionRemovida + "\t";
                            aux += unitNameDateListHash.dateAndHour.ToString() + "\t";
                            aux += unitNameDateListHash.hash + "\t\n";
 
@@ -378,20 +435,20 @@ namespace patrikService {
         }
 
         private void returnDate_Click(object sender, EventArgs e) {
-                var txt = "flavia";           
-      
-                String legthFilesCompact = "";
-                int multipleLengthTamanho = 10;
-                foreach (var decimalValue in txt) {
+            var txt = "flavia";
 
-                    legthFilesCompact +=  ((int)decimalValue) ;
-                }            
-                
-               Debug.WriteLine( legthFilesCompact);
+            String legthFilesCompact = "";
+            int multipleLengthTamanho = 10;
+            foreach (var decimalValue in txt) {
+
+                legthFilesCompact += ((int)decimalValue);
+            }
+
+            Debug.WriteLine(legthFilesCompact);
             MessageBox.Show(legthFilesCompact);
 
-         
-         
+
+
 
         }
 
@@ -466,7 +523,7 @@ namespace patrikService {
         private void button1_Click_2(object sender, EventArgs e) {
 
             MessageBox.Show(Worker7zip.typeFormatCompress["79zip"]);
-           
+
             //public static Dictionary<string, string> typeFormatCompress = new Dictionary<string, string>() { { "7zip", "7z" }, { "zip", "zip" } };
         }
     }
